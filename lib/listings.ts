@@ -14,20 +14,30 @@ const CATEGORY_RULES: Record<CategoryKey, RegExp> = {
   "theme-parks": /\b(disney|universal|seaworld|legoland|busch gardens|theme park|epic universe|volcano bay|aquatica|park ticket)/i,
   space: /\b(kennedy|space center|nasa|rocket|launch|astronaut|space coast)/i,
   wildlife: /\b(airboat|gator|alligator|wildlife|swamp|everglades|manatee|dolphin|safari|eco|nature|zoo|bird)/i,
-  "dinner-shows": /\b(dinner show|dinner theater|medieval|pirate|comedy|mystery|cabaret|nightlife|show tickets)/i,
+  "dinner-shows": /\b(dinner show|dinner theater|medieval|pirate|comedy|mystery|cabaret|show tickets)/i,
   water: /\b(kayak|paddle|boat|cruise|springs?|snorkel|jet ?ski|fishing|pontoon|lake|scuba|swim)/i,
   sky: /\b(balloon|helicopter|skydiv|flight|airplane|zip ?line|observation wheel|the wheel)/i,
   family: /\b(famil|kids?|children|legoland|gatorland|zoo|aquarium|dinner show|pirate|medieval|theme park|disney|kid-friendly)/i,
   couples: /\b(romantic|sunset|couples?|wine|champagne|balloon|date night|dinner cruise|cocktail|spa\b|honeymoon|proposal)/i,
   "day-trips": /\b(day trip|from orlando|st\.? augustine|clearwater|miami|tampa|key west|daytona|cocoa beach|crystal river|everglades)/i,
-  "food-and-city": /\b(food|tasting|brewery|beer|cocktail|culinary|walking tour|city tour|segway|bike tour|winter park|downtown|ghost tour|pub crawl)/i,
-  sightseeing: /\b(sightseeing|attraction pass|city pass|hop-on|trolley|museum|class|workshop|photo ?shoot|transfer|shuttle|escape room|go-?kart|golf)/i,
+  "food-and-dining": /\b(food|foodie|culinary|cooking class(es)?|dining experiences?|restaurants?|chocolate|dessert|coffee|brunch|street food|eats|bbq|dinner cruise|lunch cruise|food tours?|culinary tours?)\b/i,
+  "drinks-and-nightlife": /\b(brewery|breweries|beer|cocktails?|wine|winery|wineries|wine tastings?|distillery|bar crawl|pub crawl|bar hop|nightlife|nightclubs?|club crawl|speakeasy|mixology|happy hour|party bus|party boat|pubs?|bars|booze)\b/i,
+  relaxation: /\b(spas?|massages?|wellness|yoga|relaxation|float therapy|sauna|facials?|meditation|sound bath|reiki)\b/i,
+  sports: /\b(golf(?! cart)|tee times?|sporting events?|nba|nfl|mls|nhl|orlando magic|football|soccer|baseball|hockey|basketball|stadium|tennis|pickleball|surf(ing)? lessons?|race car|racing|go ?karts?|nascar|speedway|skydiv\w*|waterski\w*|wakeboard\w*|wakesurf\w*)\b/i,
+  shopping: /\b(shopping|outlets?|malls?|boutiques?|personal styling|personal shopper|flea market)\b/i,
+  sightseeing: /\b(walking tour|city tour|segway|bike tour|winter park|downtown|ghost tour|sightseeing|attraction pass|city pass|hop-on|trolley|museum|class|workshop|photo ?shoot|transfer|shuttle|escape room|go-?kart|golf)/i,
 };
 
-function classify(text: string, seed: CategoryKey[] = []): CategoryKey[] {
+/** Operators over-tag heavily, so these narrow categories match on the product title only. */
+const TITLE_ONLY = new Set<CategoryKey>(["sports", "shopping", "relaxation"]);
+
+function classify(text: string, seed: CategoryKey[] = [], title = text): CategoryKey[] {
   const found = new Set<CategoryKey>(seed);
+  // Transfers and shuttles only mention golf clubs, malls or spas as destinations.
+  const isTransfer = /transfer|shuttle|private driver/i.test(title);
   for (const [key, rule] of Object.entries(CATEGORY_RULES) as [CategoryKey, RegExp][]) {
-    if (rule.test(text)) found.add(key);
+    if (TITLE_ONLY.has(key) && (isTransfer || !title)) continue;
+    if (rule.test(TITLE_ONLY.has(key) ? title : text)) found.add(key);
   }
   return [...found];
 }
@@ -91,13 +101,14 @@ export function snapshotDate(): string | null {
 
 /** Viator's internal merchandising tags say nothing about the activity itself. */
 const META_TAG =
-  /quality|zombie|dsa non|conversion|sell out|cancellation|availability|new product|agent favorite|weather dependent|private and luxury|small group|half-day|full-day|best /i;
+  /^food & drink$|^fun & games$|^extreme sports$|^shopping tours$|quality|zombie|dsa non|conversion|sell out|cancellation|availability|new product|agent favorite|weather dependent|private and luxury|small group|half-day|full-day|best /i;
 
 function classifyProduct(raw: RawProduct, seed: CategoryKey[] = []): CategoryKey[] {
   const tags = (raw.tagNames ?? []).filter((t) => !META_TAG.test(t));
-  const primary = classify(`${raw.title ?? ""} ${tags.join(" ")}`, seed);
+  const primary = classify(`${raw.title ?? ""} ${tags.join(" ")}`, seed, raw.title ?? "");
   if (primary.length) return primary;
-  const fallback = classify(raw.description ?? "");
+  // Description fallback never assigns the narrow title-only categories.
+  const fallback = classify(raw.description ?? "", [], "");
   return fallback.length ? fallback : ["sightseeing"];
 }
 

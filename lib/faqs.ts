@@ -195,14 +195,54 @@ const categoryExtras: Record<CategoryKey, Faq[]> = {
       a: "Kennedy Space Center, St. Augustine, Clearwater Beach, Crystal River for manatees and the Everglades are the most requested day trips.",
     },
   ],
-  "food-and-city": [
+  "food-and-dining": [
     {
       q: "Where are the best food tours in Orlando?",
-      a: "Downtown Orlando, the Mills 50 and Milk District neighborhoods, Ivanhoe Village and Winter Park are the most popular areas for food and walking tours.",
+      a: "Winter Park, the Milk District, Ivanhoe Village, downtown Orlando and Celebration are the most popular areas for guided food tours, each with a mix of local restaurants, bakeries and sweet stops.",
     },
     {
       q: "Can food tours handle dietary restrictions?",
       a: "Most can with advance notice. Add dietary needs when you book or contact the operator using the details in your confirmation.",
+    },
+  ],
+  "drinks-and-nightlife": [
+    {
+      q: "What is the nightlife like in Orlando?",
+      a: "Orlando has lively nightlife beyond the theme parks. Downtown and the Milk District have bars and live music, Universal CityWalk and Disney Springs stay busy late, and guided pub crawls, brewery tours and cocktail classes make it easy to explore safely.",
+    },
+    {
+      q: "Do I need to be 21 for drinks and nightlife tours?",
+      a: "Yes. Tours that include alcohol require all drinking guests to be 21 or older with valid photo ID. Some tours do not allow guests under 21 at all, so check the listing.",
+    },
+  ],
+  relaxation: [
+    {
+      q: "Where can I get a massage or spa day near Disney and Universal?",
+      a: "Many resort spas and independent wellness centers operate near Lake Buena Vista, Celebration and International Drive. The experiences above can be booked by date with the price shown upfront.",
+    },
+    {
+      q: "Are couples massages available in Orlando?",
+      a: "Yes. Several spas offer side-by-side couples massages, which are popular for honeymoons, anniversaries and a break between theme park days.",
+    },
+  ],
+  sports: [
+    {
+      q: "What sports can I play or watch in Orlando?",
+      a: "Orlando has championship golf courses, indoor skydiving, waterskiing and wakeboarding on private lakes, adventure golf and go-karts. Fans can also catch NBA, MLS and college games in the city, and racing at nearby Daytona International Speedway.",
+    },
+    {
+      q: "Do I need experience for waterski or wakeboard lessons?",
+      a: "No. Private lessons are designed for all levels, from first-timers to experienced riders, and instructors supply the boat and equipment.",
+    },
+  ],
+  shopping: [
+    {
+      q: "Where is the best shopping in Orlando?",
+      a: "Orlando International Premium Outlets and Orlando Vineland Premium Outlets are the most popular outlet centers. The Mall at Millenia is the top upscale mall, and Disney Springs and Winter Park's Park Avenue are great for unique shops.",
+    },
+    {
+      q: "Is there transportation to the Orlando outlets?",
+      a: "Yes. Private shopping tours and outlet shuttles pick up from major hotel areas so you can shop without worrying about parking or carrying bags.",
     },
   ],
   sightseeing: [

@@ -70,6 +70,8 @@ const nextConfig: NextConfig = {
       { source: "/index.html", destination: "/", permanent: true },
       { source: "/tours", destination: "/book-now", permanent: true },
       { source: "/book", destination: "/book-now", permanent: true },
+      // Food, Drink & City was split into Food & Dining and Drinks & Nightlife.
+      { source: "/book-now/food-and-city", destination: "/book-now/food-and-dining", permanent: true },
       // Category landing pages moved from /search to /book-now.
       ...categories.map((c) => ({
         source: `/search/${c.legacySearchSlug}`,

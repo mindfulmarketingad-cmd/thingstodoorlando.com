@@ -8,7 +8,11 @@ export type CategoryKey =
   | "family"
   | "couples"
   | "day-trips"
-  | "food-and-city"
+  | "food-and-dining"
+  | "drinks-and-nightlife"
+  | "relaxation"
+  | "sports"
+  | "shopping"
   | "sightseeing";
 
 export type IllustrationKey =
