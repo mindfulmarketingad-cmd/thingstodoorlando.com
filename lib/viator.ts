@@ -252,11 +252,11 @@ export async function getProductDetail(base: Listing): Promise<ListingDetail> {
 }
 
 /** Viator search URL used for curated guides (affiliate params appended when configured). */
-export function viatorSearchUrl(term: string): string {
+export function viatorSearchUrl(term: string, ids: { pid?: string; mcid?: string } = {}): string {
   const url = new URL("https://www.viator.com/searchResults/all");
   url.searchParams.set("text", `${term} Orlando`);
-  const pid = process.env.VIATOR_PID;
-  const mcid = process.env.VIATOR_MCID;
+  const pid = process.env.VIATOR_PID || ids.pid;
+  const mcid = process.env.VIATOR_MCID || ids.mcid;
   if (pid) url.searchParams.set("pid", pid);
   if (mcid) url.searchParams.set("mcid", mcid);
   if (pid || mcid) url.searchParams.set("medium", "link");

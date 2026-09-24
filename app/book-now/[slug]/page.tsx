@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 function metaDescription(l: Listing) {
   const base = l.summary.replace(/\.\.\.$/, "");
   const text = `${base}${base.endsWith(".") ? "" : "."} Compare prices, reviews and availability.`;
-  return text.length > 160 ? `${text.slice(0, 157).replace(/\s+\S*$/, "")}...` : text;
+  return text.length > 155 ? `${text.slice(0, 152).replace(/\s+\S*$/, "")}...` : text;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -52,9 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const listing = await getListingBySlug(slug);
   if (!listing) return { title: "Experience not found", robots: { index: false } };
-  const title = listing.title.length > 60 ? listing.title.slice(0, 57).replace(/\s+\S*$/, "") : listing.title;
+  // Full product titles keep every page's <title> unique (search engines truncate display, not indexing).
   return pageMetadata({
-    title,
+    title: listing.title,
     description: metaDescription(listing),
     path: `/book-now/${listing.slug}`,
     image: listing.image

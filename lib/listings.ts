@@ -18,7 +18,7 @@ const CATEGORY_RULES: Record<CategoryKey, RegExp> = {
   water: /\b(kayak|paddle|boat|cruise|springs?|snorkel|jet ?ski|fishing|pontoon|lake|scuba|swim)/i,
   sky: /\b(balloon|helicopter|skydiv|flight|airplane|zip ?line|observation wheel|the wheel)/i,
   family: /\b(famil|kids?|children|legoland|gatorland|zoo|aquarium|dinner show|pirate|medieval|theme park|disney|kid-friendly)/i,
-  couples: /\b(romantic|sunset|couples?|wine|champagne|balloon|private|date night|dinner cruise|cocktail|spa)/i,
+  couples: /\b(romantic|sunset|couples?|wine|champagne|balloon|date night|dinner cruise|cocktail|spa\b|honeymoon|proposal)/i,
   "day-trips": /\b(day trip|from orlando|st\.? augustine|clearwater|miami|tampa|key west|daytona|cocoa beach|crystal river|everglades)/i,
   "food-and-city": /\b(food|tasting|brewery|beer|cocktail|culinary|walking tour|city tour|segway|bike tour|winter park|downtown|ghost tour|pub crawl)/i,
   sightseeing: /\b(sightseeing|attraction pass|city pass|hop-on|trolley|museum|class|workshop|photo ?shoot|transfer|shuttle|escape room|go-?kart|golf)/i,
@@ -45,7 +45,7 @@ export const getGuideListings = cache((): Listing[] =>
     durationLabel: g.durationLabel,
     location: g.location,
     categories: g.categories,
-    bookingUrl: viatorSearchUrl(g.searchTerm),
+    bookingUrl: viatorSearchUrl(g.searchTerm, affiliateParams()),
     highlights: g.highlights,
     goodToKnow: g.goodToKnow,
     bestFor: g.bestFor,
@@ -77,8 +77,25 @@ export function snapshotDate(): string | null {
   return readSnapshot().fetchedAt;
 }
 
+/** Affiliate pid/mcid taken from the snapshot's product URLs (Viator adds them for our key). */
+function affiliateParams(): { pid?: string; mcid?: string } {
+  const url = readSnapshot().products.find((p) => p.productUrl)?.productUrl;
+  if (!url) return {};
+  try {
+    const u = new URL(url);
+    return { pid: u.searchParams.get("pid") ?? undefined, mcid: u.searchParams.get("mcid") ?? undefined };
+  } catch {
+    return {};
+  }
+}
+
+/** Viator's internal merchandising tags say nothing about the activity itself. */
+const META_TAG =
+  /quality|conversion|sell out|cancellation|availability|new product|agent favorite|weather dependent|private and luxury|small group|half-day|full-day|best /i;
+
 function classifyProduct(raw: RawProduct, seed: CategoryKey[] = []): CategoryKey[] {
-  const primary = classify(`${raw.title ?? ""} ${(raw.tagNames ?? []).join(" ")}`, seed);
+  const tags = (raw.tagNames ?? []).filter((t) => !META_TAG.test(t));
+  const primary = classify(`${raw.title ?? ""} ${tags.join(" ")}`, seed);
   if (primary.length) return primary;
   const fallback = classify(raw.description ?? "");
   return fallback.length ? fallback : ["sightseeing"];
