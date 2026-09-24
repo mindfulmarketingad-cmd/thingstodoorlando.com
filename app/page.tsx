@@ -3,6 +3,7 @@ import CategoryTile from "@/components/CategoryTile";
 import Faq from "@/components/Faq";
 import ListingCard from "@/components/ListingCard";
 import SearchForm from "@/components/SearchForm";
+import HeroVideo from "@/components/HeroVideo";
 import JsonLd from "@/components/JsonLd";
 import { ArrowIcon, ShieldIcon, SparkIcon, UsersIcon } from "@/components/Icons";
 import { categoryByKey } from "@/lib/categories";
@@ -102,7 +103,7 @@ export default async function HomePage() {
   return (
     <>
       <section className="hero" aria-labelledby="hero-title">
-        <img className="hero-art" src="/hero.svg" alt="" width={1600} height={720} fetchPriority="high" />
+        <HeroVideo />
         <div className="hero-inner">
           <h1 id="hero-title">Things To Do In Orlando</h1>
           <p className="hero-sub">
