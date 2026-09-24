@@ -15,6 +15,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { getTop10, TOP10_SLUG } from "@/lib/top10";
 import EventCard from "@/components/EventCard";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
+import DatePicker from "@/components/DatePicker";
 import { eventsForMonths, MONTHS, monthSlug, orlandoToday } from "@/lib/events";
 import { itemListSchema } from "@/lib/schema";
 import type { CategoryKey } from "@/lib/types";
@@ -119,6 +120,7 @@ export default async function HomePage() {
             top-rated experiences in minutes.
           </p>
           <SearchForm id="hero-search" placeholder="Try Kennedy Space Center, airboat or Kissimmee" />
+          <DatePicker variant="hero" label="When are you visiting?" />
           <nav className="hero-tags" aria-label="Popular searches">
             {heroSearches.map((s) => (
               <Link key={s.href} href={s.href}>

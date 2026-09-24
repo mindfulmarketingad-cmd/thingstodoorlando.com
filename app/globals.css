@@ -2254,3 +2254,115 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Travel date picker ---------- */
+.date-picker {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.date-picker label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--navy);
+}
+.date-picker label svg {
+  color: var(--blue);
+}
+.date-picker input {
+  font: inherit;
+  font-size: 0.97rem;
+  padding: 10px 12px;
+  border: 1px solid #cfd8e5;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--ink);
+  min-height: 44px;
+  width: 100%;
+}
+.date-picker input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(21, 101, 216, 0.18);
+}
+.date-picker.is-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+.date-picker.is-inline input {
+  width: auto;
+  min-height: 40px;
+  padding: 6px 10px;
+}
+.date-picker.is-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 14px auto 0;
+}
+.date-picker.is-hero label {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+.date-picker.is-hero label svg {
+  color: #fff;
+}
+.date-picker.is-hero input {
+  width: auto;
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 6px 16px;
+  border: 0;
+  box-shadow: var(--shadow);
+}
+.mobile-book-bar .date-picker label span {
+  font-size: 0.78rem;
+}
+.mobile-book-bar .date-picker input {
+  font-size: 0.85rem;
+  padding: 4px 6px;
+  min-height: 36px;
+}
+.date-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.date-bar > span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+@media (max-width: 480px) {
+  .date-picker.is-hero {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .mobile-book-bar .date-picker label {
+    display: none;
+  }
+}
+/* Two-row mobile booking bar once the date picker is added: price + date, then a full-width button. */
+@media (max-width: 960px) {
+  .mobile-book-bar {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  .mobile-book-bar .btn {
+    flex: 1 1 100%;
+  }
+  body:has(.mobile-book-bar) .site-footer {
+    padding-bottom: 150px;
+  }
+}

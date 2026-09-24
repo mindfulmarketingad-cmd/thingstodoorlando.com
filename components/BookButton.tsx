@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { ExternalIcon } from "./Icons";
+import { useTravelDate, withTravelDate } from "@/lib/travel-date";
 
 declare global {
   interface Window {
@@ -9,7 +10,10 @@ declare global {
   }
 }
 
-/** Affiliate booking link. Tracks the click in GA4 and marks the link as sponsored. */
+/**
+ * Affiliate booking link. Carries the visitor's travel date to Viator,
+ * tracks the click in GA4 and marks the link as sponsored.
+ */
 export default function BookButton({
   href,
   label,
@@ -23,13 +27,17 @@ export default function BookButton({
   className?: string;
   children?: ReactNode;
 }) {
+  const date = useTravelDate();
+  const url = withTravelDate(href, date);
   return (
     <a
-      href={href}
+      href={url}
       className={className}
       target="_blank"
       rel="sponsored nofollow noopener noreferrer"
-      onClick={() => window.gtag?.("event", "affiliate_click", { item_name: item, link_url: href })}
+      onClick={() =>
+        window.gtag?.("event", "affiliate_click", { item_name: item, link_url: url, travel_date: date || undefined })
+      }
     >
       {children ?? label}
       <ExternalIcon size={16} />

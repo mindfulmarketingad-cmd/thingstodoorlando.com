@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BookButton from "./BookButton";
+import DatePicker from "./DatePicker";
 import ListingMedia from "./ListingMedia";
 import Stars from "./Stars";
 import { formatPrice } from "./ListingCard";
@@ -12,14 +13,24 @@ export default function RankedList({
   items,
   anchor = (i: number) => `pick-${i + 1}`,
   headingLevel = 2,
+  showDate = true,
 }: {
   items: Listing[];
   anchor?: (i: number) => string;
   headingLevel?: 2 | 3;
+  /** Show the travel date picker above the list. */
+  showDate?: boolean;
 }) {
   const H = headingLevel === 2 ? "h2" : "h3";
   const Sub = headingLevel === 2 ? "h3" : "h4";
   return (
+    <>
+      {showDate && (
+        <div className="date-bar">
+          <DatePicker variant="inline" label="Your travel date" />
+          <span>Every &quot;Check availability&quot; button opens Viator for this date.</span>
+        </div>
+      )}
     <ol className="rank-list">
       {items.map((l, i) => (
         <li key={l.slug} id={anchor(i)} className="rank-item">
@@ -78,5 +89,6 @@ export default function RankedList({
         </li>
       ))}
     </ol>
+    </>
   );
 }

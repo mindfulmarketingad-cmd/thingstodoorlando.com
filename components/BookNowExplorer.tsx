@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import ListingCard from "./ListingCard";
+import DatePicker from "./DatePicker";
 import { categories } from "@/lib/categories";
 import { score } from "@/lib/score";
 import type { CategoryKey, Listing } from "@/lib/types";
@@ -264,6 +265,7 @@ export default function BookNowExplorer({
           <p className="result-count" aria-live="polite">
             {count.toLocaleString("en-US")} {count === 1 ? "experience" : "experiences"} found
           </p>
+          <DatePicker variant="inline" />
           <div className="field">
             <label htmlFor="sort">Sort by</label>
             <select id="sort" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>

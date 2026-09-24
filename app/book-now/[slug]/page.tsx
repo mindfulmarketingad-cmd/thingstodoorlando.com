@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import BookButton from "@/components/BookButton";
+import DatePicker from "@/components/DatePicker";
 import CategoryPage, { categoryTitle } from "@/components/CategoryPage";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
@@ -383,6 +384,7 @@ export default async function ListingPage({ params }: Props) {
                 Verified traveler reviews
               </li>
             </ul>
+            <DatePicker />
             <BookButton href={listing.bookingUrl} label={ctaLabel} item={listing.title} />
             <p className="fine-print">
               You will be taken to Viator to complete your booking. We may earn a commission at no extra cost to you.{" "}
@@ -458,12 +460,8 @@ export default async function ListingPage({ params }: Props) {
           ) : (
             <strong>Live prices</strong>
           )}
-          {listing.rating ? (
-            <span>
-              {listing.rating.toFixed(1)} stars{listing.reviewCount ? ` (${listing.reviewCount.toLocaleString("en-US")})` : ""}
-            </span>
-          ) : null}
         </div>
+        <DatePicker variant="inline" label="Date" />
         <BookButton href={listing.bookingUrl} label="Check availability" item={listing.title} className="btn btn-primary" />
       </div>
       <JsonLd data={tripSchema(listing)} />
