@@ -9,7 +9,7 @@ import { linkHotels } from "@/components/LinkHotels";
 import { ArrowIcon, ShieldIcon, SparkIcon, UsersIcon } from "@/components/Icons";
 import { categoryByKey } from "@/lib/categories";
 import { featuredImage, posts, formatDate } from "@/lib/blog";
-import { listicles } from "@/lib/listicles";
+import { getRankedListicle, listicles } from "@/lib/listicles";
 import { getGuideLinkMap, getListingsForCategory, getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 import { getTop10, TOP10_SLUG } from "@/lib/top10";
@@ -105,6 +105,22 @@ export default async function HomePage() {
   const trending = live.slice(0, 6);
   const to = (path: string) => links.get(path) ?? path;
   const top10 = getTop10();
+  const parks = await getRankedListicle("best-theme-parks-in-orlando", 5);
+
+  // Homepage tiles use the photo of the top-rated real tour in each category, never repeating a photo.
+  const usedPhotos = new Set<string>();
+  const tilePhoto = (key: CategoryKey) => {
+    const inCat = live.filter((l) => l.categories.includes(key) && (l.imageLarge ?? l.image));
+    // Theme park tile uses a real park ticket, not a show that happens to be tagged with the parks.
+    if (key === "theme-parks" && parks?.items.length) inCat.unshift(...parks.items);
+    const pick =
+      inCat.find((l) => (key === "theme-parks" ? parks?.items.includes(l) : l.categories[0] === key) && !usedPhotos.has((l.imageLarge ?? l.image)!.url)) ??
+      inCat.find((l) => !usedPhotos.has((l.imageLarge ?? l.image)!.url));
+    const img = pick ? (pick.imageLarge ?? pick.image) : undefined;
+    if (img) usedPhotos.add(img.url);
+    return img;
+  };
+  const tiles = resourceTiles.map((key) => ({ key, photo: tilePhoto(key) }));
   const { month } = orlandoToday();
   const monthEvents = eventsForMonths([month]).slice(0, 3);
   const latestPosts = posts.slice(0, 3);
@@ -208,7 +224,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="tile-grid">
-            {resourceTiles.map((key) => {
+            {tiles.map(({ key, photo }) => {
               const c = categoryByKey[key];
               return (
                 <CategoryTile
@@ -216,7 +232,7 @@ export default async function HomePage() {
                   href={`/book-now/${c.slug}`}
                   title={c.shortName}
                   subtitle={c.blurb}
-                  image={`/illustrations/${c.illustration}.svg`}
+                  image={photo?.url ?? `/illustrations/${c.illustration}.svg`}
                 />
               );
             })}

@@ -42,6 +42,8 @@ export interface Listing {
   summary: string;
   description: string;
   image?: ListingImage;
+  /** Largest available photo, for wide tiles and heroes (not sent to the browser list API). */
+  imageLarge?: ListingImage;
   illustration: IllustrationKey;
   rating?: number;
   reviewCount?: number;

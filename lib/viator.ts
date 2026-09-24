@@ -181,6 +181,7 @@ export function mapProduct(p: RawProduct, categories: CategoryKey[], illustratio
     summary: summarize(description),
     description: description.slice(0, 1200),
     image: pickImage(p.images, title),
+    imageLarge: pickImage(p.images, title, 1200),
     illustration,
     rating: rating ? Math.round(rating * 10) / 10 : undefined,
     reviewCount: p.reviews?.totalReviews || undefined,
