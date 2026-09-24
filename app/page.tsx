@@ -12,7 +12,7 @@ import { featuredImage, posts, formatDate } from "@/lib/blog";
 import { getRankedListicle, listicles } from "@/lib/listicles";
 import { getGuideLinkMap, getListingsForCategory, getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
-import { getTop10, TOP10_SLUG } from "@/lib/top10";
+import { getTop10WithImages, TOP10_SLUG } from "@/lib/top10";
 import EventCard from "@/components/EventCard";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import DatePicker from "@/components/DatePicker";
@@ -104,7 +104,7 @@ export default async function HomePage() {
   ]);
   const trending = live.slice(0, 6);
   const to = (path: string) => links.get(path) ?? path;
-  const top10 = getTop10();
+  const top10 = await getTop10WithImages();
   const parks = await getRankedListicle("best-theme-parks-in-orlando", 5);
 
   // Homepage tiles use the photo of the top-rated real tour in each category, never repeating a photo.
@@ -167,8 +167,13 @@ export default async function HomePage() {
               {top10.map((t) => (
                 <li key={t.rank}>
                   <Link href={t.href}>
-                    <span className="top10-num" aria-hidden>
-                      {t.rank}
+                    <span className="top10-media">
+                      {t.image && (
+                        <img src={t.image.url} alt={t.image.alt} width={t.image.width} height={t.image.height} loading="lazy" decoding="async" />
+                      )}
+                      <span className="top10-num" aria-hidden>
+                        {t.rank}
+                      </span>
                     </span>
                     <span className="top10-text">
                       <strong>{t.name}</strong>
