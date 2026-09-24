@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC8FF"/><stop offset="1" stop-color="#EAF5FF"/></linearGradient><linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BC0EB"/><stop offset="1" stop-color="#1565D8"/></linearGradient></defs><rect width="800" height="600" fill="url(#g)"/>
+    <g transform="translate(620 90) scale(1)" fill="#FFFFFF" opacity="0.9"><ellipse cx="0" cy="0" rx="46" ry="18"/><ellipse cx="-22" cy="-10" rx="24" ry="18"/><ellipse cx="16" cy="-16" rx="28" ry="22"/></g>
+    <path d="M0 260 C140 230 300 250 420 238 S700 230 800 245 V300 H0z" fill="#1E8A5A"/>
+    <rect y="290" width="800" height="310" fill="url(#w)"/>
+    <g fill="#2B7A4B">
+      <path d="M-20 300 C0 120 120 80 200 110 C260 60 330 90 330 150 C360 170 340 230 300 240 C260 300 60 300 -20 300z"/>
+      <path d="M600 300 C610 170 690 130 760 150 C820 140 860 200 820 300z"/>
+    </g>
+    <g stroke="#B8C9A8" stroke-width="3" opacity=".8"><path d="M90 150v60M130 130v80M170 140v50M250 150v50M700 180v60M740 170v70"/></g>
+    <g transform="translate(300 400)">
+      <path d="M0 20 C60 40 220 40 280 20 C220 0 60 0 0 20z" fill="#FF6B1A"/>
+      <circle cx="140" cy="-6" r="14" fill="#0B2545"/>
+      <path d="M126 20 v-18 h28 v18z" fill="#1565D8"/>
+      <path d="M40 -40 L240 60" stroke="#0B2545" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="40" cy="-40" rx="8" ry="18" transform="rotate(-60 40 -40)" fill="#FFC15E"/>
+      <ellipse cx="240" cy="60" rx="8" ry="18" transform="rotate(-60 240 60)" fill="#FFC15E"/>
+    </g>
+    <g stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".5"><path d="M80 360h90M540 380h120M120 520h140M560 530h110"/></g>
+    <g transform="translate(610 470)"><rect x="-10" y="6" width="130" height="16" rx="8" fill="#7A4E2A"/><ellipse cx="40" cy="4" rx="24" ry="14" fill="#2F6B3A"/><circle cx="68" cy="2" r="7" fill="#2F6B3A"/></g></svg>

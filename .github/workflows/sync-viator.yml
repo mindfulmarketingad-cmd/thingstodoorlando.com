@@ -1,0 +1,45 @@
+name: Sync Viator products
+
+# Pulls every Orlando product from the Viator API into data/viator-products.json
+# and commits it, so the site serves the data without runtime API calls.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/fetch-viator.mjs
+      - .github/workflows/sync-viator.yml
+  # Uncomment to refresh prices and ratings weekly (Mondays 09:00 UTC).
+  # schedule:
+  #   - cron: "0 9 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-viator
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch products
+        env:
+          VIATOR_API_KEY: ${{ secrets.VIATOR_API_KEY }}
+        run: node scripts/fetch-viator.mjs
+      - name: Commit snapshot
+        run: |
+          if git diff --quiet -- data/viator-products.json; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add data/viator-products.json
+          git commit -m "Update Viator product snapshot"
+          git push

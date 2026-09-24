@@ -1,0 +1,66 @@
+export type CategoryKey =
+  | "theme-parks"
+  | "space"
+  | "wildlife"
+  | "dinner-shows"
+  | "water"
+  | "sky"
+  | "family"
+  | "couples"
+  | "day-trips"
+  | "food-and-city"
+  | "sightseeing";
+
+export type IllustrationKey =
+  | "theme-parks"
+  | "space"
+  | "wildlife"
+  | "dinner-shows"
+  | "water"
+  | "sky"
+  | "family"
+  | "couples"
+  | "day-trips"
+  | "food-and-city";
+
+export interface ListingImage {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
+export interface Listing {
+  slug: string;
+  source: "viator" | "guide";
+  productCode?: string;
+  title: string;
+  summary: string;
+  description: string;
+  image?: ListingImage;
+  illustration: IllustrationKey;
+  rating?: number;
+  reviewCount?: number;
+  priceFrom?: number;
+  currency: string;
+  durationMinutes?: number;
+  durationLabel?: string;
+  location: string;
+  categories: CategoryKey[];
+  freeCancellation?: boolean;
+  bookingUrl: string;
+  highlights?: string[];
+  goodToKnow?: string[];
+  bestFor?: string;
+  /** Search term used to pull related live tours for a guide listing. */
+  searchTerm?: string;
+}
+
+export interface ListingDetail extends Listing {
+  inclusions?: string[];
+  exclusions?: string[];
+  additionalInfo?: string[];
+  cancellationPolicy?: string;
+  meetingPoint?: string;
+  gallery?: ListingImage[];
+}
