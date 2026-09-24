@@ -29,14 +29,13 @@ const AREAS = {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/* ---------- Auth: the v2 docs are not public, so try the common schemes once and reuse the one that works ---------- */
-const AUTH_MODES = [
-  { name: "header x-api-key", headers: { "x-api-key": KEY } },
-  { name: "header Authorization Bearer", headers: { Authorization: `Bearer ${KEY}` } },
-  { name: "query apiKey", query: { apiKey: KEY } },
-  { name: "query key", query: { key: KEY } },
-  { name: "demo (no key)", headers: {} },
-].filter((m) => KEY || m.name.startsWith("demo"));
+/* ---------- Auth: Stay22 v2 reads the key from the x-api-key header ---------- */
+const AUTH_MODES = [{ name: "header x-api-key", headers: { "x-api-key": KEY } }];
+
+if (!KEY) {
+  console.error("STAY22_API_KEY is not set.");
+  process.exit(1);
+}
 
 let auth = null;
 
@@ -61,7 +60,7 @@ async function search(address) {
     for (let attempt = 1; attempt <= 4; attempt++) {
       const r = await request(params, mode);
       if (r.status === 429 || r.status >= 500) {
-        const wait = mode.name.startsWith("demo") ? 15_000 : 3000 * attempt;
+        const wait = 3000 * attempt;
         console.warn(`${address} -> ${r.status}, retrying in ${wait}ms`);
         await sleep(wait);
         continue;
@@ -71,7 +70,11 @@ async function search(address) {
         auth = mode;
         return r.json;
       }
-      console.warn(`${address} [${mode.name}] -> ${r.status}: ${r.text.slice(0, 200).replace(KEY, "***")}`);
+      console.warn(`${address} -> ${r.status}: ${r.text.slice(0, 200).replace(KEY, "***")}`);
+      if (r.status === 401 || r.status === 403) {
+        console.error("Stay22 rejected the API key. If the message says the key is not enabled for the accommodations API, ask your Stay22 representative to enable it, then re-run this workflow.");
+        process.exit(1);
+      }
       break;
     }
   }
@@ -203,7 +206,6 @@ for (const [key, address] of Object.entries(AREAS)) {
   hotels.forEach((h) => hosts.add(new URL(h.image).hostname));
   snapshot.areas[key] = { address, hotels };
   console.log(`${key}: ${hotels.length} hotels (${raw.length} raw)`);
-  if (auth?.name.startsWith("demo")) await sleep(13_000);
 }
 
 snapshot.imageHosts = [...hosts].sort();
