@@ -4,6 +4,7 @@ import { posts } from "@/lib/blog";
 import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
 import { listicles } from "@/lib/listicles";
+import { MONTHS } from "@/data/events";
 import { getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -34,10 +35,25 @@ export default async function SitemapPage() {
               <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/search">Search</Link></li>
               <li><Link href="/about">About</Link></li>
+              <li><Link href="/author">Authors</Link></li>
               <li><Link href="/contact">Contact</Link></li>
               <li><Link href="/disclaimer">Disclaimer</Link></li>
               <li><Link href="/privacy">Privacy Policy</Link></li>
               <li><Link href="/terms">Terms of Use</Link></li>
+            </ul>
+          </section>
+          <section>
+            <h2>Events</h2>
+            <ul>
+              <li><Link href="/events">Orlando Events Calendar</Link></li>
+              <li><Link href="/events/this-weekend">Things To Do In Orlando This Weekend</Link></li>
+              <li><Link href="/events/halloween-in-orlando">Halloween in Orlando</Link></li>
+              <li><Link href="/events/christmas-in-orlando">Christmas in Orlando</Link></li>
+              {MONTHS.map((m) => (
+                <li key={m}>
+                  <Link href={`/events/${m.toLowerCase()}`}>Things To Do In Orlando In {m}</Link>
+                </li>
+              ))}
             </ul>
           </section>
           <section>

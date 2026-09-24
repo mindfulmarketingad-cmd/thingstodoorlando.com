@@ -14,4 +14,6 @@ export interface Post {
   body: string;
   /** Guide or listing slugs to feature at the end of the post. */
   featuredListings: string[];
+  /** Author slug from data/authors.ts; defaults to DEFAULT_AUTHOR. */
+  author?: string;
 }

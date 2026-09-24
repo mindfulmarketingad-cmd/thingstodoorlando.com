@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Faq from "./Faq";
+import AuthorBox, { AuthorByline } from "./AuthorBox";
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
 import { linkHotels } from "./LinkHotels";
@@ -10,6 +11,7 @@ import { featuredImage, formatDate } from "@/lib/blog";
 import { categoryByKey } from "@/lib/categories";
 import { listicles, type RankedListicle } from "@/lib/listicles";
 import { formatDuration } from "@/lib/viator";
+import { authorSchema, getAuthor } from "@/lib/authors";
 import { absoluteUrl, site } from "@/lib/site";
 
 const anchor = (i: number) => `pick-${i + 1}`;
@@ -20,6 +22,7 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
   const plural = `${config.noun}s`;
   const path = `/blog/${config.slug}`;
   const typical = formatDuration(stats.medianMinutes);
+  const author = getAuthor(config.author);
 
   const faqs = [
     ...(stats.minPrice
@@ -57,7 +60,7 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
       datePublished: "2026-09-24",
       mainEntityOfPage: absoluteUrl(path),
       image: absoluteUrl(featuredImage(config.slug).url),
-      author: { "@type": "Organization", name: `${site.name} Editorial Team`, url: absoluteUrl("/about") },
+      author: authorSchema(author),
       publisher: { "@id": `${site.url}/#organization` },
       inLanguage: "en-US",
     },
@@ -85,10 +88,10 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
           { name: config.title, href: path },
         ]}
       >
-        <p style={{ marginTop: 8, fontSize: "0.95rem" }}>
-          By the ThingsToDoOrlando.com editorial team. Updated <time dateTime={updated}>{formatDate(updated)}</time>{" "}
-          with current prices and reviews.
-        </p>
+        <AuthorByline author={author}>
+          {" "}
+          · Updated <time dateTime={updated}>{formatDate(updated)}</time> with current prices and reviews
+        </AuthorByline>
       </PageHero>
 
       <section className="section" style={{ paddingTop: 40 }}>
@@ -226,6 +229,12 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
             listings are grouped. Prices and ratings update each time we refresh our data. We may earn a commission when
             you book, which never affects the ranking. See our <Link href="/disclaimer">disclosure</Link>.
           </p>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }} aria-label="About the author">
+        <div className="container container-narrow">
+          <AuthorBox author={author} />
         </div>
       </section>
 

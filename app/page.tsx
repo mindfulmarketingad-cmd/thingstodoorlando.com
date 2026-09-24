@@ -13,6 +13,9 @@ import { listicles } from "@/lib/listicles";
 import { getGuideLinkMap, getListingsForCategory, getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 import { getTop10, TOP10_SLUG } from "@/lib/top10";
+import EventCard from "@/components/EventCard";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
+import { eventsForMonths, MONTHS, monthSlug, orlandoToday } from "@/lib/events";
 import { itemListSchema } from "@/lib/schema";
 import type { CategoryKey } from "@/lib/types";
 
@@ -101,6 +104,8 @@ export default async function HomePage() {
   const trending = live.slice(0, 6);
   const to = (path: string) => links.get(path) ?? path;
   const top10 = getTop10();
+  const { month } = orlandoToday();
+  const monthEvents = eventsForMonths([month]).slice(0, 3);
   const latestPosts = posts.slice(0, 3);
 
   return (
@@ -307,7 +312,58 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="section section-alt" aria-labelledby="guides-title">
+      {monthEvents.length > 0 && (
+        <section className="section" aria-labelledby="events-title">
+          <div className="container">
+            <div className="cat-head">
+              <div>
+                <h2 id="events-title">Happening in Orlando in {MONTHS[month - 1]}</h2>
+                <p>Festivals, holiday events and game days worth planning your trip around.</p>
+              </div>
+              <Link href="/events" className="link-arrow">
+                Full events calendar <ArrowIcon size={16} />
+              </Link>
+            </div>
+            <div className="event-grid">
+              {monthEvents.map((e) => (
+                <EventCard key={e.slug} event={e} />
+              ))}
+            </div>
+            <p className="center mt-lg">
+              <Link href="/events/this-weekend" className="btn btn-outline">
+                Things to do this weekend
+              </Link>{" "}
+              <Link href={`/events/${monthSlug(month)}`} className="btn btn-outline">
+                Orlando in {MONTHS[month - 1]}
+              </Link>
+            </p>
+          </div>
+        </section>
+      )}
+
+      <section className="section section-alt" aria-labelledby="video-title">
+        <div className="container video-section">
+          <div>
+            <p className="eyebrow">Orlando travel guide</p>
+            <h2 id="video-title">Watch Our Orlando Travel Guide</h2>
+            <p style={{ color: "var(--muted)" }}>
+              Get a feel for Orlando before you go, then use our guides to choose the parks, tours and neighborhoods
+              that fit your trip.
+            </p>
+            <p style={{ margin: 0 }}>
+              <Link href={`/blog/${TOP10_SLUG}`} className="btn btn-primary">
+                Top 10 things to do
+              </Link>{" "}
+              <Link href="/blog/where-to-stay-in-orlando" className="btn btn-outline">
+                Where to stay
+              </Link>
+            </p>
+          </div>
+          <YouTubeEmbed id="ffpo8K-I3Xg" title="Orlando travel guide video" />
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="guides-title">
         <div className="container">
           <div className="cat-head">
             <div>

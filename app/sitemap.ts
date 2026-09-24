@@ -3,6 +3,8 @@ import { posts } from "@/lib/blog";
 import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
 import { listicles } from "@/lib/listicles";
+import { authors } from "@/data/authors";
+import { MONTHS } from "@/data/events";
 import { getLiveListings } from "@/lib/listings";
 import { absoluteUrl } from "@/lib/site";
 
@@ -40,6 +42,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }));
 
+  const authorPages = [
+    { url: absoluteUrl("/author"), lastModified: legalUpdated, changeFrequency: "monthly" as const, priority: 0.4 },
+    ...authors.map((a) => ({
+      url: absoluteUrl(`/author/${a.slug}`),
+      lastModified: legalUpdated,
+      changeFrequency: "monthly" as const,
+      priority: 0.4,
+    })),
+  ];
+
+  const eventPages = ["", ...MONTHS.map((m) => `/${m.toLowerCase()}`), "/halloween-in-orlando", "/christmas-in-orlando", "/this-weekend"].map(
+    (p) => ({
+      url: absoluteUrl(`/events${p}`),
+      lastModified: now,
+      changeFrequency: (p === "/this-weekend" || p === "" ? "daily" : "weekly") as "daily" | "weekly",
+      priority: p === "" ? 0.9 : 0.7,
+    }),
+  );
+
   const lists = listicles.map((l) => ({
     url: absoluteUrl(`/blog/${l.slug}`),
     lastModified: now,
@@ -62,5 +83,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(l.image ? { images: [l.image.url] } : {}),
   }));
 
-  return [...pages, ...cats, ...searches, ...lists, ...blog, ...live];
+  return [...pages, ...cats, ...searches, ...eventPages, ...lists, ...blog, ...authorPages, ...live];
 }

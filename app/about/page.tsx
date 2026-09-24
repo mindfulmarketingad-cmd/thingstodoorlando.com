@@ -36,7 +36,7 @@ Viator is a Tripadvisor company and one of the largest marketplaces for tours an
 
 ## Get in touch
 
-We love hearing from readers, locals and tour operators. If you have a question, a tip or a correction, please [contact us](/contact). Ready to start planning? Browse every experience on [Book Now](/book-now) or read our latest [Orlando travel guides](/blog).
+Meet the people behind our guides on our [authors page](/author). We love hearing from readers, locals and tour operators. If you have a question, a tip or a correction, please [contact us](/contact). Ready to start planning? Browse every experience on [Book Now](/book-now) or read our latest [Orlando travel guides](/blog).
 `;
 
 export default function AboutPage() {

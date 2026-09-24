@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import AuthorBox, { AuthorByline } from "@/components/AuthorBox";
 import JsonLd from "@/components/JsonLd";
 import ListiclePage from "@/components/ListiclePage";
 import ListingCard from "@/components/ListingCard";
 import PageHero from "@/components/PageHero";
 import RankedList from "@/components/RankedList";
+import HotelCta from "@/components/HotelCta";
 import Prose from "@/components/Prose";
 import { featuredImage, formatDate, getPost, posts, readingMinutes, relatedPosts } from "@/lib/blog";
-import { getAllListings, getGuideLinkMap } from "@/lib/listings";
+import { getAllListings, getGuideLinkMap, getLiveListings } from "@/lib/listings";
 import { getRankedListicle, getTopRated, listicleBySlug, listicles } from "@/lib/listicles";
 import { parseMarkdown } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/metadata";
+import { authorSchema, getAuthor } from "@/lib/authors";
 import { absoluteUrl, site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -62,15 +65,32 @@ export default async function PostPage({ params }: Props) {
   }
   const post = getPost(slug);
   if (!post) notFound();
+  const author = getAuthor(post.author);
 
   // "[[top-rated]]" in a post body renders the live top-rated Viator list at that spot.
-  const MARKER = "[[top-rated]]";
-  const [before, after = ""] = post.body.split(MARKER);
-  const hasTopRated = post.body.includes(MARKER);
-  const topRated = hasTopRated ? await getTopRated(10) : [];
-  const blocks = parseMarkdown(before);
-  const afterBlocks = parseMarkdown(after);
-  const toc = [...blocks, ...afterBlocks].filter((b): b is Extract<typeof b, { type: "h2" }> => b.type === "h2");
+  // Markers embed live data inside a post body:
+  //   [[top-rated]]            ten highest-rated Viator experiences
+  //   [[products:CODE,CODE]]   specific Viator products by product code
+  //   [[hotels]] / [[hotels:Area]]  Stay22 hotel call to action
+  const live = await getLiveListings();
+  const segments = await Promise.all(
+    post.body.split(/(\[\[[^\]]+\]\])/).map(async (part) => {
+      const m = part.match(/^\[\[([a-z-]+)(?::(.*))?\]\]$/);
+      if (!m) return { kind: "md" as const, blocks: parseMarkdown(part) };
+      if (m[1] === "top-rated") return { kind: "list" as const, id: "top-rated", items: await getTopRated(10) };
+      if (m[1] === "products") {
+        const codes = (m[2] ?? "").split(",").map((c) => c.trim());
+        const items = codes.map((c) => live.find((l) => l.productCode === c)).filter((l): l is NonNullable<typeof l> => !!l);
+        return { kind: "list" as const, id: `picks-${codes[0]?.toLowerCase()}`, items };
+      }
+      if (m[1] === "hotels") return { kind: "hotels" as const, area: m[2] };
+      return { kind: "md" as const, blocks: [] };
+    }),
+  );
+  const topRated = segments.flatMap((s) => (s.kind === "list" && s.id === "top-rated" ? s.items : []));
+  const toc = segments
+    .flatMap((s) => (s.kind === "md" ? s.blocks : []))
+    .filter((b): b is Extract<(typeof b), { type: "h2" }> => b.type === "h2");
   const [all, links] = await Promise.all([getAllListings(), getGuideLinkMap()]);
   const featured = [
     ...new Set(post.featuredListings.map((s) => (links.get(`/book-now/${s}`) ?? `/book-now/${s}`).replace("/book-now/", ""))),
@@ -88,7 +108,7 @@ export default async function PostPage({ params }: Props) {
     dateModified: post.updated,
     mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
     image: absoluteUrl(featuredImage(post.slug).url),
-    author: { "@type": "Organization", name: `${site.name} Editorial Team`, url: absoluteUrl("/about") },
+    author: authorSchema(author),
     publisher: { "@id": `${site.url}/#organization` },
     articleSection: post.category,
     inLanguage: "en-US",
@@ -103,10 +123,10 @@ export default async function PostPage({ params }: Props) {
           { name: post.title, href: `/blog/${post.slug}` },
         ]}
       >
-        <p style={{ marginTop: 8, fontSize: "0.95rem" }}>
-          By the ThingsToDoOrlando.com editorial team. Updated{" "}
-          <time dateTime={post.updated}>{formatDate(post.updated)}</time>. {readingMinutes(post)} min read.
-        </p>
+        <AuthorByline author={author}>
+          {" "}
+          · Updated <time dateTime={post.updated}>{formatDate(post.updated)}</time> · {readingMinutes(post)} min read
+        </AuthorByline>
       </PageHero>
 
       <section className="section" style={{ paddingTop: 40 }}>
@@ -116,22 +136,18 @@ export default async function PostPage({ params }: Props) {
               <img src={featuredImage(post.slug).url} alt={post.title} width={1200} height={630} fetchPriority="high" />
             </div>
             <p style={{ fontSize: "1.15rem", color: "var(--muted)" }}>{post.excerpt}</p>
-            <Prose blocks={blocks} links={links} />
-            {topRated.length > 0 && (
-              <div style={{ margin: "24px 0 32px" }}>
-                <RankedList items={topRated} anchor={(i) => `top-rated-${i + 1}`} headingLevel={3} />
-              </div>
+            {segments.map((s, i) =>
+              s.kind === "md" ? (
+                s.blocks.length ? <Prose key={i} blocks={s.blocks} links={links} /> : null
+              ) : s.kind === "hotels" ? (
+                <HotelCta key={i} area={s.area} />
+              ) : s.items.length ? (
+                <div key={i} style={{ margin: "24px 0 32px" }}>
+                  <RankedList items={s.items} anchor={(n) => `${s.id}-${n + 1}`} headingLevel={3} />
+                </div>
+              ) : null,
             )}
-            {afterBlocks.length > 0 && <Prose blocks={afterBlocks} links={links} />}
-            <div className="author-box">
-              <img src="/logo-mark.svg" alt="" width={52} height={52} />
-              <p>
-                <strong style={{ color: "var(--navy)" }}>ThingsToDoOrlando.com Editorial Team</strong>
-                <br />
-                We research Orlando tours, attractions and events so you can plan with confidence.{" "}
-                <Link href="/about">About us</Link>.
-              </p>
-            </div>
+            <AuthorBox author={author} />
           </article>
           <aside className="toc" aria-label="Table of contents">
             <strong>In this guide</strong>

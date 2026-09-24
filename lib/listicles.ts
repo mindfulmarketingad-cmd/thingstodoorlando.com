@@ -34,6 +34,8 @@ export interface ListicleConfig {
   howToChoose: { heading: string; text: string }[];
   goodToKnow: string[];
   faqs: { q: string; a: string }[];
+  /** Author slug from data/authors.ts; defaults to DEFAULT_AUTHOR. */
+  author?: string;
 }
 
 /** Transfers and transport-only products are never "things to do". */
@@ -763,3 +765,45 @@ export const getTopRated = cache(async (limit = 10, minReviews = 100, perCategor
   }
   return out;
 });
+
+/** Best-ranked real products whose title matches, for seasonal and editorial pages. */
+export async function findListings(re: RegExp, limit = 6, minReviews = 1): Promise<Listing[]> {
+  const live = await getLiveListings();
+  const out: Listing[] = [];
+  for (const l of live
+    .filter(
+      (l) =>
+        re.test(l.title) &&
+        !TRANSPORT.test(l.title) &&
+        !(l.tags ?? []).some((t) => LOW_QUALITY_TAG.test(t.trim())) &&
+        (l.reviewCount ?? 0) >= minReviews,
+    )
+    .sort((a, b) => rankScore(b) - rankScore(a))) {
+    if (out.some((o) => similar(o.title, l.title))) continue;
+    out.push(l);
+    if (out.length >= limit) break;
+  }
+  return out;
+}
+
+/** Similar well-reviewed products for the "How it compares" table on tour pages. */
+export async function comparableListings(listing: Listing, limit = 3): Promise<Listing[]> {
+  const live = await getLiveListings();
+  const key = activityKey(listing);
+  const pool = live.filter(
+    (l) =>
+      l.slug !== listing.slug &&
+      !TRANSPORT.test(l.title) &&
+      !(l.tags ?? []).some((t) => LOW_QUALITY_TAG.test(t.trim())) &&
+      (l.reviewCount ?? 0) >= 5,
+  );
+  const same = pool.filter((l) => activityKey(l) === key);
+  const fallback = pool.filter((l) => l.categories[0] === listing.categories[0]);
+  const out: Listing[] = [];
+  for (const l of [...same, ...fallback].sort((a, b) => rankScore(b) - rankScore(a))) {
+    if (out.some((o) => o.slug === l.slug || similar(o.title, l.title)) || similar(l.title, listing.title)) continue;
+    out.push(l);
+    if (out.length >= limit) break;
+  }
+  return out;
+}

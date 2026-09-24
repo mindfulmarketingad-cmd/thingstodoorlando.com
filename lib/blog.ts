@@ -9,8 +9,13 @@ import { post as cheap } from "@/content/posts/cheap";
 import { post as rainy } from "@/content/posts/rainy";
 import { post as bestTime } from "@/content/posts/best-time";
 import { post as top10 } from "@/content/posts/top-10";
+import { post as whereToStay } from "@/content/posts/where-to-stay";
+import { post as gatorVsWild } from "@/content/posts/gatorland-vs-wild-florida";
+import { post as kscTicketsVsTour } from "@/content/posts/ksc-tickets-vs-tour";
+import { post as discoveryCove } from "@/content/posts/discovery-cove";
+import { post as goCity } from "@/content/posts/go-city";
 
-export const posts: Post[] = [top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
+export const posts: Post[] = [whereToStay, gatorVsWild, kscTicketsVsTour, discoveryCove, goCity, top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
   b.published.localeCompare(a.published),
 );
 

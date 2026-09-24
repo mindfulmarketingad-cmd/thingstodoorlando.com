@@ -15,6 +15,8 @@ import { categories, categoryByKey, categoryBySlug } from "@/lib/categories";
 import { getGuideLinkMap, getListingBySlug, getLiveListings, getRelatedListings } from "@/lib/listings";
 import { extractLinks } from "@/lib/markdown";
 import { listingFaqs } from "@/lib/faqs";
+import { comparableListings } from "@/lib/listicles";
+import { tourInsights } from "@/data/tour-insights";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site";
 import type { Listing, ListingDetail } from "@/lib/types";
@@ -101,7 +103,12 @@ export default async function ListingPage({ params }: Props) {
     notFound();
   }
 
-  const [listing, related] = await Promise.all([getProductDetail(base), getRelatedListings(base, 6)]);
+  const [listing, related, comparable] = await Promise.all([
+    getProductDetail(base),
+    getRelatedListings(base, 6),
+    comparableListings(base, 3),
+  ]);
+  const insight = base.productCode ? tourInsights[base.productCode] : undefined;
   const primary = categoryByKey[listing.categories[0]];
   const isGuide = listing.source === "guide";
   const liveMatches = related.filter((r) => r.source === "viator");
@@ -222,6 +229,78 @@ export default async function ListingPage({ params }: Props) {
                 </>
               ) : null}
             </div>
+
+            {insight && (
+              <div className="insight-box">
+                <h2>Our take</h2>
+                <p className="insight-verdict">{insight.verdict}</p>
+                <div className="insight-grid">
+                  <div>
+                    <h3>Best for</h3>
+                    <ul className="check-list">
+                      {insight.bestFor.map((b) => (
+                        <li key={b}>
+                          <CheckIcon size={16} />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3>Skip it if</h3>
+                    <p>{insight.skipIf.charAt(0).toUpperCase() + insight.skipIf.slice(1)}</p>
+                  </div>
+                </div>
+                <h3>Tips before you book</h3>
+                <ol className="insight-tips">
+                  {insight.tips.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
+            {comparable.length > 0 && (
+              <div className="info-box">
+                <h2>How it compares</h2>
+                <div className="table-wrap" style={{ marginBottom: 12 }}>
+                  <table className="compare-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Experience</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">From</th>
+                        <th scope="col">Length</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="is-current">
+                        <td>
+                          <strong>{listing.title}</strong> (this tour)
+                        </td>
+                        <td>{listing.rating ? `${listing.rating.toFixed(1)} (${(listing.reviewCount ?? 0).toLocaleString("en-US")})` : "New"}</td>
+                        <td>{listing.priceFrom ? formatPrice(listing.priceFrom, listing.currency) : "See site"}</td>
+                        <td>{listing.durationLabel ?? "Varies"}</td>
+                      </tr>
+                      {comparable.map((c) => (
+                        <tr key={c.slug}>
+                          <td>
+                            <Link href={`/book-now/${c.slug}`}>{c.title}</Link>
+                          </td>
+                          <td>{c.rating ? `${c.rating.toFixed(1)} (${(c.reviewCount ?? 0).toLocaleString("en-US")})` : "New"}</td>
+                          <td>{c.priceFrom ? formatPrice(c.priceFrom, c.currency) : "See site"}</td>
+                          <td>{c.durationLabel ?? "Varies"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--muted)" }}>
+                  Similar experiences in Orlando, compared by traveler rating, starting price and length. Prices update with
+                  our latest data.
+                </p>
+              </div>
+            )}
 
             {listing.bestFor && (
               <div className="info-box">
@@ -368,6 +447,25 @@ export default async function ListingPage({ params }: Props) {
         </section>
       )}
 
+      {/* Sticky booking bar for phones and tablets; the sidebar card covers desktop. */}
+      <div className="mobile-book-bar" role="region" aria-label="Book this experience">
+        <div className="mobile-book-price">
+          {listing.priceFrom ? (
+            <>
+              <span>From</span>
+              <strong>{formatPrice(listing.priceFrom, listing.currency)}</strong>
+            </>
+          ) : (
+            <strong>Live prices</strong>
+          )}
+          {listing.rating ? (
+            <span>
+              {listing.rating.toFixed(1)} stars{listing.reviewCount ? ` (${listing.reviewCount.toLocaleString("en-US")})` : ""}
+            </span>
+          ) : null}
+        </div>
+        <BookButton href={listing.bookingUrl} label="Check availability" item={listing.title} className="btn btn-primary" />
+      </div>
       <JsonLd data={tripSchema(listing)} />
     </>
   );
