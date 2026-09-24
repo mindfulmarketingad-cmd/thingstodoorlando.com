@@ -8,8 +8,9 @@ import { post as airboat } from "@/content/posts/airboat";
 import { post as cheap } from "@/content/posts/cheap";
 import { post as rainy } from "@/content/posts/rainy";
 import { post as bestTime } from "@/content/posts/best-time";
+import { post as top10 } from "@/content/posts/top-10";
 
-export const posts: Post[] = [kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
+export const posts: Post[] = [top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
   b.published.localeCompare(a.published),
 );
 

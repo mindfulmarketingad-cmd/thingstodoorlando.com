@@ -5,10 +5,11 @@ import JsonLd from "@/components/JsonLd";
 import ListiclePage from "@/components/ListiclePage";
 import ListingCard from "@/components/ListingCard";
 import PageHero from "@/components/PageHero";
+import RankedList from "@/components/RankedList";
 import Prose from "@/components/Prose";
 import { featuredImage, formatDate, getPost, posts, readingMinutes, relatedPosts } from "@/lib/blog";
 import { getAllListings, getGuideLinkMap } from "@/lib/listings";
-import { getRankedListicle, listicleBySlug, listicles } from "@/lib/listicles";
+import { getRankedListicle, getTopRated, listicleBySlug, listicles } from "@/lib/listicles";
 import { parseMarkdown } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl, site } from "@/lib/site";
@@ -62,8 +63,14 @@ export default async function PostPage({ params }: Props) {
   const post = getPost(slug);
   if (!post) notFound();
 
-  const blocks = parseMarkdown(post.body);
-  const toc = blocks.filter((b): b is Extract<typeof b, { type: "h2" }> => b.type === "h2");
+  // "[[top-rated]]" in a post body renders the live top-rated Viator list at that spot.
+  const MARKER = "[[top-rated]]";
+  const [before, after = ""] = post.body.split(MARKER);
+  const hasTopRated = post.body.includes(MARKER);
+  const topRated = hasTopRated ? await getTopRated(10) : [];
+  const blocks = parseMarkdown(before);
+  const afterBlocks = parseMarkdown(after);
+  const toc = [...blocks, ...afterBlocks].filter((b): b is Extract<typeof b, { type: "h2" }> => b.type === "h2");
   const [all, links] = await Promise.all([getAllListings(), getGuideLinkMap()]);
   const featured = [
     ...new Set(post.featuredListings.map((s) => (links.get(`/book-now/${s}`) ?? `/book-now/${s}`).replace("/book-now/", ""))),
@@ -110,6 +117,12 @@ export default async function PostPage({ params }: Props) {
             </div>
             <p style={{ fontSize: "1.15rem", color: "var(--muted)" }}>{post.excerpt}</p>
             <Prose blocks={blocks} links={links} />
+            {topRated.length > 0 && (
+              <div style={{ margin: "24px 0 32px" }}>
+                <RankedList items={topRated} anchor={(i) => `top-rated-${i + 1}`} headingLevel={3} />
+              </div>
+            )}
+            {afterBlocks.length > 0 && <Prose blocks={afterBlocks} links={links} />}
             <div className="author-box">
               <img src="/logo-mark.svg" alt="" width={52} height={52} />
               <p>
@@ -180,6 +193,21 @@ export default async function PostPage({ params }: Props) {
         </div>
       </section>
       <JsonLd data={articleSchema} />
+      {topRated.length > 0 && (
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Highest-rated tours and experiences in Orlando",
+            itemListElement: topRated.map((l, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: l.title,
+              url: absoluteUrl(`/book-now/${l.slug}`),
+            })),
+          }}
+        />
+      )}
     </>
   );
 }

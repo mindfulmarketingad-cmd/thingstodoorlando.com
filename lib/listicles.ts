@@ -717,3 +717,49 @@ export function itemReasons(l: Listing): string[] {
   if (l.durationLabel) reasons.push(`Takes about ${l.durationLabel}`);
   return reasons.slice(0, 4);
 }
+
+/** What the activity actually is, so category tagging quirks cannot defeat the variety cap. */
+const ACTIVITIES: [string, RegExp][] = [
+  ["kayak", /kayak|paddle|canoe/i],
+  ["airboat", /airboat/i],
+  ["air", /helicopter|flight|balloon|skydiv/i],
+  ["tactical", /tactical|drill|shooting|gun|laser tag/i],
+  ["escape", /escape (room|game)/i],
+  ["ghost", /ghost|haunted|paranormal/i],
+  ["space", /kennedy|space center|rocket|launch/i],
+  ["food", /food|tasting|brewery|distillery|culinary/i],
+  ["zipline", /zip ?line|tree ?trek|ropes course|adventure park/i],
+];
+function activityKey(l: Listing): string {
+  return ACTIVITIES.find(([, re]) => re.test(l.title))?.[0] ?? l.categories[0];
+}
+
+/**
+ * Highest-rated Orlando experiences overall. Requires a solid review base and
+ * caps each activity type so the list is not ten versions of one tour.
+ */
+export const getTopRated = cache(async (limit = 10, minReviews = 100, perCategory = 2): Promise<Listing[]> => {
+  const live = await getLiveListings();
+  const pool = live
+    .filter(
+      (l) =>
+        !TRANSPORT.test(l.title) &&
+        !(l.tags ?? []).some((t) => LOW_QUALITY_TAG.test(t.trim())) &&
+        (l.reviewCount ?? 0) >= minReviews &&
+        (l.rating ?? 0) >= 4.5,
+    )
+    .sort((a, b) => rankScore(b) - rankScore(a));
+  const perCat = new Map<string, number>();
+  const out: Listing[] = [];
+  for (const l of pool) {
+    const cat = activityKey(l);
+    // One per named activity (kayak, airboat...), up to `perCategory` for broad categories.
+    const cap = ACTIVITIES.some(([k]) => k === cat) ? 1 : perCategory;
+    if ((perCat.get(cat) ?? 0) >= cap) continue;
+    if (out.some((o) => similar(o.title, l.title))) continue;
+    out.push(l);
+    perCat.set(cat, (perCat.get(cat) ?? 0) + 1);
+    if (out.length >= limit) break;
+  }
+  return out;
+});

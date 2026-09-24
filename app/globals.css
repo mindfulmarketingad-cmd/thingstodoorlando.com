@@ -1712,19 +1712,20 @@ p {
   font-size: 1.15rem;
   box-shadow: var(--shadow);
 }
-.rank-body h2 {
+.rank-title {
   font-size: 1.3rem;
   margin-bottom: 8px;
 }
-.rank-body h2 a {
+.rank-title a {
   color: var(--navy);
   text-decoration: none;
 }
-.rank-body h2 a:hover {
+.rank-title a:hover {
   color: var(--blue);
 }
-.rank-body h3 {
+.rank-sub {
   font-size: 0.95rem;
+  color: var(--navy);
   margin: 16px 0 8px;
 }
 .rank-body p {

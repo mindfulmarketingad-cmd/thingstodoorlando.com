@@ -1,15 +1,13 @@
 import Link from "next/link";
-import BookButton from "./BookButton";
 import Faq from "./Faq";
 import JsonLd from "./JsonLd";
-import ListingMedia from "./ListingMedia";
 import PageHero from "./PageHero";
-import Stars from "./Stars";
+import RankedList from "./RankedList";
 import { formatPrice } from "./ListingCard";
-import { CheckIcon, ClockIcon, PinIcon, TagIcon } from "./Icons";
+import { CheckIcon, ClockIcon, TagIcon } from "./Icons";
 import { featuredImage, formatDate } from "@/lib/blog";
 import { categoryByKey } from "@/lib/categories";
-import { itemReasons, itemSummary, listicles, type RankedListicle } from "@/lib/listicles";
+import { listicles, type RankedListicle } from "@/lib/listicles";
 import { formatDuration } from "@/lib/viator";
 import { absoluteUrl, site } from "@/lib/site";
 
@@ -196,64 +194,7 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
       {items.length > 0 && (
         <section className="section section-alt" aria-label={`Ranked ${plural}`} style={{ paddingTop: 48 }}>
           <div className="container container-narrow">
-            <ol className="rank-list">
-              {items.map((l, i) => (
-                <li key={l.slug} id={anchor(i)} className="rank-item">
-                  <div className="rank-media">
-                    <span className="rank-num" aria-hidden>
-                      {i + 1}
-                    </span>
-                    <ListingMedia listing={l} sizes="(max-width: 760px) 100vw, 320px" priority={i === 0} />
-                  </div>
-                  <div className="rank-body">
-                    <h2>
-                      <span className="sr-only">{i + 1}. </span>
-                      <Link href={`/book-now/${l.slug}`}>{l.title}</Link>
-                    </h2>
-                    {l.rating ? <Stars rating={l.rating} reviews={l.reviewCount} /> : null}
-                    <ul className="card-meta rank-meta">
-                      <li>
-                        <PinIcon size={15} />
-                        {l.location}
-                      </li>
-                      {l.durationLabel && (
-                        <li>
-                          <ClockIcon size={15} />
-                          {l.durationLabel}
-                        </li>
-                      )}
-                      {l.priceFrom ? (
-                        <li>
-                          <TagIcon size={15} />
-                          From {formatPrice(l.priceFrom, l.currency)} per person
-                        </li>
-                      ) : null}
-                    </ul>
-                    <p>{itemSummary(l)}</p>
-                    <h3>Why it made our list</h3>
-                    <ul className="check-list">
-                      {itemReasons(l).map((r) => (
-                        <li key={r}>
-                          <CheckIcon size={16} />
-                          {r}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="rank-actions">
-                      <BookButton
-                        href={l.bookingUrl}
-                        label="Check availability"
-                        item={l.title}
-                        className="btn btn-primary"
-                      />
-                      <Link href={`/book-now/${l.slug}`} className="btn btn-outline">
-                        Full details
-                      </Link>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <RankedList items={items} anchor={anchor} />
           </div>
         </section>
       )}
