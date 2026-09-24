@@ -74,7 +74,7 @@ Some of the best things to do in Orlando with kids cost very little. [Lake Eola 
 
 ## How to book family activities without the stress
 
-Every experience on ThingsToDoOrlando.com links to a verified booking page on Viator, where you can check live prices, read traveler reviews and see cancellation terms before paying. Look for tours marked with free cancellation, especially during summer when afternoon storms are common. When you are ready, browse the full list of [family friendly tours and events](/book-now/family-friendly) or head to [Book Now](/book-now) to filter by category, price and rating.
+Every experience on ThingsToDoOrlando.com links to a verified booking page on Viator, where you can check live prices, read traveler reviews and see cancellation terms before paying. Look for tours marked with free cancellation, especially during summer when afternoon storms are common. When you are ready, browse the full list of [family friendly tours and events](/book-now/family-friendly) or head to [Book Now](/book-now) to filter by category, price and rating. Still choosing a base? See the [best family hotels in Orlando by area](/place-to-stay).
 
 ## Frequently asked questions
 

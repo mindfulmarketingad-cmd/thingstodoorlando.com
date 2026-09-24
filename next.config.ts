@@ -19,7 +19,7 @@ const csp = [
   `img-src 'self' data: blob: ${viatorImageHosts.map((h) => `https://${h}`).join(" ")} https://www.googletagmanager.com https://*.google-analytics.com https://i.ytimg.com`,
   "font-src 'self'",
   "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
-  "frame-src https://www.youtube-nocookie.com",
+  "frame-src https://www.youtube-nocookie.com https://www.stay22.com",
   "frame-ancestors 'none'",
   "object-src 'none'",
   "base-uri 'self'",

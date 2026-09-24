@@ -13,7 +13,7 @@ export const post: Post = {
   illustration: "family",
   featuredListings: [],
   body: `
-Orlando is huge and spread out, and traffic on Interstate 4 can turn a 15-minute drive into an hour. Where you stay shapes your whole trip: how early you reach the parks, whether you need a rental car, and how much you spend on parking and rideshares. This guide compares Orlando's main areas so you can pick the right base for your plans, then compare hotel prices in one place.
+Orlando is huge and spread out, and traffic on Interstate 4 can turn a 15-minute drive into an hour. Where you stay shapes your whole trip: how early you reach the parks, whether you need a rental car, and how much you spend on parking and rideshares. This guide compares Orlando's main areas so you can pick the right base for your plans, then compare hotel prices in one place. For our hotel picks in every area, see the [best hotels in Orlando Florida](/place-to-stay).
 
 ## The short answer
 

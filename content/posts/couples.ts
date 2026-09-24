@@ -66,6 +66,10 @@ Orlando's food scene rewards couples who venture out. A [food tour](/book-now/or
 
 Ready to plan? See every [romantic thing to do in Orlando](/book-now/couples) or filter by category on [Book Now](/book-now).
 
+## Where to stay for a romantic trip
+
+Winter Park and Downtown Orlando are the most romantic bases, with walkable restaurants, bars and lakes. See our picks for the [best hotels in Orlando Florida](/place-to-stay), from boutique inns to resorts with quiet pools.
+
 ## Frequently asked questions
 
 ### What is the most romantic thing to do in Orlando?

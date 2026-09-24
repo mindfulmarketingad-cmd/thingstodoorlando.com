@@ -379,6 +379,9 @@ export default async function HomePage() {
               </Link>{" "}
               <Link href="/blog/where-to-stay-in-orlando" className="btn btn-outline">
                 Where to stay
+              </Link>{" "}
+              <Link href="/place-to-stay" className="btn btn-outline">
+                Best hotels
               </Link>
             </p>
           </div>
