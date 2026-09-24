@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { Block, Inline } from "@/lib/markdown";
+import { linkHotels } from "./LinkHotels";
 
-function InlineNodes({ nodes, links }: { nodes: Inline[]; links?: Map<string, string> }) {
+function InlineNodes({ nodes, links, hotels = true }: { nodes: Inline[]; links?: Map<string, string>; hotels?: boolean }) {
+  const txt = (v: string) => (hotels ? linkHotels(v) : v);
   return (
     <>
       {nodes.map((n, i) => {
-        if (n.type === "strong") return <strong key={i}>{n.value}</strong>;
+        if (n.type === "strong") return <strong key={i}>{txt(n.value)}</strong>;
         if (n.type === "link") {
           if (n.href.startsWith("/")) {
             return (
@@ -23,13 +25,22 @@ function InlineNodes({ nodes, links }: { nodes: Inline[]; links?: Map<string, st
           }
           return <span key={i}>{n.value}</span>;
         }
-        return <span key={i}>{n.value}</span>;
+        return <span key={i}>{txt(n.value)}</span>;
       })}
     </>
   );
 }
 
-export default function Prose({ blocks, links }: { blocks: Block[]; links?: Map<string, string> }) {
+export default function Prose({
+  blocks,
+  links,
+  hotelLinks = true,
+}: {
+  blocks: Block[];
+  links?: Map<string, string>;
+  /** Link "hotel"/"hotels" to the Stay22 affiliate URL. Off for legal pages. */
+  hotelLinks?: boolean;
+}) {
   return (
     <div className="prose">
       {blocks.map((b, i) => {
@@ -51,7 +62,7 @@ export default function Prose({ blocks, links }: { blocks: Block[]; links?: Map<
               <ul key={i}>
                 {b.items.map((it, j) => (
                   <li key={j}>
-                    <InlineNodes nodes={it} links={links} />
+                    <InlineNodes nodes={it} links={links} hotels={hotelLinks} />
                   </li>
                 ))}
               </ul>
@@ -61,7 +72,7 @@ export default function Prose({ blocks, links }: { blocks: Block[]; links?: Map<
               <ol key={i}>
                 {b.items.map((it, j) => (
                   <li key={j}>
-                    <InlineNodes nodes={it} links={links} />
+                    <InlineNodes nodes={it} links={links} hotels={hotelLinks} />
                   </li>
                 ))}
               </ol>
@@ -70,14 +81,14 @@ export default function Prose({ blocks, links }: { blocks: Block[]; links?: Map<
             return (
               <div key={i} className="callout">
                 <p>
-                  <InlineNodes nodes={b.inline} links={links} />
+                  <InlineNodes nodes={b.inline} links={links} hotels={hotelLinks} />
                 </p>
               </div>
             );
           default:
             return (
               <p key={i}>
-                <InlineNodes nodes={b.inline} links={links} />
+                <InlineNodes nodes={b.inline} links={links} hotels={hotelLinks} />
               </p>
             );
         }

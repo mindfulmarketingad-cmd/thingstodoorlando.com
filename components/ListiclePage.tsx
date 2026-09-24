@@ -2,6 +2,7 @@ import Link from "next/link";
 import Faq from "./Faq";
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
+import { linkHotels } from "./LinkHotels";
 import RankedList from "./RankedList";
 import { formatPrice } from "./ListingCard";
 import { CheckIcon, ClockIcon, TagIcon } from "./Icons";
@@ -103,7 +104,7 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
           </figure>
           <div className="prose">
             {config.intro.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
+              <p key={p.slice(0, 24)}>{linkHotels(p)}</p>
             ))}
           </div>
 
@@ -205,7 +206,7 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
           {config.howToChoose.map((h) => (
             <div key={h.heading}>
               <h3>{h.heading}</h3>
-              <p>{h.text}</p>
+              <p>{linkHotels(h.text)}</p>
             </div>
           ))}
           <h2>Good to know before you book</h2>
@@ -213,7 +214,7 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
             {config.goodToKnow.map((g) => (
               <li key={g}>
                 <CheckIcon size={16} />
-                {g}
+                {linkHotels(g)}
               </li>
             ))}
           </ul>

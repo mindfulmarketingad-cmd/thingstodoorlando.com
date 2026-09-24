@@ -9,6 +9,7 @@ export default function TextPage({
   crumb,
   body,
   updated,
+  hotelLinks = true,
 }: {
   title: string;
   intro?: string;
@@ -16,6 +17,7 @@ export default function TextPage({
   crumb: string;
   body: string;
   updated?: string;
+  hotelLinks?: boolean;
 }) {
   return (
     <>
@@ -27,7 +29,7 @@ export default function TextPage({
               Last updated: <time dateTime={updated}>{new Date(`${updated}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time>
             </p>
           )}
-          <Prose blocks={parseMarkdown(body)} />
+          <Prose blocks={parseMarkdown(body)} hotelLinks={hotelLinks} />
         </div>
       </section>
     </>

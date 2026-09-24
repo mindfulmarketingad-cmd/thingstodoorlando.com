@@ -20,9 +20,10 @@ export const site = {
 export const mainNav = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
-  { href: "/book-now", label: "Book Now" },
   { href: "/about", label: "About" },
   { href: "/search", label: "Search" },
+  // Primary CTA sits at the far right of the header.
+  { href: "/book-now", label: "Book Now" },
 ] as const;
 
 export const footerNav = [

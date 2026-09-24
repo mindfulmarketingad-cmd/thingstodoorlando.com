@@ -25,13 +25,13 @@ Our hosting provider may also record standard server logs, including IP address,
 
 ## Cookies
 
-Cookies are small text files stored on your device. We use analytics cookies set by Google Analytics. When you click a booking link and visit Viator, Viator may set its own cookies to track the referral and your booking. Those cookies are governed by Viator's privacy policy.
+Cookies are small text files stored on your device. We use analytics cookies set by Google Analytics. When you click a booking link and visit Viator, or a hotel link and visit Stay22 or its booking partners, those sites may set their own cookies to track the referral and your booking. Those cookies are governed by their own privacy policies.
 
 You can block or delete cookies through your browser settings, and you can opt out of Google Analytics using the Google Analytics Opt-out Browser Add-on provided by Google.
 
 ## Affiliate links and bookings
 
-When you click a booking link, you leave our site and go to Viator. We do not receive your payment details or booking information. Viator may share limited, non-identifying information with us, such as the fact that a booking was made, so that we can receive our commission. Please review Viator's privacy policy before booking.
+When you click a booking link, you leave our site and go to Viator or, for hotels, Stay22 and its booking partners. We do not receive your payment details or booking information. These partners may share limited, non-identifying information with us, such as the fact that a booking was made, so that we can receive our commission. Please review their privacy policies before booking.
 
 ## How we use information
 
@@ -76,6 +76,7 @@ export default function PrivacyPage() {
       crumb="Privacy"
       body={body}
       updated="2026-09-24"
+      hotelLinks={false}
     />
   );
 }

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import ListingCard from "@/components/ListingCard";
 import PageHero from "@/components/PageHero";
+import { linkHotels } from "@/components/LinkHotels";
 import SearchForm from "@/components/SearchForm";
 import { featuredSearchBySlug, featuredSearches } from "@/lib/featured-searches";
 import { pageMetadata } from "@/lib/metadata";
@@ -67,7 +68,7 @@ export default async function SearchResultsPage({ params }: Props) {
         <div className="container">
           {featured && (
             <div className="prose" style={{ maxWidth: 820, marginBottom: 32 }}>
-              <p>{featured.intro}</p>
+              <p>{linkHotels(featured.intro)}</p>
             </div>
           )}
           <div style={{ maxWidth: 640, marginBottom: 40 }}>

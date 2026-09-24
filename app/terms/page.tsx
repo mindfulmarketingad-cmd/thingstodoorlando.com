@@ -71,6 +71,7 @@ export default function TermsPage() {
       crumb="Terms"
       body={body}
       updated="2026-09-24"
+      hotelLinks={false}
     />
   );
 }

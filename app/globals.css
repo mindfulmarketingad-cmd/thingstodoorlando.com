@@ -341,6 +341,7 @@ p {
     font-size: 1.05rem;
   }
   .main-nav a.nav-cta {
+    display: flex;
     justify-content: center;
     margin-top: 8px;
   }

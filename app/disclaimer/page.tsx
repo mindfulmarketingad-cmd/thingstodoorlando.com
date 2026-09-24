@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 const body = `
 ## Affiliate disclosure
 
-ThingsToDoOrlando.com participates in affiliate marketing programs, including the Viator Affiliate Program. When you click a booking link on our site and complete a purchase, we may receive a commission from Viator. **This comes at no additional cost to you**, and the price you pay is the same as booking directly.
+ThingsToDoOrlando.com participates in affiliate marketing programs, including the Viator Affiliate Program for tours and activities and the Stay22 affiliate program for hotel and accommodation bookings. When you click a booking link on our site and complete a purchase, we may receive a commission from Viator, Stay22 or their partners. **This comes at no additional cost to you**, and the price you pay is the same as booking directly.
 
 In line with the U.S. Federal Trade Commission's guidelines on endorsements, we clearly disclose these relationships. Booking links on our site are marked as sponsored links for search engines. Commissions help us keep our guides free and up to date, but they do not determine which experiences we write about or how we describe them.
 
@@ -51,6 +51,7 @@ export default function DisclaimerPage() {
       crumb="Disclaimer"
       body={body}
       updated="2026-09-24"
+      hotelLinks={false}
     />
   );
 }

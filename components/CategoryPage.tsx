@@ -2,6 +2,7 @@ import Link from "next/link";
 import BookNowExplorer from "./BookNowExplorer";
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
+import { linkHotels } from "./LinkHotels";
 import { posts } from "@/lib/blog";
 import { categories, type Category } from "@/lib/categories";
 import { getAllListings } from "@/lib/listings";
@@ -40,7 +41,7 @@ export default async function CategoryPage({ category }: { category: Category })
       <section className="section" style={{ paddingTop: 40 }}>
         <div className="container">
           <div className="prose" style={{ maxWidth: 820, marginBottom: 28 }}>
-            <p>{category.intro}</p>
+            <p>{linkHotels(category.intro)}</p>
           </div>
           {items.length ? (
             <BookNowExplorer

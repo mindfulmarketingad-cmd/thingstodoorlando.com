@@ -5,6 +5,7 @@ import ListingCard from "@/components/ListingCard";
 import SearchForm from "@/components/SearchForm";
 import HeroVideo from "@/components/HeroVideo";
 import JsonLd from "@/components/JsonLd";
+import { linkHotels } from "@/components/LinkHotels";
 import { ArrowIcon, ShieldIcon, SparkIcon, UsersIcon } from "@/components/Icons";
 import { categoryByKey } from "@/lib/categories";
 import { featuredImage, posts, formatDate } from "@/lib/blog";
@@ -232,7 +233,7 @@ export default async function HomePage() {
               <div className="cat-head">
                 <div>
                   <h2 id={`cat-${g.key}`}>{g.heading}</h2>
-                  <p>{g.intro}</p>
+                  <p>{linkHotels(g.intro)}</p>
                 </div>
                 <Link href={`/book-now/${c.slug}`} className="link-arrow">
                   More {c.shortName.toLowerCase()} <ArrowIcon size={16} />

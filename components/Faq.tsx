@@ -1,4 +1,5 @@
 import JsonLd from "./JsonLd";
+import { linkHotels } from "./LinkHotels";
 import { faqSchema } from "@/lib/schema";
 
 export default function Faq({ items }: { items: { q: string; a: string }[] }) {
@@ -10,7 +11,7 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
             <h3 style={{ display: "inline", font: "inherit", color: "inherit", margin: 0 }}>{f.q}</h3>
           </summary>
           <div className="faq-a">
-            <p>{f.a}</p>
+            <p>{linkHotels(f.a)}</p>
           </div>
         </details>
       ))}
