@@ -2,6 +2,8 @@ export const site = {
   name: "ThingsToDoOrlando.com",
   shortName: "Things To Do Orlando",
   domain: "thingstodoorlando.com",
+  /** Visitor questions and inquiries. Display the vanity form; dial the digits. */
+  phone: { display: "1-855-ORL-CITY", tel: "+18556752489", digits: "1-855-675-2489" },
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://thingstodoorlando.com").replace(/\/$/, ""),
   mainKeyword: "Things To Do In Orlando",
   tagline: "Tours, Events & More",

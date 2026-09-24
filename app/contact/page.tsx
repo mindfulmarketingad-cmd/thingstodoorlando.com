@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { pageMetadata } from "@/lib/metadata";
+import { site } from "@/lib/site";
 import ContactForm from "./ContactForm";
 
 export const metadata = pageMetadata({
@@ -25,6 +26,14 @@ export default function ContactPage() {
             <ContactForm />
           </div>
           <aside className="info-box">
+            <h2>Call us</h2>
+            <p>
+              For questions about tours or planning your trip, call{" "}
+              <a href={`tel:${site.phone.tel}`}>
+                <strong>{site.phone.display}</strong>
+              </a>{" "}
+              ({site.phone.digits}).
+            </p>
             <h2>Before you write</h2>
             <p>
               <strong>Existing bookings:</strong> All bookings are made and managed on Viator. For changes, cancellations

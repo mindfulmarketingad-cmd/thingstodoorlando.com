@@ -24,6 +24,13 @@ export function organizationSchema() {
     url: site.url,
     logo: absoluteUrl("/logo.png"),
     sameAs: Object.values(site.social),
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: site.phone.tel,
+      contactType: "customer service",
+      areaServed: "US",
+      availableLanguage: "English",
+    },
   };
 }
 

@@ -17,6 +17,8 @@ export interface OrlandoEvent {
   tip?: string;
   /** Weekly events show on every weekend page. */
   weekly?: "Saturday" | "Sunday" | "Monday";
+  /** Day of the month for events on the same date every year (e.g. July 4). */
+  fixedDay?: number;
   /** Related page on this site. */
   related?: { href: string; label: string };
 }
@@ -120,6 +122,7 @@ export const events: OrlandoEvent[] = [
     name: "Fourth of July Fireworks at Lake Eola",
     months: [7],
     timing: "July 4",
+    fixedDay: 4,
     where: "Lake Eola Park, Downtown Orlando",
     category: "Fireworks",
     description: "Downtown's big Independence Day celebration with live music, food vendors and fireworks over the lake.",
@@ -263,6 +266,7 @@ export const events: OrlandoEvent[] = [
     name: "New Year's Eve celebrations",
     months: [12],
     timing: "December 31",
+    fixedDay: 31,
     where: "Theme parks, Disney Springs, CityWalk and Downtown Orlando",
     category: "Fireworks",
     description: "Extended park hours, fireworks and parties across Orlando. Theme parks often reach capacity, so plan ahead.",

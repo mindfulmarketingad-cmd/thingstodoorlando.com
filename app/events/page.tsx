@@ -1,4 +1,5 @@
 import Link from "next/link";
+import EventCalendar from "@/components/EventCalendar";
 import EventCard from "@/components/EventCard";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
@@ -11,15 +12,15 @@ import { itemListSchema } from "@/lib/schema";
 export const revalidate = 3600;
 
 export const metadata = pageMetadata({
-  title: "Orlando Events Calendar: Festivals, Holidays & Things To Do by Month",
+  title: "Orlando Events Calendar: Festivals, Holidays & Events by Month",
   description:
     "The Orlando events calendar: theme park festivals, Halloween and Christmas events, sports, markets and rocket launches, month by month, with planning tips.",
   path: "/events",
 });
 
 export default function EventsPage() {
-  const { month } = orlandoToday();
-  const now = eventsForMonths([month]);
+  const { year, month, day } = orlandoToday();
+  const todayIso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
   return (
     <>
@@ -29,7 +30,7 @@ export default function EventsPage() {
         crumbs={[{ name: "Events", href: "/events" }]}
       />
 
-      <section className="section" style={{ paddingTop: 40 }} aria-labelledby="now-title">
+      <section className="section" style={{ paddingTop: 40 }} aria-labelledby="cal-title">
         <div className="container">
           <nav aria-label="Seasonal guides" style={{ marginBottom: 28 }}>
             <ul className="pill-links">
@@ -47,20 +48,10 @@ export default function EventsPage() {
               </li>
             </ul>
           </nav>
-          <div className="cat-head">
-            <div>
-              <h2 id="now-title">Happening in {MONTHS[month - 1]}</h2>
-              <p>Events that usually run this month in and around Orlando.</p>
-            </div>
-            <Link href={`/events/${monthSlug(month)}`} className="link-arrow">
-              Full {MONTHS[month - 1]} guide
-            </Link>
-          </div>
-          <div className="event-grid">
-            {now.map((e) => (
-              <EventCard key={e.slug} event={e} />
-            ))}
-          </div>
+          <h2 id="cal-title" className="sr-only">
+            Interactive Orlando events calendar
+          </h2>
+          <EventCalendar events={events} initialYear={year} initialMonth={month} todayIso={todayIso} />
         </div>
       </section>
 
@@ -78,39 +69,29 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="cal-title">
+      <section className="section" aria-labelledby="months-title">
         <div className="container">
-          <h2 id="cal-title">Month-by-month calendar</h2>
-          <ul className="month-nav">
-            {MONTHS.map((m, i) => (
-              <li key={m}>
-                <a href={`#${m.toLowerCase()}`} aria-current={i + 1 === month ? "true" : undefined}>
-                  {m}
-                </a>
-              </li>
-            ))}
+          <div className="section-head">
+            <h2 id="months-title">Browse Orlando events by month</h2>
+            <p>Weather, crowds, events and the best tours to book for every month of the year.</p>
+          </div>
+          <ul className="month-cards">
+            {MONTHS.map((m, i) => {
+              const list = eventsForMonths([i + 1]);
+              return (
+                <li key={m} className={i + 1 === month ? "is-now" : undefined}>
+                  <Link href={`/events/${monthSlug(i + 1)}`}>
+                    <strong>{m}</strong>
+                    <span>
+                      {list.length} events
+                      {i + 1 === month ? " · This month" : ""}
+                    </span>
+                    <em>{list.slice(0, 2).map((e) => e.name).join(", ")}</em>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
-          {MONTHS.map((m, i) => {
-            const list = eventsForMonths([i + 1]);
-            return (
-              <div key={m} id={m.toLowerCase()} className="month-block">
-                <h3 style={{ fontSize: "1.4rem" }}>
-                  {m} {i + 1 === month && <small className="now-badge">This month</small>}
-                </h3>
-                <ul className="month-list">
-                  {list.map((e) => (
-                    <li key={e.slug}>
-                      <Link href={`/events/${monthSlug(i + 1)}#${e.slug}`}>{e.name}</Link>
-                      <span>{e.timing}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href={`/events/${monthSlug(i + 1)}`} className="link-arrow">
-                  Things to do in Orlando in {m}
-                </Link>
-              </div>
-            );
-          })}
         </div>
       </section>
 

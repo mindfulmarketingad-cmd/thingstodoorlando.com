@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Logo from "./Logo";
-import { MenuIcon, SearchIcon, XIcon } from "./Icons";
-import { mainNav } from "@/lib/site";
+import { MenuIcon, PhoneIcon, SearchIcon, XIcon } from "./Icons";
+import { mainNav, site } from "@/lib/site";
 
 export default function Header() {
   const pathname = usePathname();
@@ -15,6 +15,15 @@ export default function Header() {
 
   return (
     <header className="site-header">
+      <div className="top-bar">
+        <div className="container top-bar-inner">
+          <span>Questions about tours or planning your Orlando trip?</span>
+          <a href={`tel:${site.phone.tel}`} className="top-bar-phone" aria-label={`Call us at ${site.phone.digits}`}>
+            <PhoneIcon size={15} />
+            Call {site.phone.display}
+          </a>
+        </div>
+      </div>
       <div className="container header-inner">
         <Logo />
         <button
