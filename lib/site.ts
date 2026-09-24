@@ -10,7 +10,7 @@ export const site = {
   description:
     "Find the best things to do in Orlando: theme park tickets, Kennedy Space Center trips, airboat rides, dinner shows, family tours and date nights. Compare top-rated experiences and book securely through Viator.",
   locale: "en_US",
-  gaId: "G-FPWVKSZCLY",
+  gaId: "G-373TLMQBV1",
   social: {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/thingstodoorlando",
     twitter: process.env.NEXT_PUBLIC_TWITTER_URL || "https://twitter.com/thingstodoorlando",
