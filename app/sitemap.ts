@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { posts } from "@/lib/blog";
 import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
+import { listicles } from "@/lib/listicles";
 import { getLiveListings } from "@/lib/listings";
 import { absoluteUrl } from "@/lib/site";
 
@@ -39,6 +40,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }));
 
+  const lists = listicles.map((l) => ({
+    url: absoluteUrl(`/blog/${l.slug}`),
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
   const blog = posts.map((p) => ({
     url: absoluteUrl(`/blog/${p.slug}`),
     lastModified: new Date(p.updated),
@@ -54,5 +62,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(l.image ? { images: [l.image.url] } : {}),
   }));
 
-  return [...pages, ...cats, ...searches, ...blog, ...live];
+  return [...pages, ...cats, ...searches, ...lists, ...blog, ...live];
 }

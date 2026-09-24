@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import ListiclePage from "@/components/ListiclePage";
 import ListingCard from "@/components/ListingCard";
 import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
-import { formatDate, getPost, posts, readingMinutes, relatedPosts } from "@/lib/blog";
+import { featuredImage, formatDate, getPost, posts, readingMinutes, relatedPosts } from "@/lib/blog";
 import { getAllListings, getGuideLinkMap } from "@/lib/listings";
+import { getRankedListicle, listicleBySlug, listicles } from "@/lib/listicles";
 import { parseMarkdown } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl, site } from "@/lib/site";
@@ -17,11 +19,26 @@ export const dynamicParams = false;
 export const revalidate = 21600;
 
 export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return [...listicles.map((l) => ({ slug: l.slug })), ...posts.map((p) => ({ slug: p.slug }))];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const listicle = listicleBySlug.get(slug);
+  if (listicle) {
+    const data = await getRankedListicle(slug);
+    const year = (data?.updated ?? "2026").slice(0, 4);
+    return pageMetadata({
+      title: `${listicle.title} (${year})`,
+      absoluteTitle: true,
+      description: listicle.description,
+      path: `/blog/${slug}`,
+      type: "article",
+      publishedTime: "2026-09-24",
+      modifiedTime: data?.updated,
+      image: { ...featuredImage(slug), alt: listicle.title },
+    });
+  }
   const post = getPost(slug);
   if (!post) return {};
   return pageMetadata({
@@ -31,11 +48,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     type: "article",
     publishedTime: post.published,
     modifiedTime: post.updated,
+    image: { ...featuredImage(post.slug), alt: post.title },
   });
 }
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
+  if (listicleBySlug.has(slug)) {
+    const data = await getRankedListicle(slug);
+    if (!data) notFound();
+    return <ListiclePage data={data} />;
+  }
   const post = getPost(slug);
   if (!post) notFound();
 
@@ -57,7 +80,7 @@ export default async function PostPage({ params }: Props) {
     datePublished: post.published,
     dateModified: post.updated,
     mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
-    image: absoluteUrl("/opengraph-image.png"),
+    image: absoluteUrl(featuredImage(post.slug).url),
     author: { "@type": "Organization", name: `${site.name} Editorial Team`, url: absoluteUrl("/about") },
     publisher: { "@id": `${site.url}/#organization` },
     articleSection: post.category,
@@ -83,7 +106,7 @@ export default async function PostPage({ params }: Props) {
         <div className="container article-layout">
           <article>
             <div className="article-hero-img">
-              <img src={`/illustrations/${post.illustration}.svg`} alt="" width={800} height={600} />
+              <img src={featuredImage(post.slug).url} alt={post.title} width={1200} height={630} fetchPriority="high" />
             </div>
             <p style={{ fontSize: "1.15rem", color: "var(--muted)" }}>{post.excerpt}</p>
             <Prose blocks={blocks} links={links} />
@@ -142,8 +165,8 @@ export default async function PostPage({ params }: Props) {
           <div className="post-grid">
             {related.map((p) => (
               <article key={p.slug} className="card post-card">
-                <div className="card-media">
-                  <img src={`/illustrations/${p.illustration}.svg`} alt="" width={800} height={600} loading="lazy" />
+                <div className="card-media is-featured">
+                  <img src={featuredImage(p.slug).url} alt="" width={1200} height={630} loading="lazy" />
                 </div>
                 <div className="card-body">
                   <span className="post-cat">{p.category}</span>

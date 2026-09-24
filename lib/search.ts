@@ -3,6 +3,7 @@ import { categories } from "./categories";
 import { posts } from "./blog";
 import type { Post } from "./blog-types";
 import { getAllListings, score } from "./listings";
+import { listicles } from "./listicles";
 import type { Listing } from "./types";
 
 const STOP = new Set(["the", "and", "for", "in", "of", "to", "a", "an", "with", "near", "orlando", "things", "do", "best", "top", "what", "fl", "florida"]);
@@ -17,6 +18,7 @@ export const staticPages = [
   { href: "/privacy", title: "Privacy Policy", text: "privacy policy cookies analytics data" },
   { href: "/terms", title: "Terms of Use", text: "terms of use conditions legal" },
   { href: "/sitemap", title: "Sitemap", text: "sitemap all pages" },
+  ...listicles.map((l) => ({ href: `/blog/${l.slug}`, title: l.title, text: `${l.noun} best top ranked ${l.description}` })),
 ];
 
 function stem(t: string) {

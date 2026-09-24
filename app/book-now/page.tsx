@@ -25,7 +25,7 @@ export default async function BookNowPage() {
   return (
     <>
       <PageHero
-        title="Book Things To Do In Orlando"
+        title="Book Tours & Events In Orlando Florida"
         intro={`${all.length.toLocaleString("en-US")} tours, tickets and experiences in Orlando, Florida. Filter by category, price, rating and duration, then book securely with Viator.`}
         crumbs={[{ name: "Book Now", href: "/book-now" }]}
       />

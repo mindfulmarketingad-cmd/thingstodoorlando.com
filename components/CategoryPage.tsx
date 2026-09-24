@@ -5,6 +5,7 @@ import PageHero from "./PageHero";
 import { posts } from "@/lib/blog";
 import { categories, type Category } from "@/lib/categories";
 import { getAllListings } from "@/lib/listings";
+import { listicles } from "@/lib/listicles";
 import { extractLinks } from "@/lib/markdown";
 import { itemListSchema } from "@/lib/schema";
 import { recommendedOrder, slimListing } from "@/lib/slim";
@@ -24,6 +25,7 @@ export default async function CategoryPage({ category }: { category: Category })
     })
     .slice(0, 4);
   const others = categories.filter((c) => c.key !== category.key);
+  const lists = listicles.filter((l) => l.category === category.key);
 
   return (
     <>
@@ -56,6 +58,24 @@ export default async function CategoryPage({ category }: { category: Category })
           )}
         </div>
       </section>
+
+      {lists.length > 0 && (
+        <section className="section section-alt" aria-labelledby="cat-lists">
+          <div className="container container-narrow">
+            <h2 id="cat-lists">Our ranked lists</h2>
+            <ul className="result-list">
+              {lists.map((l) => (
+                <li key={l.slug}>
+                  <Link href={`/blog/${l.slug}`}>
+                    <strong>{l.title}</strong>
+                    <span>{l.description}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {related.length > 0 && (
         <section className="section section-alt" aria-labelledby="cat-guides">

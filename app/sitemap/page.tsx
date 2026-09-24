@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import { posts } from "@/lib/blog";
 import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
+import { listicles } from "@/lib/listicles";
 import { getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -62,6 +63,11 @@ export default async function SitemapPage() {
           <section>
             <h2>Blog</h2>
             <ul>
+              {listicles.map((l) => (
+                <li key={l.slug}>
+                  <Link href={`/blog/${l.slug}`}>{l.title}</Link>
+                </li>
+              ))}
               {posts.map((p) => (
                 <li key={p.slug}>
                   <Link href={`/blog/${p.slug}`}>{p.title}</Link>

@@ -6,7 +6,8 @@ import SearchForm from "@/components/SearchForm";
 import JsonLd from "@/components/JsonLd";
 import { ArrowIcon, ShieldIcon, SparkIcon, UsersIcon } from "@/components/Icons";
 import { categoryByKey } from "@/lib/categories";
-import { posts, formatDate } from "@/lib/blog";
+import { featuredImage, posts, formatDate } from "@/lib/blog";
+import { listicles } from "@/lib/listicles";
 import { getGuideLinkMap, getListingsForCategory, getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
@@ -281,12 +282,12 @@ export default async function HomePage() {
           <div className="post-grid">
             {latestPosts.map((p) => (
               <article key={p.slug} className="card post-card">
-                <div className="card-media">
+                <div className="card-media is-featured">
                   <img
-                    src={`/illustrations/${p.illustration}.svg`}
+                    src={featuredImage(p.slug).url}
                     alt=""
-                    width={800}
-                    height={600}
+                    width={1200}
+                    height={630}
                     loading="lazy"
                     decoding="async"
                   />
@@ -304,6 +305,14 @@ export default async function HomePage() {
               </article>
             ))}
           </div>
+          <h3 style={{ marginTop: 40 }}>Best of Orlando lists</h3>
+          <ul className="pill-links">
+            {listicles.map((l) => (
+              <li key={l.slug}>
+                <Link href={`/blog/${l.slug}`}>{l.title}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

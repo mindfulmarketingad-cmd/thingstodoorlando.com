@@ -52,6 +52,8 @@ export interface Listing {
   highlights?: string[];
   goodToKnow?: string[];
   bestFor?: string;
+  /** Viator tag names (activity and quality tags) from the snapshot. */
+  tags?: string[];
   /** Search term used to pull related live tours for a guide listing. */
   searchTerm?: string;
 }

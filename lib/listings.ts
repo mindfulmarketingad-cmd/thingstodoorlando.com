@@ -88,21 +88,10 @@ export function snapshotDate(): string | null {
   return readSnapshot().fetchedAt;
 }
 
-/** Affiliate pid/mcid taken from the snapshot's product URLs (Viator adds them for our key). */
-function affiliateParams(): { pid?: string; mcid?: string } {
-  const url = readSnapshot().products.find((p) => p.productUrl)?.productUrl;
-  if (!url) return {};
-  try {
-    const u = new URL(url);
-    return { pid: u.searchParams.get("pid") ?? undefined, mcid: u.searchParams.get("mcid") ?? undefined };
-  } catch {
-    return {};
-  }
-}
 
 /** Viator's internal merchandising tags say nothing about the activity itself. */
 const META_TAG =
-  /quality|conversion|sell out|cancellation|availability|new product|agent favorite|weather dependent|private and luxury|small group|half-day|full-day|best /i;
+  /quality|zombie|dsa non|conversion|sell out|cancellation|availability|new product|agent favorite|weather dependent|private and luxury|small group|half-day|full-day|best /i;
 
 function classifyProduct(raw: RawProduct, seed: CategoryKey[] = []): CategoryKey[] {
   const tags = (raw.tagNames ?? []).filter((t) => !META_TAG.test(t));
@@ -126,7 +115,10 @@ export const getLiveListings = cache(async (): Promise<Listing[]> => {
       for (const raw of snap.products) {
         const cats = classifyProduct(raw);
         const mapped = mapProduct(raw, cats, categoryByKey[cats[0]].illustration);
-        if (mapped?.productCode && !byCode.has(mapped.productCode)) byCode.set(mapped.productCode, mapped);
+        if (mapped?.productCode && !byCode.has(mapped.productCode)) {
+          mapped.tags = raw.tagNames;
+          byCode.set(mapped.productCode, mapped);
+        }
       }
       snapshotListings = assignSlugs([...byCode.values()]);
     }
