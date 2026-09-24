@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import { ArrowIcon, ShieldIcon, SparkIcon, UsersIcon } from "@/components/Icons";
 import { categoryByKey } from "@/lib/categories";
 import { posts, formatDate } from "@/lib/blog";
-import { getListingsForCategory, getLiveListings } from "@/lib/listings";
+import { getGuideLinkMap, getListingsForCategory, getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import type { CategoryKey } from "@/lib/types";
@@ -87,13 +87,15 @@ const faqs = [
 ];
 
 export default async function HomePage() {
-  const [family, couples, live, ...grids] = await Promise.all([
+  const [links, family, couples, live, ...grids] = await Promise.all([
+    getGuideLinkMap(),
     getListingsForCategory("family", 6),
     getListingsForCategory("couples", 6),
     getLiveListings(),
     ...moreGrids.map((g) => getListingsForCategory(g.key, 3)),
   ]);
   const trending = live.slice(0, 6);
+  const to = (path: string) => links.get(path) ?? path;
   const latestPosts = posts.slice(0, 3);
 
   return (
@@ -182,7 +184,7 @@ export default async function HomePage() {
               <h2 id="family-title">Family Friendly Tours & Events in Orlando</h2>
               <p>Kid-approved adventures with easy logistics, from gator parks to pirate dinner shows.</p>
             </div>
-            <Link href="/book-now/family-friendly" className="link-arrow">
+            <Link href={to("/book-now/family-friendly")} className="link-arrow">
               See all family activities <ArrowIcon size={16} />
             </Link>
           </div>
@@ -201,7 +203,7 @@ export default async function HomePage() {
               <h2 id="couples-title">Couples Tours & Events in Orlando</h2>
               <p>Sunrise balloons, sunset cruises and date nights worth dressing up for.</p>
             </div>
-            <Link href="/book-now/couples" className="link-arrow">
+            <Link href={to("/book-now/couples")} className="link-arrow">
               See all date ideas <ArrowIcon size={16} />
             </Link>
           </div>
@@ -364,37 +366,37 @@ export default async function HomePage() {
           </p>
           <h3>Theme parks and attractions</h3>
           <p>
-            <Link href="/book-now/walt-disney-world-tickets-and-guided-park-days">Walt Disney World</Link>,{" "}
-            <Link href="/book-now/universal-orlando-resort-tickets">Universal Orlando Resort</Link> and{" "}
-            <Link href="/book-now/seaworld-orlando-and-aquatica-tickets">SeaWorld Orlando</Link> anchor most itineraries.
+            <Link href={to("/book-now/walt-disney-world-tickets-and-guided-park-days")}>Walt Disney World</Link>,{" "}
+            <Link href={to("/book-now/universal-orlando-resort-tickets")}>Universal Orlando Resort</Link> and{" "}
+            <Link href={to("/book-now/seaworld-orlando-and-aquatica-tickets")}>SeaWorld Orlando</Link> anchor most itineraries.
             Ticket prices vary by date, so buying early and choosing midweek days can save a meaningful amount. Families
             with younger children should also consider{" "}
-            <Link href="/book-now/legoland-florida-day-trip">LEGOLAND Florida</Link>, about an hour away.
+            <Link href={to("/book-now/legoland-florida-day-trip")}>LEGOLAND Florida</Link>, about an hour away.
           </p>
           <h3>Nature and wildlife</h3>
           <p>
-            An <Link href="/book-now/airboat-rides-and-everglades-style-swamp-tours">airboat ride</Link> is the classic
+            An <Link href={to("/book-now/airboat-rides-and-everglades-style-swamp-tours")}>airboat ride</Link> is the classic
             way to see wild alligators. In winter,{" "}
-            <Link href="/book-now/manatee-encounters-at-blue-spring-and-crystal-river">manatees gather in warm springs</Link>{" "}
+            <Link href={to("/book-now/manatee-encounters-at-blue-spring-and-crystal-river")}>manatees gather in warm springs</Link>{" "}
             north of the city, and spring-fed rivers like Wekiwa are perfect for{" "}
-            <Link href="/book-now/kayak-and-paddleboard-tours-on-central-florida-springs">kayaking</Link> all year.
+            <Link href={to("/book-now/kayak-and-paddleboard-tours-on-central-florida-springs")}>kayaking</Link> all year.
           </p>
           <h3>Space, sky and day trips</h3>
           <p>
-            <Link href="/book-now/kennedy-space-center-day-trip-from-orlando">Kennedy Space Center</Link> is the most
+            <Link href={to("/book-now/kennedy-space-center-day-trip-from-orlando")}>Kennedy Space Center</Link> is the most
             popular day trip from Orlando, and seeing a{" "}
-            <Link href="/book-now/rocket-launch-viewing-tours-on-the-space-coast">rocket launch</Link> is unforgettable.
+            <Link href={to("/book-now/rocket-launch-viewing-tours-on-the-space-coast")}>rocket launch</Link> is unforgettable.
             For views from above, book a{" "}
-            <Link href="/book-now/sunrise-hot-air-balloon-rides-over-central-florida">sunrise balloon flight</Link>. The
+            <Link href={to("/book-now/sunrise-hot-air-balloon-rides-over-central-florida")}>sunrise balloon flight</Link>. The
             Gulf beaches, historic St. Augustine and the Everglades are all reachable as{" "}
-            <Link href="/book-now/day-trips">day trips from Orlando</Link>.
+            <Link href={to("/book-now/day-trips")}>day trips from Orlando</Link>.
           </p>
           <h3>Evenings and nightlife</h3>
           <p>
-            Orlando&apos;s <Link href="/book-now/dinner-shows">dinner shows</Link> are an experience you will not find in
+            Orlando&apos;s <Link href={to("/book-now/dinner-shows")}>dinner shows</Link> are an experience you will not find in
             many other cities, and International Drive stays lively late with attractions like{" "}
-            <Link href="/book-now/icon-park-and-the-wheel-on-international-drive">The Wheel at ICON Park</Link>. For a
-            more local night out, try a <Link href="/book-now/orlando-food-tours-and-downtown-walking-tours">food tour</Link>{" "}
+            <Link href={to("/book-now/icon-park-and-the-wheel-on-international-drive")}>The Wheel at ICON Park</Link>. For a
+            more local night out, try a <Link href={to("/book-now/orlando-food-tours-and-downtown-walking-tours")}>food tour</Link>{" "}
             in Winter Park or downtown.
           </p>
           <p>

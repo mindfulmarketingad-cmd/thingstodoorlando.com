@@ -167,6 +167,8 @@ function summarize(text: string, max = 180): string {
 export function mapProduct(p: RawProduct, categories: CategoryKey[], illustration: IllustrationKey): Listing | null {
   if (!p.productCode || !p.title || !isSafeBookingUrl(p.productUrl)) return null;
   if (p.status && p.status !== "ACTIVE") return null;
+  // Only show real, bookable listings: a photo and a price are required.
+  if (!p.pricing?.summary?.fromPrice || !pickImage(p.images, p.title)) return null;
   const title = clean(p.title);
   const description = clean(p.description);
   const minutes = p.duration?.fixedDurationInMinutes ?? p.duration?.variableDurationFromMinutes;

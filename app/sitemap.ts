@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { posts } from "@/lib/blog";
 import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
-import { getGuideListings, getLiveListings } from "@/lib/listings";
+import { getLiveListings } from "@/lib/listings";
 import { absoluteUrl } from "@/lib/site";
 
 export const revalidate = 21600;
@@ -46,13 +46,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const guides = getGuideListings().map((l) => ({
-    url: absoluteUrl(`/book-now/${l.slug}`),
-    lastModified: legalUpdated,
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
-
   const live = (await getLiveListings()).map((l) => ({
     url: absoluteUrl(`/book-now/${l.slug}`),
     lastModified: now,
@@ -61,5 +54,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(l.image ? { images: [l.image.url] } : {}),
   }));
 
-  return [...pages, ...cats, ...searches, ...blog, ...guides, ...live];
+  return [...pages, ...cats, ...searches, ...blog, ...live];
 }

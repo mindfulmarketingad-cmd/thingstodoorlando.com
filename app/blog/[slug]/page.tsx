@@ -6,7 +6,7 @@ import ListingCard from "@/components/ListingCard";
 import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
 import { formatDate, getPost, posts, readingMinutes, relatedPosts } from "@/lib/blog";
-import { getAllListings } from "@/lib/listings";
+import { getAllListings, getGuideLinkMap } from "@/lib/listings";
 import { parseMarkdown } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl, site } from "@/lib/site";
@@ -41,8 +41,10 @@ export default async function PostPage({ params }: Props) {
 
   const blocks = parseMarkdown(post.body);
   const toc = blocks.filter((b): b is Extract<typeof b, { type: "h2" }> => b.type === "h2");
-  const all = await getAllListings();
-  const featured = post.featuredListings
+  const [all, links] = await Promise.all([getAllListings(), getGuideLinkMap()]);
+  const featured = [
+    ...new Set(post.featuredListings.map((s) => (links.get(`/book-now/${s}`) ?? `/book-now/${s}`).replace("/book-now/", ""))),
+  ]
     .map((s) => all.find((l) => l.slug === s))
     .filter((l): l is NonNullable<typeof l> => !!l);
   const related = relatedPosts(post);
@@ -84,7 +86,7 @@ export default async function PostPage({ params }: Props) {
               <img src={`/illustrations/${post.illustration}.svg`} alt="" width={800} height={600} />
             </div>
             <p style={{ fontSize: "1.15rem", color: "var(--muted)" }}>{post.excerpt}</p>
-            <Prose blocks={blocks} />
+            <Prose blocks={blocks} links={links} />
             <div className="author-box">
               <img src="/logo-mark.svg" alt="" width={52} height={52} />
               <p>

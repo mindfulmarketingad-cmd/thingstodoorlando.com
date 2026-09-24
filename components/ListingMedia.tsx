@@ -20,6 +20,8 @@ export default function ListingMedia({
         height={listing.image.height}
         sizes={sizes}
         priority={priority}
+        // Viator's CDN already serves right-sized variants; skipping the optimizer avoids host image quotas.
+        unoptimized
       />
     );
   }

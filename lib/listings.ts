@@ -7,7 +7,7 @@ import { categories, categoryByKey } from "./categories";
 import { score } from "./score";
 import { slugify } from "./slug";
 import type { CategoryKey, Listing } from "./types";
-import { freetextProducts, mapProduct, searchDestinationProducts, viatorSearchUrl } from "./viator";
+import { freetextProducts, mapProduct, searchDestinationProducts, } from "./viator";
 
 /** Keyword rules used to place live products into site categories. */
 const CATEGORY_RULES: Record<CategoryKey, RegExp> = {
@@ -32,26 +32,37 @@ function classify(text: string, seed: CategoryKey[] = []): CategoryKey[] {
   return [...found];
 }
 
-export const getGuideListings = cache((): Listing[] =>
-  guides.map((g) => ({
-    slug: slugify(g.title),
-    source: "guide",
-    title: g.title,
-    summary: g.summary,
-    description: g.description,
-    illustration: g.illustration,
-    currency: "USD",
-    durationMinutes: g.durationMinutes,
-    durationLabel: g.durationLabel,
-    location: g.location,
-    categories: g.categories,
-    bookingUrl: viatorSearchUrl(g.searchTerm, affiliateParams()),
-    highlights: g.highlights,
-    goodToKnow: g.goodToKnow,
-    bestFor: g.bestFor,
-    searchTerm: g.searchTerm,
-  })),
-);
+/** Old editorial guide URLs, kept only so links and redirects can resolve to real products. */
+export const guideSlugs = guides.map((g) => ({
+  slug: slugify(g.title),
+  searchTerm: g.searchTerm,
+  category: g.categories[0],
+}));
+
+const LINK_STOP = new Set(["orlando", "tour", "tours", "tickets", "ticket", "from", "the", "and", "ride", "day", "trip"]);
+
+/**
+ * Maps each old guide URL to the best matching real Viator product
+ * (all search terms in the title, highest rated), or to its category page.
+ */
+export const getGuideLinkMap = cache(async (): Promise<Map<string, string>> => {
+  const live = await getLiveListings();
+  const map = new Map<string, string>();
+  for (const g of guideSlugs) {
+    const terms = g.searchTerm
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((t) => t.length > 2 && !LINK_STOP.has(t));
+    const match = terms.length
+      ? live.find((l) => {
+          const title = l.title.toLowerCase();
+          return terms.every((t) => title.includes(t));
+        })
+      : undefined;
+    map.set(`/book-now/${g.slug}`, match ? `/book-now/${match.slug}` : `/book-now/${categoryByKey[g.category].slug}`);
+  }
+  return map;
+});
 
 type RawProduct = Parameters<typeof mapProduct>[0] & { tagNames?: string[] };
 
@@ -147,7 +158,7 @@ export const getLiveListings = cache(async (): Promise<Listing[]> => {
 
 function assignSlugs(items: Listing[]): Listing[] {
   // Stable, unique slugs that never collide with guide URLs.
-  const taken = new Set([...getGuideListings().map((g) => g.slug), ...categories.map((c) => c.slug)]);
+  const taken = new Set([...guideSlugs.map((g) => g.slug), ...categories.map((c) => c.slug)]);
   const live = items.sort((a, b) => score(b) - score(a));
   for (const l of live) {
     let slug = l.slug || slugify(l.productCode ?? "tour");
@@ -160,30 +171,17 @@ function assignSlugs(items: Listing[]): Listing[] {
 
 export { score };
 
-export const getAllListings = cache(async (): Promise<Listing[]> => {
-  const live = await getLiveListings();
-  return [...getGuideListings(), ...live];
-});
+/** Every bookable Viator product. Only real listings with a photo and a price are shown. */
+export const getAllListings = cache(async (): Promise<Listing[]> => getLiveListings());
 
 export async function getListingBySlug(slug: string): Promise<Listing | undefined> {
   const all = await getAllListings();
   return all.find((l) => l.slug === slug);
 }
 
-/**
- * Listings for a category grid. Live products lead when the API is available;
- * curated guides fill any remaining slots so grids are never empty.
- */
+/** Top rated real products in a category. */
 export async function getListingsForCategory(key: CategoryKey, limit = 6): Promise<Listing[]> {
-  const live = (await getLiveListings()).filter((l) => l.categories.includes(key));
-  const guideItems = getGuideListings().filter((l) => l.categories.includes(key));
-  return [...live, ...guideItems].slice(0, limit);
-}
-
-export async function getTrendingListings(limit = 6): Promise<Listing[]> {
-  const live = await getLiveListings();
-  if (live.length >= limit) return live.slice(0, limit);
-  return [...live, ...getGuideListings()].slice(0, limit);
+  return (await getLiveListings()).filter((l) => l.categories.includes(key)).slice(0, limit);
 }
 
 /** Live tours related to a listing, used on detail pages. */

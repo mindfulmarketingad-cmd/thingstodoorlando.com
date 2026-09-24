@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Block, Inline } from "@/lib/markdown";
 
-function InlineNodes({ nodes }: { nodes: Inline[] }) {
+function InlineNodes({ nodes, links }: { nodes: Inline[]; links?: Map<string, string> }) {
   return (
     <>
       {nodes.map((n, i) => {
@@ -9,7 +9,7 @@ function InlineNodes({ nodes }: { nodes: Inline[] }) {
         if (n.type === "link") {
           if (n.href.startsWith("/")) {
             return (
-              <Link key={i} href={n.href}>
+              <Link key={i} href={links?.get(n.href) ?? n.href}>
                 {n.value}
               </Link>
             );
@@ -29,7 +29,7 @@ function InlineNodes({ nodes }: { nodes: Inline[] }) {
   );
 }
 
-export default function Prose({ blocks }: { blocks: Block[] }) {
+export default function Prose({ blocks, links }: { blocks: Block[]; links?: Map<string, string> }) {
   return (
     <div className="prose">
       {blocks.map((b, i) => {
@@ -51,7 +51,7 @@ export default function Prose({ blocks }: { blocks: Block[] }) {
               <ul key={i}>
                 {b.items.map((it, j) => (
                   <li key={j}>
-                    <InlineNodes nodes={it} />
+                    <InlineNodes nodes={it} links={links} />
                   </li>
                 ))}
               </ul>
@@ -61,7 +61,7 @@ export default function Prose({ blocks }: { blocks: Block[] }) {
               <ol key={i}>
                 {b.items.map((it, j) => (
                   <li key={j}>
-                    <InlineNodes nodes={it} />
+                    <InlineNodes nodes={it} links={links} />
                   </li>
                 ))}
               </ol>
@@ -70,14 +70,14 @@ export default function Prose({ blocks }: { blocks: Block[] }) {
             return (
               <div key={i} className="callout">
                 <p>
-                  <InlineNodes nodes={b.inline} />
+                  <InlineNodes nodes={b.inline} links={links} />
                 </p>
               </div>
             );
           default:
             return (
               <p key={i}>
-                <InlineNodes nodes={b.inline} />
+                <InlineNodes nodes={b.inline} links={links} />
               </p>
             );
         }

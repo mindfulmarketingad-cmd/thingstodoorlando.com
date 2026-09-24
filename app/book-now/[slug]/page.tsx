@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import BookButton from "@/components/BookButton";
 import CategoryPage, { categoryTitle } from "@/components/CategoryPage";
 import JsonLd from "@/components/JsonLd";
@@ -11,7 +11,7 @@ import Stars from "@/components/Stars";
 import { CheckIcon, ClockIcon, PinIcon, ShieldIcon, TagIcon, XIcon } from "@/components/Icons";
 import { posts } from "@/lib/blog";
 import { categories, categoryByKey, categoryBySlug } from "@/lib/categories";
-import { getGuideListings, getListingBySlug, getLiveListings, getRelatedListings } from "@/lib/listings";
+import { getGuideLinkMap, getListingBySlug, getLiveListings, getRelatedListings } from "@/lib/listings";
 import { extractLinks } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site";
@@ -27,7 +27,6 @@ export async function generateStaticParams() {
   const live = await getLiveListings();
   return [
     ...categories.map((c) => ({ slug: c.slug })),
-    ...getGuideListings().map((l) => ({ slug: l.slug })),
     // Top products are prebuilt; the rest render on first request and are cached.
     ...live.slice(0, 200).map((l) => ({ slug: l.slug })),
   ];
@@ -93,7 +92,12 @@ export default async function ListingPage({ params }: Props) {
   if (category) return <CategoryPage category={category} />;
 
   const base = await getListingBySlug(slug);
-  if (!base) notFound();
+  if (!base) {
+    // Retired editorial guide URLs point to the matching real tour.
+    const target = (await getGuideLinkMap()).get(`/book-now/${slug}`);
+    if (target) permanentRedirect(target);
+    notFound();
+  }
 
   const [listing, related] = await Promise.all([getProductDetail(base), getRelatedListings(base, 6)]);
   const primary = categoryByKey[listing.categories[0]];

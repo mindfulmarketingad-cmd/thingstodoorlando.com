@@ -3,19 +3,18 @@ import PageHero from "@/components/PageHero";
 import { posts } from "@/lib/blog";
 import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
-import { getGuideListings, getLiveListings } from "@/lib/listings";
+import { getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 
 export const revalidate = 21600;
 
 export const metadata = pageMetadata({
   title: "Sitemap",
-  description: "A complete list of every page on ThingsToDoOrlando.com: tours, experience guides, search categories and blog posts.",
+  description: "A complete list of every page on ThingsToDoOrlando.com: tour categories, every bookable tour, popular searches and blog posts.",
   path: "/sitemap",
 });
 
 export default async function SitemapPage() {
-  const guides = getGuideListings();
   const live = await getLiveListings();
   return (
     <>
@@ -66,16 +65,6 @@ export default async function SitemapPage() {
               {posts.map((p) => (
                 <li key={p.slug}>
                   <Link href={`/blog/${p.slug}`}>{p.title}</Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section>
-            <h2>Experience guides</h2>
-            <ul>
-              {guides.map((l) => (
-                <li key={l.slug}>
-                  <Link href={`/book-now/${l.slug}`}>{l.title}</Link>
                 </li>
               ))}
             </ul>
