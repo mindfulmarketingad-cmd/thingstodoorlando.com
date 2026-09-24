@@ -5,7 +5,7 @@
 export type Inline =
   | { type: "text"; value: string }
   | { type: "strong"; value: string }
-  | { type: "link"; value: string; href: string };
+  | { type: "link"; value: string; href: string; strong?: boolean };
 
 export type Block =
   | { type: "h2"; id: string; text: string }
@@ -26,7 +26,10 @@ export function parseInline(src: string): Inline[] {
   while ((m = re.exec(src))) {
     if (m.index > last) out.push({ type: "text", value: src.slice(last, m.index) });
     if (m[1]) out.push({ type: "strong", value: m[1] });
-    else out.push({ type: "link", value: m[2], href: m[3] });
+    else {
+      const bold = m[2].match(/^\*\*(.+)\*\*$/);
+      out.push(bold ? { type: "link", value: bold[1], href: m[3], strong: true } : { type: "link", value: m[2], href: m[3] });
+    }
     last = re.lastIndex;
   }
   if (last < src.length) out.push({ type: "text", value: src.slice(last) });

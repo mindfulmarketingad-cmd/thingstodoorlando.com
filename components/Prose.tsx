@@ -9,21 +9,30 @@ function InlineNodes({ nodes, links, hotels = true }: { nodes: Inline[]; links?:
       {nodes.map((n, i) => {
         if (n.type === "strong") return <strong key={i}>{txt(n.value)}</strong>;
         if (n.type === "link") {
+          const label = n.strong ? <strong>{n.value}</strong> : n.value;
           if (n.href.startsWith("/")) {
             return (
               <Link key={i} href={links?.get(n.href) ?? n.href}>
-                {n.value}
+                {label}
               </Link>
+            );
+          }
+          // In-page jump to a section heading on the same page.
+          if (/^#[a-z0-9-]+$/.test(n.href)) {
+            return (
+              <a key={i} href={n.href}>
+                {label}
+              </a>
             );
           }
           if (/^https:\/\//.test(n.href)) {
             return (
               <a key={i} href={n.href} rel="noopener noreferrer" target="_blank">
-                {n.value}
+                {label}
               </a>
             );
           }
-          return <span key={i}>{n.value}</span>;
+          return <span key={i}>{label}</span>;
         }
         return <span key={i}>{txt(n.value)}</span>;
       })}

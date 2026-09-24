@@ -25,7 +25,7 @@ export function getTop10(): Top10Item[] {
   const anchors = blocks.filter((b) => b.type === "h2" && /^\d+\.\s/.test(b.text)) as { id: string }[];
   if (!glance || glance.type !== "ol") return [];
   return glance.items.slice(0, 10).map((inline, i) => {
-    const name = inline.find((n) => n.type === "strong")?.value ?? "";
+    const name = inline.find((n) => n.type === "strong" || (n.type === "link" && n.strong))?.value ?? "";
     const hint = inline
       .filter((n) => n.type === "text")
       .map((n) => n.value)

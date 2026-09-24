@@ -21,16 +21,16 @@ This guide answers the question we hear most: **what are the top 10 things to do
 
 ## The top 10 things to do in Orlando at a glance
 
-1. **Walt Disney World Resort** for classic theme park magic
-2. **Universal Orlando Resort** for thrill rides and Epic Universe
-3. **Disney Springs** for free-to-enter shopping, dining and entertainment
-4. **Universal CityWalk** for nightlife, live music and themed restaurants
-5. **ICON Park and The Wheel** for skyline views on International Drive
-6. **Gatorland** for old-school Florida and thousands of alligators
-7. **Lake Eola Park** for a free downtown stroll and swan boats
-8. **Winter Park Scenic Boat Tour** for a relaxing hour on the lakes
-9. **Discovery Cove** for an all-inclusive day with dolphins and tropical fish
-10. **Kennedy Space Center Visitor Complex** for rockets and real space history
+1. [**Walt Disney World Resort**](#1-walt-disney-world-resort) for classic theme park magic
+2. [**Universal Orlando Resort**](#2-universal-orlando-resort) for thrill rides and Epic Universe
+3. [**Disney Springs**](#3-disney-springs) for free-to-enter shopping, dining and entertainment
+4. [**Universal CityWalk**](#4-universal-citywalk) for nightlife, live music and themed restaurants
+5. [**ICON Park and The Wheel**](#5-icon-park-and-the-wheel) for skyline views on International Drive
+6. [**Gatorland**](#6-gatorland) for old-school Florida and thousands of alligators
+7. [**Lake Eola Park**](#7-lake-eola-park) for a free downtown stroll and swan boats
+8. [**Winter Park Scenic Boat Tour**](#8-winter-park-scenic-boat-tour) for a relaxing hour on the lakes
+9. [**Discovery Cove**](#9-discovery-cove) for an all-inclusive day with dolphins and tropical fish
+10. [**Kennedy Space Center Visitor Complex**](#10-kennedy-space-center-visitor-complex) for rockets and real space history
 
 ## 1. Walt Disney World Resort
 
