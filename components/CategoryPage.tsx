@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BookNowExplorer from "./BookNowExplorer";
+import Faq from "./Faq";
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
 import { linkHotels } from "./LinkHotels";
@@ -7,6 +8,7 @@ import { posts } from "@/lib/blog";
 import { categories, type Category } from "@/lib/categories";
 import { getAllListings } from "@/lib/listings";
 import { listicles } from "@/lib/listicles";
+import { categoryFaqs } from "@/lib/faqs";
 import { extractLinks } from "@/lib/markdown";
 import { itemListSchema } from "@/lib/schema";
 import { recommendedOrder, slimListing } from "@/lib/slim";
@@ -57,6 +59,15 @@ export default async function CategoryPage({ category }: { category: Category })
               </Link>
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="faq-title">
+        <div className="container">
+          <div className="section-head">
+            <h2 id="faq-title">{category.label} Tours in Orlando: FAQs</h2>
+          </div>
+          <Faq items={categoryFaqs(category, items)} />
         </div>
       </section>
 

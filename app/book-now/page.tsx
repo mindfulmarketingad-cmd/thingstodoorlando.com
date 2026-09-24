@@ -1,9 +1,11 @@
 import Link from "next/link";
 import BookNowExplorer from "@/components/BookNowExplorer";
+import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
 import { categories } from "@/lib/categories";
 import { getAllListings } from "@/lib/listings";
+import { hubFaqs } from "@/lib/faqs";
 import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import { recommendedOrder, slimListing } from "@/lib/slim";
@@ -46,6 +48,14 @@ export default async function BookNowPage() {
             </ul>
           </nav>
           <BookNowExplorer initial={ordered.slice(0, 24).map(slimListing)} total={all.length} />
+        </div>
+      </section>
+      <section className="section section-alt" aria-labelledby="faq-title">
+        <div className="container">
+          <div className="section-head">
+            <h2 id="faq-title">Booking Tours in Orlando: FAQs</h2>
+          </div>
+          <Faq items={hubFaqs(all)} />
         </div>
       </section>
       <JsonLd

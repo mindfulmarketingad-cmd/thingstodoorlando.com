@@ -12,6 +12,7 @@ import { featuredImage, posts, formatDate } from "@/lib/blog";
 import { listicles } from "@/lib/listicles";
 import { getGuideLinkMap, getListingsForCategory, getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
+import { getTop10, TOP10_SLUG } from "@/lib/top10";
 import { itemListSchema } from "@/lib/schema";
 import type { CategoryKey } from "@/lib/types";
 
@@ -99,6 +100,7 @@ export default async function HomePage() {
   ]);
   const trending = live.slice(0, 6);
   const to = (path: string) => links.get(path) ?? path;
+  const top10 = getTop10();
   const latestPosts = posts.slice(0, 3);
 
   return (
@@ -121,6 +123,41 @@ export default async function HomePage() {
           </nav>
         </div>
       </section>
+
+      {top10.length > 0 && (
+        <section className="top10" aria-labelledby="top10-title">
+          <div className="container">
+            <div className="top10-head">
+              <div>
+                <p className="eyebrow">Start here</p>
+                <h2 id="top10-title">Top 10 Things To Do In Orlando</h2>
+                <p>
+                  Our editors&apos; definitive shortlist of Orlando&apos;s must-do experiences, with costs, tips and the
+                  best way to book each one.
+                </p>
+              </div>
+              <Link href={`/blog/${TOP10_SLUG}`} className="link-arrow">
+                Read the complete guide <ArrowIcon size={16} />
+              </Link>
+            </div>
+            <ol className="top10-list">
+              {top10.map((t) => (
+                <li key={t.rank}>
+                  <Link href={t.href}>
+                    <span className="top10-num" aria-hidden>
+                      {t.rank}
+                    </span>
+                    <span className="top10-text">
+                      <strong>{t.name}</strong>
+                      <span>{t.hint}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
 
       <div className="trust-bar">
         <div className="container trust-grid">

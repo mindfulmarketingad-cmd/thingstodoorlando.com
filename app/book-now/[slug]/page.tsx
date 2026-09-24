@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import BookButton from "@/components/BookButton";
 import CategoryPage, { categoryTitle } from "@/components/CategoryPage";
+import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import ListingCard, { formatPrice } from "@/components/ListingCard";
 import ListingMedia from "@/components/ListingMedia";
@@ -13,6 +14,7 @@ import { posts } from "@/lib/blog";
 import { categories, categoryByKey, categoryBySlug } from "@/lib/categories";
 import { getGuideLinkMap, getListingBySlug, getLiveListings, getRelatedListings } from "@/lib/listings";
 import { extractLinks } from "@/lib/markdown";
+import { listingFaqs } from "@/lib/faqs";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site";
 import type { Listing, ListingDetail } from "@/lib/types";
@@ -308,6 +310,15 @@ export default async function ListingPage({ params }: Props) {
               <Link href="/disclaimer">Disclosure</Link>.
             </p>
           </aside>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="faq-title">
+        <div className="container">
+          <div className="section-head">
+            <h2 id="faq-title">Frequently Asked Questions</h2>
+          </div>
+          <Faq items={listingFaqs(listing)} />
         </div>
       </section>
 
