@@ -1,4 +1,6 @@
 import type { NextConfig } from "next";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { categories } from "./lib/categories";
 
 const isDev = process.env.NODE_ENV !== "production";
@@ -11,12 +13,22 @@ const viatorImageHosts = [
   "media.viator.com",
 ];
 
+/** Hotel photo hosts recorded by scripts/fetch-stay22.mjs. */
+const hotelImageHosts: string[] = (() => {
+  try {
+    const hosts = JSON.parse(readFileSync(path.join(process.cwd(), "data/stay22-hotels.json"), "utf8")).imageHosts;
+    return Array.isArray(hosts) ? hosts.filter((h: unknown) => typeof h === "string" && /^[a-z0-9.-]+$/i.test(h)) : [];
+  } catch {
+    return [];
+  }
+})();
+
 const csp = [
   "default-src 'self'",
   // Next.js injects inline bootstrap scripts; GA loads from googletagmanager.
   `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  `img-src 'self' data: blob: ${viatorImageHosts.map((h) => `https://${h}`).join(" ")} https://www.googletagmanager.com https://*.google-analytics.com https://i.ytimg.com`,
+  `img-src 'self' data: blob: ${viatorImageHosts.map((h) => `https://${h}`).join(" ")} https://www.googletagmanager.com https://*.google-analytics.com https://i.ytimg.com${hotelImageHosts.map((h) => ` https://${h}`).join("")}`,
   "font-src 'self'",
   "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
   "frame-src https://www.youtube-nocookie.com https://www.stay22.com",
@@ -44,7 +56,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   // The Viator snapshot is read from disk at runtime; ship it with every server function.
-  outputFileTracingIncludes: { "/**": ["./data/viator-products.json"] },
+  outputFileTracingIncludes: { "/**": ["./data/viator-products.json", "./data/stay22-hotels.json"] },
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Faq from "./Faq";
+import HotelSection from "./HotelSection";
+import { areaForCategory } from "@/lib/hotels";
 import AuthorBox, { AuthorByline } from "./AuthorBox";
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
@@ -237,6 +239,8 @@ export default function ListiclePage({ data }: { data: RankedListicle }) {
           <AuthorBox author={author} />
         </div>
       </section>
+
+      <HotelSection area={areaForCategory(config.category)} />
 
       <section className="section section-alt" aria-labelledby="faq-title">
         <div className="container">

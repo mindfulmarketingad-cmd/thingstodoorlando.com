@@ -5,6 +5,8 @@ import BookButton from "@/components/BookButton";
 import DatePicker from "@/components/DatePicker";
 import CategoryPage, { categoryTitle } from "@/components/CategoryPage";
 import Faq from "@/components/Faq";
+import HotelSection from "@/components/HotelSection";
+import { areaForListing } from "@/lib/hotels";
 import JsonLd from "@/components/JsonLd";
 import ListingCard, { formatPrice } from "@/components/ListingCard";
 import ListingMedia from "@/components/ListingMedia";
@@ -393,6 +395,8 @@ export default async function ListingPage({ params }: Props) {
           </aside>
         </div>
       </section>
+
+      <HotelSection area={areaForListing(listing)} alt />
 
       <section className="section" aria-labelledby="faq-title">
         <div className="container">

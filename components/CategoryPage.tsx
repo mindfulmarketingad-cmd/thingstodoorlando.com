@@ -1,6 +1,8 @@
 import Link from "next/link";
 import BookNowExplorer from "./BookNowExplorer";
 import Faq from "./Faq";
+import HotelSection from "./HotelSection";
+import { areaForCategory } from "@/lib/hotels";
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
 import { linkHotels } from "./LinkHotels";
@@ -61,6 +63,8 @@ export default async function CategoryPage({ category }: { category: Category })
           )}
         </div>
       </section>
+
+      <HotelSection area={areaForCategory(category.key)} alt />
 
       <section className="section" aria-labelledby="faq-title">
         <div className="container">

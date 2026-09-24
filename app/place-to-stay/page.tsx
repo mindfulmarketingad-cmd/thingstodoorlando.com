@@ -1,9 +1,13 @@
 import Link from "next/link";
 import Faq from "@/components/Faq";
+import HotelCard from "@/components/HotelCard";
 import HotelLink from "@/components/HotelLink";
+import { getHotels, type HotelArea } from "@/lib/hotels";
 import { linkHotels } from "@/components/LinkHotels";
 import PageHero from "@/components/PageHero";
 import { pageMetadata } from "@/lib/metadata";
+
+export const revalidate = 21600;
 
 export const metadata = pageMetadata({
   title: "Best Hotels In Orlando Florida: Where To Stay By Area",
@@ -15,7 +19,7 @@ export const metadata = pageMetadata({
 const STAY22_MAP = "https://www.stay22.com/embed/6ab56c2028c02a2c437b791e";
 
 interface Area {
-  id: string;
+  id: HotelArea;
   name: string;
   bestFor: string;
   intro: string;
@@ -215,6 +219,13 @@ export default function PlaceToStayPage() {
                   <p className="stay-best">Best for: {a.bestFor}</p>
                   <p>{linkHotels(a.intro)}</p>
                 </header>
+                {getHotels(a.id, 6).length >= 3 ? (
+                  <div className="hotel-grid hotel-grid-3">
+                    {getHotels(a.id, 6).map((h) => (
+                      <HotelCard key={h.id} hotel={h} headingLevel={4} />
+                    ))}
+                  </div>
+                ) : (
                 <ul className="stay-hotels">
                   {a.hotels.map((h) => (
                     <li key={h.name}>
@@ -226,6 +237,7 @@ export default function PlaceToStayPage() {
                     </li>
                   ))}
                 </ul>
+                )}
                 <div className="stay-nearby">
                   <span>Things to do nearby:</span>
                   {a.nearby.map((n) => (

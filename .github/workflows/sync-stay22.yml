@@ -1,0 +1,46 @@
+name: Sync Stay22 hotels
+
+# Pulls Orlando hotels (no prices) from the Stay22 API into data/stay22-hotels.json
+# and commits it, so the site serves the data without runtime API calls.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/fetch-stay22.mjs
+      - .github/workflows/sync-stay22.yml
+  # Uncomment to refresh hotels weekly (Mondays 09:30 UTC).
+  # schedule:
+  #   - cron: "30 9 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-stay22
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch hotels
+        env:
+          STAY22_API_KEY: ${{ secrets.STAY22_API_KEY }}
+        run: node scripts/fetch-stay22.mjs
+      - name: Commit snapshot
+        run: |
+          if [ -z "$(git status --porcelain -- data/stay22-hotels.json data/stay22-sample.json)" ]; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add data/stay22-*.json
+          git commit -m "Update Stay22 hotel snapshot"
+          git pull --rebase
+          git push
