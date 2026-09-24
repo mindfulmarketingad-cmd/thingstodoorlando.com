@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BookNowExplorer from "@/components/BookNowExplorer";
+import BrowseCollections from "@/components/BrowseCollections";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
@@ -50,7 +51,8 @@ export default async function BookNowPage() {
           <BookNowExplorer initial={ordered.slice(0, 24).map(slimListing)} total={all.length} />
         </div>
       </section>
-      <section className="section section-alt" aria-labelledby="faq-title">
+      <BrowseCollections title="Browse Orlando experiences by budget, type and area" alt />
+      <section className="section" aria-labelledby="faq-title">
         <div className="container">
           <div className="section-head">
             <h2 id="faq-title">Booking Tours in Orlando: FAQs</h2>

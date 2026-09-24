@@ -3102,3 +3102,77 @@ p {
 .stay-area .hotel-grid {
   margin-top: 16px;
 }
+
+/* ---------- Collections (/book-now programmatic pages) ---------- */
+.collection-updated {
+  margin: -8px 0 28px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.collection-mix {
+  margin-bottom: 8px;
+}
+.collection-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+@media (max-width: 860px) {
+  .collection-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.collection-links h3 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 1rem;
+}
+.collection-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.collection-links a {
+  color: var(--blue);
+  font-weight: 600;
+}
+.browse-groups {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 1000px) {
+  .browse-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .browse-groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.browse-group {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.browse-group h3 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 1rem;
+}
+.browse-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.browse-group a {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 0.93rem;
+}

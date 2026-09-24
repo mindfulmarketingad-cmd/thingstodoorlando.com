@@ -3,6 +3,7 @@ import BookNowExplorer from "./BookNowExplorer";
 import Faq from "./Faq";
 import HotelSection from "./HotelSection";
 import { areaForCategory } from "@/lib/hotels";
+import { getIndexableCollections } from "@/lib/collections";
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
 import { linkHotels } from "./LinkHotels";
@@ -31,6 +32,11 @@ export default async function CategoryPage({ category }: { category: Category })
     .slice(0, 4);
   const others = categories.filter((c) => c.key !== category.key);
   const lists = listicles.filter((l) => l.category === category.key);
+  const indexable = await getIndexableCollections();
+  const browse = [
+    ...indexable.filter((c) => c.category === category.key),
+    ...indexable.filter((c) => c.kind === "budget"),
+  ];
 
   return (
     <>
@@ -60,6 +66,17 @@ export default async function CategoryPage({ category }: { category: Category })
                 Browse all tours
               </Link>
             </div>
+          )}
+          {browse.length > 0 && (
+            <nav aria-label="More ways to browse" style={{ marginTop: 32 }}>
+              <ul className="pill-links">
+                {browse.map((c) => (
+                  <li key={c.slug}>
+                    <Link href={`/book-now/${c.slug}`}>{c.h1}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           )}
         </div>
       </section>

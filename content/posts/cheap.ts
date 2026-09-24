@@ -67,7 +67,7 @@ Some [airboat operators](/book-now/airboat-rides-and-everglades-style-swamp-tour
 1. **Travel midweek and off peak.** Many theme park tickets use date-based pricing.
 2. **Bundle tickets.** Combo tickets can lower the cost per park.
 3. **Book tours with free cancellation.** Lock in a price and cancel if plans change.
-4. **Compare before you buy.** Use [Book Now](/book-now) to sort by price and rating in one place.
+4. **Compare before you buy.** Use [Book Now](/book-now) to sort by price and rating in one place, or jump straight to our ranked lists of [things to do under $25](/book-now/things-to-do-in-orlando-under-25), [under $50](/book-now/things-to-do-in-orlando-under-50) and [under $100](/book-now/things-to-do-in-orlando-under-100).
 5. **Mix free days with paid days.** Alternate a big park day with a free or low-cost day.
 6. **Stay in a value area.** Kissimmee and the south end of International Drive are usually cheapest. Compare the [best hotels in Orlando](/place-to-stay) by area.
 

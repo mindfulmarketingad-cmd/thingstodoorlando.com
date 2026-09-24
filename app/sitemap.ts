@@ -6,6 +6,7 @@ import { listicles } from "@/lib/listicles";
 import { authors } from "@/data/authors";
 import { MONTHS } from "@/data/events";
 import { getLiveListings } from "@/lib/listings";
+import { getIndexableCollections } from "@/lib/collections";
 import { absoluteUrl } from "@/lib/site";
 
 export const revalidate = 21600;
@@ -84,5 +85,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(l.image ? { images: [l.image.url] } : {}),
   }));
 
-  return [...pages, ...cats, ...searches, ...eventPages, ...lists, ...blog, ...authorPages, ...live];
+  const collectionPages = (await getIndexableCollections()).map((c) => ({
+    url: absoluteUrl(`/book-now/${c.slug}`),
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [...pages, ...cats, ...collectionPages, ...searches, ...eventPages, ...lists, ...blog, ...authorPages, ...live];
 }

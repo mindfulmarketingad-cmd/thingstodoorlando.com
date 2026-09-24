@@ -4,6 +4,8 @@ import { notFound, permanentRedirect } from "next/navigation";
 import BookButton from "@/components/BookButton";
 import DatePicker from "@/components/DatePicker";
 import CategoryPage, { categoryTitle } from "@/components/CategoryPage";
+import CollectionPage from "@/components/CollectionPage";
+import { collectionBySlug, collections, getCollection, getIndexableCollections } from "@/lib/collections";
 import Faq from "@/components/Faq";
 import HotelSection from "@/components/HotelSection";
 import { areaForListing } from "@/lib/hotels";
@@ -34,6 +36,7 @@ export async function generateStaticParams() {
   const live = await getLiveListings();
   return [
     ...categories.map((c) => ({ slug: c.slug })),
+    ...collections.map((c) => ({ slug: c.slug })),
     // Top products are prebuilt; the rest render on first request and are cached.
     ...live.slice(0, 200).map((l) => ({ slug: l.slug })),
   ];
@@ -55,6 +58,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `${category.intro.split(". ")[0]}. Compare prices, reviews and availability.`.slice(0, 160),
       path: `/book-now/${category.slug}`,
     });
+  }
+  if (collectionBySlug.has(slug)) {
+    const data = (await getCollection(slug))!;
+    const hero = data.items.find((l) => l.imageLarge ?? l.image);
+    const img = hero ? (hero.imageLarge ?? hero.image) : undefined;
+    return {
+      ...pageMetadata({
+        title: data.config.title,
+        absoluteTitle: true,
+        description: data.config.description,
+        path: `/book-now/${slug}`,
+        image: img ? { url: img.url, width: img.width, height: img.height, alt: img.alt } : undefined,
+      }),
+      // Thin collections stay reachable but out of the index until they fill up.
+      ...(data.indexable ? {} : { robots: { index: false, follow: true } }),
+    };
   }
   const listing = await getListingBySlug(slug);
   if (!listing) return { title: "Experience not found", robots: { index: false } };
@@ -97,6 +116,10 @@ export default async function ListingPage({ params }: Props) {
   const { slug } = await params;
   const category = categoryBySlug.get(slug);
   if (category) return <CategoryPage category={category} />;
+  if (collectionBySlug.has(slug)) {
+    const [data, indexable] = await Promise.all([getCollection(slug), getIndexableCollections()]);
+    return <CollectionPage data={data!} siblings={indexable.map((c) => c.slug)} />;
+  }
 
   const base = await getListingBySlug(slug);
   if (!base) {

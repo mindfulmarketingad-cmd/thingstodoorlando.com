@@ -39,9 +39,9 @@ export interface ListicleConfig {
 }
 
 /** Transfers and transport-only products are never "things to do". */
-const TRANSPORT = /transfer|shuttle|private driver|airport|cruise port|port to |to port|limo(usine)? service|car service/i;
+export const TRANSPORT = /transfer|shuttle|private driver|airport|cruise port|port to |to port|limo(usine)? service|car service/i;
 /** Viator's own low-quality and inactive flags. */
-const LOW_QUALITY_TAG = /^(zombie|zombie slice|agent low quality product)$/i;
+export const LOW_QUALITY_TAG = /^(zombie|zombie slice|agent low quality product)$/i;
 
 export const listicles: ListicleConfig[] = [
   {
@@ -597,7 +597,7 @@ export const listicleBySlug = new Map(listicles.map((l) => [l.slug, l]));
 /* ---------------- Ranking ---------------- */
 
 const tokens = (t: string) => new Set(t.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 2));
-function similar(a: string, b: string): boolean {
+export function similar(a: string, b: string): boolean {
   const A = tokens(a);
   const B = tokens(b);
   const inter = [...A].filter((w) => B.has(w)).length;
@@ -605,7 +605,7 @@ function similar(a: string, b: string): boolean {
 }
 
 /** Bayesian average so a 5.0 with 3 reviews does not outrank a 4.8 with 2,000. */
-function rankScore(l: Listing): number {
+export function rankScore(l: Listing): number {
   const v = l.reviewCount ?? 0;
   const R = l.rating ?? 0;
   const m = 25;
@@ -639,7 +639,7 @@ export interface RankedListicle {
   picks: { label: string; listing: Listing }[];
 }
 
-const median = (xs: number[]) => {
+export const median = (xs: number[]) => {
   if (!xs.length) return undefined;
   const s = [...xs].sort((a, b) => a - b);
   return s[Math.floor(s.length / 2)];

@@ -43,6 +43,7 @@ const areas: Area[] = [
       { name: "Waldorf Astoria Orlando", note: "Quiet luxury in Bonnet Creek, minutes from Disney Springs." },
     ],
     nearby: [
+      { label: "Things to do near Disney World", href: "/book-now/things-to-do-near-disney-world" },
       { label: "Best theme parks in Orlando", href: "/blog/best-theme-parks-in-orlando" },
       { label: "Theme park tickets and tours", href: "/book-now/theme-parks" },
       { label: "Best water parks in Orlando", href: "/blog/best-water-parks-in-orlando-florida" },
@@ -79,6 +80,7 @@ const areas: Area[] = [
       { name: "Hilton Orlando", note: "Lazy river and a short drive to SeaWorld." },
     ],
     nearby: [
+      { label: "Things to do near International Drive", href: "/book-now/things-to-do-near-international-drive" },
       { label: "Things to do on International Drive", href: "/search/international-drive" },
       { label: "Sightseeing tours", href: "/book-now/sightseeing" },
       { label: "Food and dining experiences", href: "/book-now/food-and-dining" },
@@ -95,6 +97,7 @@ const areas: Area[] = [
       { name: "Margaritaville Resort Orlando", note: "Resort with a water park and vacation cottages near Disney." },
     ],
     nearby: [
+      { label: "Things to do near Kissimmee", href: "/book-now/things-to-do-near-kissimmee" },
       { label: "Best airboat tours in Orlando", href: "/blog/best-airboat-tours-in-orlando" },
       { label: "Nature and wildlife tours", href: "/book-now/airboat-and-wildlife" },
       { label: "Family-friendly tours", href: "/blog/best-family-friendly-tours-in-orlando-florida" },
@@ -107,6 +110,7 @@ const areas: Area[] = [
     intro: "Downtown has Lake Eola Park, the Orlando Magic and Orlando City SC, and the city's best restaurants and bars.",
     hotels: [{ name: "Grand Bohemian Hotel Orlando", note: "Art-filled boutique hotel steps from Lake Eola." }],
     nearby: [
+      { label: "Things to do near Downtown Orlando", href: "/book-now/things-to-do-near-downtown-orlando" },
       { label: "Orlando events calendar", href: "/events" },
       { label: "Sports tours and games", href: "/book-now/sports" },
       { label: "Couples tours and events", href: "/blog/romantic-things-to-do-in-orlando-for-couples" },
@@ -119,6 +123,7 @@ const areas: Area[] = [
     intro: "Brick streets, Park Avenue boutiques and the Scenic Boat Tour give Winter Park a small-town feel just north of downtown.",
     hotels: [{ name: "The Alfond Inn", note: "Boutique hotel with a contemporary art collection near Park Avenue." }],
     nearby: [
+      { label: "Things to do near Winter Park", href: "/book-now/things-to-do-near-winter-park" },
       { label: "Kayaking tours in Orlando", href: "/blog/best-kayaking-tours-in-orlando" },
       { label: "Relaxation and spas", href: "/book-now/relaxation-and-spas" },
       { label: "Shopping in Orlando", href: "/book-now/shopping" },

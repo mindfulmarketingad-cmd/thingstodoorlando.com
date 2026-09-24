@@ -5,6 +5,7 @@ import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
 import { listicles } from "@/lib/listicles";
 import { MONTHS } from "@/data/events";
+import { getIndexableCollections } from "@/lib/collections";
 import { getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -18,6 +19,7 @@ export const metadata = pageMetadata({
 
 export default async function SitemapPage() {
   const live = await getLiveListings();
+  const browse = await getIndexableCollections();
   return (
     <>
       <PageHero
@@ -63,6 +65,16 @@ export default async function SitemapPage() {
               {categories.map((c) => (
                 <li key={c.key}>
                   <Link href={`/book-now/${c.slug}`}>{c.label} Tours and Events in Orlando Florida</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <h2>Browse by budget, type and area</h2>
+            <ul>
+              {browse.map((c) => (
+                <li key={c.slug}>
+                  <Link href={`/book-now/${c.slug}`}>{c.h1}</Link>
                 </li>
               ))}
             </ul>

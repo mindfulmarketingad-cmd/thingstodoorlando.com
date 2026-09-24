@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BrowseCollections from "@/components/BrowseCollections";
 import CategoryTile from "@/components/CategoryTile";
 import Faq from "@/components/Faq";
 import ListingCard from "@/components/ListingCard";
@@ -388,6 +389,8 @@ export default async function HomePage() {
           <YouTubeEmbed id="ffpo8K-I3Xg" title="Orlando travel guide video" />
         </div>
       </section>
+
+      <BrowseCollections title="Find Things To Do In Orlando by Budget and Area" />
 
       <section className="section" aria-labelledby="guides-title">
         <div className="container">
