@@ -8,6 +8,7 @@ import { events, weeklyEvents } from "@/data/events";
 import { eventsForMonths, MONTHS, monthSlug, orlandoToday } from "@/lib/events";
 import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
+import { parkCalendars } from "@/content/park-calendars";
 
 export const revalidate = 3600;
 
@@ -98,7 +99,23 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section className="section section-alt" aria-labelledby="faq-title">
+      <section className="section section-alt" aria-labelledby="parks-cal-title">
+        <div className="container">
+          <div className="section-head">
+            <h2 id="parks-cal-title">Theme park calendars and the best days to go</h2>
+            <p>Month-by-month crowds, seasonal events and the best days for every Orlando theme park and water park.</p>
+          </div>
+          <ul className="pill-links">
+            {parkCalendars.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/blog/${p.slug}`}>{p.title.replace(" & Best Days to Go", "")}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="faq-title">
         <div className="container">
           <div className="section-head">
             <h2 id="faq-title">Orlando events FAQs</h2>

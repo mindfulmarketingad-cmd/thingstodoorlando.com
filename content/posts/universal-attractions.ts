@@ -128,7 +128,7 @@ This land replaced the old KidZone in 2024 and is built for preschoolers.
 
 ## Epic Universe attractions list
 
-Epic Universe opened in May 2025 as Universal's third park. It is organized as a central hub, Celestial Park, with portals into four worlds. Most first-time visitors head straight to the Ministry of Magic or Super Nintendo World at opening, so consider going the other way.
+Epic Universe opened in May 2025 as Universal's third park. See how the worlds connect in our [Epic Universe map and layout guide](/blog/epic-universe-map-layout). It is organized as a central hub, Celestial Park, with portals into four worlds. Most first-time visitors head straight to the Ministry of Magic or Super Nintendo World at opening, so consider going the other way.
 
 ### Celestial Park
 

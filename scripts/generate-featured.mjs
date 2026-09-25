@@ -19,6 +19,7 @@ function extract(source, eyebrow) {
 const items = [
   ...extract(readFileSync("lib/listicles.ts", "utf8"), "BEST OF ORLANDO"),
   ...readdirSync("content/posts").flatMap((f) => extract(readFileSync(`content/posts/${f}`, "utf8"), "ORLANDO TRAVEL GUIDE")),
+  ...extract(readFileSync("content/park-calendars.ts", "utf8"), "THEME PARK CALENDAR"),
 ];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
