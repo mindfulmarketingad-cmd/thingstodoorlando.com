@@ -11,6 +11,7 @@ import { formatDate } from "@/lib/blog";
 import { categoryByKey } from "@/lib/categories";
 import { collections, kindLabel, type BuiltCollection } from "@/lib/collections";
 import { formatDuration } from "@/lib/viator";
+import { stayLinksForBookNow } from "@/lib/cross-links";
 import { absoluteUrl } from "@/lib/site";
 
 const anchor = (i: number) => `pick-${i + 1}`;
@@ -80,6 +81,7 @@ export default function CollectionPage({ data, siblings }: { data: BuiltCollecti
     })),
   };
 
+  const stays = stayLinksForBookNow(config.slug);
   const sameKind = collections.filter((c) => c.kind === config.kind && c.slug !== config.slug && siblings.includes(c.slug));
   const otherKinds = collections.filter((c) => c.kind !== config.kind && siblings.includes(c.slug));
 
@@ -302,6 +304,21 @@ export default function CollectionPage({ data, siblings }: { data: BuiltCollecti
                       <Link href={`/book-now/${c.slug}`}>{c.h1}</Link>
                     </li>
                   ))}
+                </ul>
+              </div>
+            )}
+            {stays.length > 0 && (
+              <div>
+                <h3>Where to stay</h3>
+                <ul>
+                  {stays.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href}>{l.label}</Link>
+                    </li>
+                  ))}
+                  <li>
+                    <Link href="/place-to-stay">Best hotels in Orlando</Link>
+                  </li>
                 </ul>
               </div>
             )}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getIndexableCollections, kindLabel, type CollectionKind } from "@/lib/collections";
 
-const ORDER: CollectionKind[] = ["budget", "cheap", "near", "private"];
+const ORDER: CollectionKind[] = ["top", "ideas", "budget", "cheap", "near", "private"];
 
 /** Links to every indexable /book-now collection, grouped by type. */
 export default async function BrowseCollections({ title = "More ways to find things to do", alt = false }: { title?: string; alt?: boolean }) {

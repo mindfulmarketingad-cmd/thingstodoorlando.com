@@ -12,6 +12,7 @@ import StayMap from "@/components/StayMap";
 import { CheckIcon, ClockIcon, XIcon } from "@/components/Icons";
 import { stayGuideBySlug, stayGuides } from "@/data/stay-guides";
 import { findListings } from "@/lib/listicles";
+import { bookNowLinksForStay } from "@/lib/cross-links";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site";
 
@@ -41,6 +42,7 @@ export default async function StayGuidePage({ params }: Props) {
   const path = `/place-to-stay/${g.slug}`;
   const tours = (await findListings(g.tours, 12, 0)).filter((l) => !NOT_A_TOUR.test(l.title)).slice(0, 6);
   const others = stayGuides.filter((o) => o.slug !== g.slug);
+  const bookLinks = bookNowLinksForStay(g.slug);
 
   const schema = {
     "@context": "https://schema.org",
@@ -225,19 +227,19 @@ export default async function StayGuidePage({ params }: Props) {
               </ul>
             </div>
             <div>
-              <h3>More places to stay</h3>
+              <h3>Book things to do nearby</h3>
               <ul>
-                {others.slice(0, 7).map((o) => (
-                  <li key={o.slug}>
-                    <Link href={`/place-to-stay/${o.slug}`}>{o.h1}</Link>
+                {bookLinks.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href}>{l.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h3>&nbsp;</h3>
+              <h3>More places to stay</h3>
               <ul>
-                {others.slice(7).map((o) => (
+                {others.map((o) => (
                   <li key={o.slug}>
                     <Link href={`/place-to-stay/${o.slug}`}>{o.h1}</Link>
                   </li>

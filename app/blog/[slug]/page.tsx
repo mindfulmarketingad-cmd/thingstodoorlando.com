@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AuthorBox, { AuthorByline } from "@/components/AuthorBox";
 import JsonLd from "@/components/JsonLd";
+import { faqSchema } from "@/lib/schema";
 import ListiclePage from "@/components/ListiclePage";
 import ListingCard from "@/components/ListingCard";
 import PageHero from "@/components/PageHero";
@@ -87,6 +88,21 @@ export default async function PostPage({ params }: Props) {
       return { kind: "md" as const, blocks: [] };
     }),
   );
+  const heroListing = post.heroProduct ? live.find((l) => l.productCode === post.heroProduct) : undefined;
+  const heroImg = heroListing ? (heroListing.imageLarge ?? heroListing.image) : undefined;
+  // "## Frequently asked questions" followed by "### Question" + answer paragraphs becomes FAQPage schema.
+  const faqItems = (() => {
+    const blocks = segments.flatMap((s) => (s.kind === "md" ? s.blocks : []));
+    const start = blocks.findIndex((b) => b.type === "h2" && /frequently asked questions/i.test(b.text));
+    if (start < 0) return [];
+    const out: { q: string; a: string }[] = [];
+    for (let i = start + 1; i < blocks.length && blocks[i].type !== "h2"; i++) {
+      const b = blocks[i];
+      const next = blocks[i + 1];
+      if (b.type === "h3" && next?.type === "p") out.push({ q: b.text, a: next.inline.map((n) => n.value).join("") });
+    }
+    return out;
+  })();
   const topRated = segments.flatMap((s) => (s.kind === "list" && s.id === "top-rated" ? s.items : []));
   const toc = segments
     .flatMap((s) => (s.kind === "md" ? s.blocks : []))
@@ -133,7 +149,11 @@ export default async function PostPage({ params }: Props) {
         <div className="container article-layout">
           <article>
             <div className="article-hero-img">
-              <img src={featuredImage(post.slug).url} alt={post.title} width={1200} height={630} fetchPriority="high" />
+              {heroImg ? (
+                <img src={heroImg.url} alt={heroImg.alt} width={heroImg.width} height={heroImg.height} fetchPriority="high" />
+              ) : (
+                <img src={featuredImage(post.slug).url} alt={post.title} width={1200} height={630} fetchPriority="high" />
+              )}
             </div>
             <p style={{ fontSize: "1.15rem", color: "var(--muted)" }}>{post.excerpt}</p>
             {segments.map((s, i) =>
@@ -209,6 +229,7 @@ export default async function PostPage({ params }: Props) {
         </div>
       </section>
       <JsonLd data={articleSchema} />
+      {faqItems.length > 0 && <JsonLd data={faqSchema(faqItems)} />}
       {topRated.length > 0 && (
         <JsonLd
           data={{

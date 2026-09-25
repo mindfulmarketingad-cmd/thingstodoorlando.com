@@ -29,7 +29,7 @@ export default async function BookNowPage() {
     <>
       <PageHero
         title="Book Tours & Events In Orlando Florida"
-        intro={`${all.length.toLocaleString("en-US")} tours, tickets and experiences in Orlando, Florida. Filter by category, price, rating and duration, then book securely with Viator.`}
+        intro={`${all.length.toLocaleString("en-US")} tours, tickets and experiences in Orlando, Florida. Filter by category, price, rating and duration, then book securely.`}
         crumbs={[{ name: "Book Now", href: "/book-now" }]}
       />
       <section className="section" style={{ paddingTop: 40 }}>

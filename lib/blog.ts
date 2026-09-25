@@ -14,8 +14,9 @@ import { post as gatorVsWild } from "@/content/posts/gatorland-vs-wild-florida";
 import { post as kscTicketsVsTour } from "@/content/posts/ksc-tickets-vs-tour";
 import { post as discoveryCove } from "@/content/posts/discovery-cove";
 import { post as goCity } from "@/content/posts/go-city";
+import { post as universalAttractions } from "@/content/posts/universal-attractions";
 
-export const posts: Post[] = [whereToStay, gatorVsWild, kscTicketsVsTour, discoveryCove, goCity, top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
+export const posts: Post[] = [universalAttractions, whereToStay, gatorVsWild, kscTicketsVsTour, discoveryCove, goCity, top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
   b.published.localeCompare(a.published),
 );
 

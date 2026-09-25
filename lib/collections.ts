@@ -3,7 +3,7 @@ import { cache } from "react";
 import type { CategoryKey, Listing } from "./types";
 import type { HotelArea } from "./hotels";
 import { getLiveListings, snapshotDate } from "./listings";
-import { LOW_QUALITY_TAG, TRANSPORT, median, rankScore, similar } from "./listicles";
+import { LOW_QUALITY_TAG, TRANSPORT, getTopRated, median, rankScore, similar } from "./listicles";
 
 /**
  * Programmatic /book-now collections: budget pages, cheap-by-category pages,
@@ -12,7 +12,7 @@ import { LOW_QUALITY_TAG, TRANSPORT, median, rankScore, similar } from "./listic
  * it has enough distinct experiences to be useful.
  */
 
-export type CollectionKind = "budget" | "cheap" | "private" | "near";
+export type CollectionKind = "top" | "ideas" | "budget" | "cheap" | "private" | "near";
 
 export interface CollectionConfig {
   slug: string;
@@ -27,6 +27,8 @@ export interface CollectionConfig {
   /** Plural noun for generated copy, e.g. "airboat and wildlife tours". */
   noun: string;
   match: (l: Listing) => boolean;
+  /** Rank with the site-wide top-rated list (one per activity type) instead of the plain score. */
+  topRated?: { limit: number };
   /** Keep listings Viator flags for ranking reasons (official tickets carry these flags). */
   includeFlagged?: boolean;
   /** Parent category for breadcrumbs and cross-links. */
@@ -53,6 +55,127 @@ const both = (a: (l: Listing) => boolean, re: RegExp, not?: RegExp) => (l: Listi
   a(l) && re.test(l.title) && !(not && not.test(l.title));
 
 export const collections: CollectionConfig[] = [
+  /* ---------------- Top rated ---------------- */
+  {
+    slug: "top-tourist-attractions-in-orlando-florida",
+    kind: "top",
+    h1: "Top Tourist Attractions in Orlando Florida",
+    title: "Top Tourist Attractions in Orlando Florida (Top 10)",
+    description:
+      "The 10 top-rated tourist attractions in Orlando, Florida on Viator, ranked by thousands of traveler reviews: tours, adventures and experiences worth booking.",
+    label: "Top tourist attractions",
+    noun: "top-rated attractions and tours",
+    match: (l) => (l.reviewCount ?? 0) >= 100 && (l.rating ?? 0) >= 4.5,
+    topRated: { limit: 10 },
+    hotelArea: "international-drive",
+    intro: [
+      "Everyone knows Orlando's theme parks. What visitors do not always know is which of the city's hundreds of other attractions are actually worth the ticket. This page answers that with real data: the 10 top tourist attractions in Orlando, Florida, ranked by the ratings and reviews of travelers who booked them on Viator.",
+      "To keep the list useful, we only rank experiences with at least 100 reviews and an average of 4.5 stars or higher, and we allow one pick per type of activity, so you get the best escape room, the best kayak tour and the best airboat ride instead of ten versions of the same thing. The ranking refreshes every time our data updates, so a newcomer with great reviews can climb the list.",
+    ],
+    howToChoose: [
+      {
+        heading: "Pair one big attraction with one local favorite",
+        text: "Put Kennedy Space Center or a theme park on the calendar first, then fill the lighter days with smaller top-rated experiences like a clear kayak paddle in Winter Park or a downtown ghost tour.",
+      },
+      {
+        heading: "Match the attraction to the time of day",
+        text: "Outdoor adventures like kayaking, airboats and zip lines are best in the morning before the summer heat and storms. Escape rooms and indoor experiences are perfect for afternoons, and ghost tours come alive after dark.",
+      },
+      {
+        heading: "Think about the drive",
+        text: "Some of the best-rated experiences are outside the tourist corridor, in Winter Park, Kissimmee or on the Space Coast. Group attractions by area to spend more time doing and less time on I-4.",
+      },
+    ],
+    goodToKnow: [
+      "Top-rated experiences sell out first, especially on weekends and holidays. Book a few days ahead.",
+      "Most include free cancellation up to 24 hours before the start time.",
+      "Prices shown are starting prices per person and change by date and group size.",
+      "Tours with hotel pickup usually collect from International Drive, Lake Buena Vista and Kissimmee.",
+    ],
+    faqs: [
+      {
+        q: "What is the number one tourist attraction in Orlando?",
+        a: "Walt Disney World is the most visited attraction in Orlando. Among bookable tours and experiences on Viator, the top-rated attraction right now is the first pick on this page, based on traveler ratings and review volume.",
+      },
+      {
+        q: "What are the top attractions in Orlando besides theme parks?",
+        a: "Kennedy Space Center, airboat rides on Central Florida's lakes, clear kayak tours, the downtown ghost tour, escape rooms on International Drive and zip line parks are consistently among the highest-rated experiences outside the parks.",
+      },
+      {
+        q: "How do you rank the top tourist attractions?",
+        a: "We use a weighted score that balances each experience's average rating with how many travelers reviewed it, require at least 100 reviews and a 4.5 average, and allow one pick per activity type so the list stays varied.",
+      },
+    ],
+    related: [
+      { label: "Top 10 things to do in Orlando (guide)", href: "/blog/top-10-things-to-do-in-orlando-florida" },
+      { label: "Events today in Orlando", href: "/book-now/today" },
+      { label: "Things to do under $50", href: "/book-now/things-to-do-in-orlando-under-50" },
+      { label: "Best hotels in Orlando", href: "/place-to-stay" },
+    ],
+  },
+
+  /* ---------------- Ideas ---------------- */
+  {
+    slug: "cute-date-ideas-orlando-florida",
+    kind: "ideas",
+    h1: "Cute Date Ideas Orlando Florida",
+    title: "Cute Date Ideas in Orlando, Florida: Bookable Dates",
+    description:
+      "Cute date ideas in Orlando, Florida you can book today: sunset kayaks, glow paddles, sunset airboats, trail rides, helicopter flights and couples massages.",
+    label: "Cute date ideas",
+    category: "couples",
+    noun: "date ideas",
+    match: (l) =>
+      (l.categories.includes("couples") ||
+        /sunset|date night|romantic|couple|champagne|dinner cruise|glow|helicopter|balloon|massage|trail ride|horseback|charcuterie|high-tea|wine/i.test(l.title)) &&
+      !/paintball|family pack|theme park loop|water park/i.test(l.title),
+    hotelArea: "winter-park",
+    intro: [
+      "Orlando's best dates happen away from the theme park crowds. Ask anyone who lives here and they will send you out on the water at golden hour, up in the air over the fireworks or down a quiet trail on horseback, then off to dinner on Park Avenue. This page gathers the cutest date ideas in Orlando, Florida that you can actually book, from real experiences with real traveler reviews on Viator.",
+      "The list mixes sweet and simple with once-in-a-lifetime: clear kayak paddles through the Winter Park canals at sunset, glowing LED kayaks after dark, sunset airboat rides, horseback trail rides in state parks, river dinner cruises, helicopter flights over the fireworks and couples massages. Every pick is ranked by traveler ratings and review volume, so the most-loved dates rise to the top.",
+    ],
+    howToChoose: [
+      {
+        heading: "First dates and new couples",
+        text: "Keep it light and active. A sunset clear kayak or a glow paddle gives you something to laugh about, and it is easy to extend into dinner if it is going well.",
+      },
+      {
+        heading: "Anniversaries and proposals",
+        text: "Go big with a helicopter flight over the theme parks during the fireworks, a champagne sunset trail ride or a private paddle. Mention the occasion when you book; many small operators love helping with a surprise.",
+      },
+      {
+        heading: "Low-key and relaxing",
+        text: "A river cruise out of Sanford or a couples massage is the move when you want to slow down after a few big park days.",
+      },
+    ],
+    goodToKnow: [
+      "Sunset tour start times shift with the seasons, so check the time for your date.",
+      "Bring bug spray for anything on the water or on trails at dusk.",
+      "Evening slots on Fridays and Saturdays sell out first. Weeknights are easier to book and just as pretty.",
+      "Summer storms usually pass by early evening, but most operators offer free cancellation or rescheduling for weather.",
+    ],
+    faqs: [
+      {
+        q: "What are some cute date ideas in Orlando?",
+        a: "Paddle a clear kayak through the Winter Park chain of lakes at sunset, take a glow-in-the-dark kayak tour, ride an airboat at golden hour, go horseback riding on a state park trail, or fly over the fireworks in a helicopter. Finish with dinner on Park Avenue or in Thornton Park.",
+      },
+      {
+        q: "What are free date ideas in Orlando?",
+        a: "Walk around Lake Eola at dusk, watch the sunset at Kraft Azalea Garden in Winter Park, stroll Disney Springs, or browse the Winter Park Farmers' Market on a Saturday morning.",
+      },
+      {
+        q: "What is the most romantic thing to do in Orlando?",
+        a: "A night helicopter flight over the theme park fireworks is the showstopper. For something quieter, a sunset clear kayak tour through Winter Park's canals is a local favorite.",
+      },
+    ],
+    related: [
+      { label: "Cheap date night ideas under $100", href: "/book-now/cheap-date-night-ideas" },
+      { label: "Romantic things to do in Orlando", href: "/blog/romantic-things-to-do-in-orlando-for-couples" },
+      { label: "Hotels near downtown Winter Park", href: "/place-to-stay/hotels-near-downtown-winter-park" },
+      { label: "Luxury resort hotels in Orlando", href: "/place-to-stay/luxury-resort-hotels-in-orlando" },
+    ],
+  },
+
   /* ---------------- Budget ---------------- */
   {
     slug: "things-to-do-in-orlando-under-25",
@@ -628,6 +751,7 @@ export const collections: CollectionConfig[] = [
       { label: "All couples tours and events", href: "/book-now/couples" },
       { label: "Romantic things to do in Orlando", href: "/blog/romantic-things-to-do-in-orlando-for-couples" },
       { label: "Things to do near Winter Park", href: "/book-now/things-to-do-near-winter-park" },
+      { label: "Cute date ideas in Orlando", href: "/book-now/cute-date-ideas-orlando-florida" },
     ],
   },
 
@@ -1089,10 +1213,14 @@ export const getCollection = cache(async (slug: string, limit = 12): Promise<Bui
   const pool = [...reviewed.sort((a, b) => rankScore(b) - rankScore(a)), ...rest.sort((a, b) => rankScore(b) - rankScore(a))];
 
   const items: Listing[] = [];
-  for (const l of pool) {
-    if (items.some((i) => similar(i.title, l.title))) continue;
-    items.push(l);
-    if (items.length >= limit) break;
+  if (config.topRated) {
+    items.push(...(await getTopRated(config.topRated.limit, 100, 2)));
+  } else {
+    for (const l of pool) {
+      if (items.some((i) => similar(i.title, l.title))) continue;
+      items.push(l);
+      if (items.length >= limit) break;
+    }
   }
 
   const prices = matches.map((l) => l.priceFrom).filter((p): p is number => !!p);
@@ -1144,6 +1272,8 @@ export const getIndexableCollections = cache(async (): Promise<CollectionConfig[
 });
 
 export const kindLabel: Record<CollectionKind, string> = {
+  top: "Top rated",
+  ideas: "Date and trip ideas",
   budget: "Things to do by budget",
   cheap: "Cheap things to do by type",
   private: "Private tours",

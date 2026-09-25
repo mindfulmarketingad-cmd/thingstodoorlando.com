@@ -195,7 +195,7 @@ export default async function HomePage() {
               <ShieldIcon size={22} />
             </span>
             <div>
-              <strong>Secure booking with Viator</strong>
+              <strong>Secure booking</strong>
               <span>Checkout and support from a Tripadvisor company</span>
             </div>
           </div>
@@ -479,8 +479,8 @@ export default async function HomePage() {
                   <p>Review what is included, how long it lasts, ratings and our tips for getting the most out of it.</p>
                 </li>
                 <li>
-                  <h3>Book securely on Viator</h3>
-                  <p>Check live availability and complete your booking with Viator, often with free cancellation.</p>
+                  <h3>Book securely</h3>
+                  <p>Check live availability and complete your booking securely, often with free cancellation.</p>
                 </li>
               </ol>
             </div>

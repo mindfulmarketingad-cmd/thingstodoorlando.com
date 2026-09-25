@@ -28,7 +28,7 @@ export default function RankedList({
       {showDate && (
         <div className="date-bar">
           <DatePicker variant="inline" label="Your travel date" />
-          <span>Every &quot;Check availability&quot; button opens Viator for this date.</span>
+          <span>Every &quot;Check availability&quot; button opens the booking page for this date.</span>
         </div>
       )}
     <ol className="rank-list">

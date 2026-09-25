@@ -9,6 +9,7 @@ import UseTodayDate from "@/components/UseTodayDate";
 import { events } from "@/data/events";
 import { orlandoToday } from "@/lib/events";
 import { getListingsAvailableOn } from "@/lib/listings";
+import { stayLinksForBookNow } from "@/lib/cross-links";
 import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import { recommendedOrder, slimListing } from "@/lib/slim";
@@ -66,7 +67,7 @@ export default async function TodayPage() {
       <UseTodayDate />
       <PageHero
         title="Events Today in Orlando"
-        intro={`Tours, attractions and events you can book for today, ${label}. Availability comes from Viator and refreshes through the day.`}
+        intro={`Tours, attractions and events you can book for today, ${label}. Availability refreshes through the day.`}
         crumbs={[
           { name: "Book Now", href: "/book-now" },
           { name: "Today", href: "/book-now/today" },
@@ -103,8 +104,7 @@ export default async function TodayPage() {
           <div className="section-head" style={{ textAlign: "left", marginInline: 0 }}>
             <h2 id="today-tours-title">Tours and activities available today</h2>
             <p>
-              Only experiences bookable for {label} are shown. Booking links open with today&apos;s date selected where
-              Viator supports it.
+              Only experiences bookable for {label} are shown. Booking links open with today&apos;s date selected.
             </p>
           </div>
           {available && items.length ? (
@@ -139,6 +139,11 @@ export default async function TodayPage() {
               <li>
                 <Link href="/place-to-stay">Where to stay tonight</Link>
               </li>
+              {stayLinksForBookNow("today").map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href}>{l.label}</Link>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>

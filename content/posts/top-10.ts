@@ -50,7 +50,7 @@ Universal is the thrill-seeker's side of Orlando. **Universal Studios Florida** 
 - **Best for:** Teens, thrill seekers, movie and gaming fans.
 - **Plan for:** One day per park, or two to three days for the full resort.
 
-**Tip:** Express passes can save hours on busy days. Compare tickets on our [Universal Orlando page](/search/universal-orlando).
+**Tip:** Express passes can save hours on busy days. Compare tickets on our [Universal Orlando page](/search/universal-orlando), and see every ride with height requirements in our [Universal Studios Orlando attractions list](/blog/universal-studios-orlando-attractions-list).
 
 ## 3. Disney Springs
 

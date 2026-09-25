@@ -9,6 +9,7 @@ import { collectionBySlug, collections, getCollection, getIndexableCollections }
 import Faq from "@/components/Faq";
 import HotelSection from "@/components/HotelSection";
 import { areaForListing } from "@/lib/hotels";
+import { stayLinksForBookNow } from "@/lib/cross-links";
 import JsonLd from "@/components/JsonLd";
 import ListingCard, { formatPrice } from "@/components/ListingCard";
 import ListingMedia from "@/components/ListingMedia";
@@ -143,7 +144,7 @@ export default async function ListingPage({ params }: Props) {
     .filter((p) => p.featuredListings.includes(listing.slug) || extractLinks(p.body).includes(`/book-now/${listing.slug}`))
     .slice(0, 3);
 
-  const ctaLabel = isGuide ? "Compare live prices on Viator" : "Check availability on Viator";
+  const ctaLabel = isGuide ? "Compare live prices" : "Check availability";
 
   return (
     <>
@@ -398,7 +399,7 @@ export default async function ListingPage({ params }: Props) {
             <ul>
               <li>
                 <CheckIcon size={16} />
-                Secure checkout on Viator
+                Secure checkout
               </li>
               <li>
                 <CheckIcon size={16} />
@@ -427,6 +428,18 @@ export default async function ListingPage({ params }: Props) {
             <h2 id="faq-title">Frequently Asked Questions</h2>
           </div>
           <Faq items={listingFaqs(listing)} />
+          {primary && stayLinksForBookNow(primary.slug).length > 0 && (
+            <nav aria-label="Where to stay" style={{ marginTop: 28 }}>
+              <h3 style={{ fontSize: "1rem", marginBottom: 10 }}>Where to stay for this trip</h3>
+              <ul className="pill-links">
+                {stayLinksForBookNow(primary.slug).map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href}>{l.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
         </div>
       </section>
 

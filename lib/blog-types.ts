@@ -14,6 +14,8 @@ export interface Post {
   body: string;
   /** Guide or listing slugs to feature at the end of the post. */
   featuredListings: string[];
+  /** Viator product code whose photo is used as the article hero image. */
+  heroProduct?: string;
   /** Author slug from data/authors.ts; defaults to DEFAULT_AUTHOR. */
   author?: string;
 }

@@ -45,6 +45,8 @@ Universal's on-site hotels are within walking distance or a short boat ride of U
 - **Pros:** Walk to the parks and CityWalk, early admission, no daily parking fees.
 - **Cons:** Farther from Disney; the premier hotels are among the most expensive in the city.
 
+Planning your park days? See the full [Universal Studios Orlando attractions list](/blog/universal-studios-orlando-attractions-list) with every ride and height requirement.
+
 [[hotels:Universal Orlando]]
 
 ## 3. International Drive
