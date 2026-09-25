@@ -3306,3 +3306,210 @@ p {
   font-size: 0.92rem;
   line-height: 1.55;
 }
+
+/* ---------- Start Planning CTA + planner quiz ---------- */
+.hero-plan-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px auto 4px;
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+.planner {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.planner-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--blue-50);
+  overflow: hidden;
+}
+.planner-progress span {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+  transition: width 0.25s;
+}
+.planner-step {
+  margin: 12px 0 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.planner-q {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.planner-q legend {
+  padding: 0;
+  color: var(--navy);
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.planner-help {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+.planner-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+.planner-options.is-dense {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 640px) {
+  .planner {
+    padding: 20px 16px;
+  }
+  .planner-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .planner-options.is-dense {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.planner-option {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.planner-option:hover {
+  border-color: var(--orange);
+}
+.planner-option[aria-pressed="true"] {
+  border-color: var(--orange);
+  background: var(--orange-50);
+}
+.planner-option strong {
+  color: var(--navy);
+}
+.planner-option span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.planner-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+}
+.planner-results-head {
+  margin-bottom: 20px;
+}
+.planner-results-head h2 {
+  margin: 0 0 8px;
+}
+.planner-results-head p {
+  color: var(--muted);
+}
+.planner-loading {
+  color: var(--muted);
+}
+.planner-picks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.planner-pick {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+@media (max-width: 640px) {
+  .planner-pick {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.planner-pick-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--blue-50);
+}
+.planner-pick-media .rank-num {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 8px;
+}
+.planner-pick-body h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+.planner-pick-body h3 a {
+  color: var(--navy);
+  text-decoration: none;
+}
+.planner-pick-meta {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.planner-reasons {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.planner-reasons li {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--blue-50);
+  color: var(--blue-700);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.planner-extras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+.planner-extra {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--blue-50);
+}
+.planner-extra h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.planner-extra a {
+  color: var(--blue);
+  font-weight: 600;
+}
+.planner-extra ul {
+  margin: 0 0 8px;
+  padding-left: 18px;
+}
+.instagram-feed {
+  padding-bottom: 24px;
+}

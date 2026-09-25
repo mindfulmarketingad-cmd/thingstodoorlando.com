@@ -5,6 +5,7 @@ import Faq from "@/components/Faq";
 import ListingCard from "@/components/ListingCard";
 import SearchForm from "@/components/SearchForm";
 import HeroVideo from "@/components/HeroVideo";
+import InstagramFeed from "@/components/InstagramFeed";
 import JsonLd from "@/components/JsonLd";
 import { linkHotels } from "@/components/LinkHotels";
 import { ArrowIcon, ShieldIcon, SparkIcon, UsersIcon } from "@/components/Icons";
@@ -138,6 +139,10 @@ export default async function HomePage() {
             top-rated experiences in minutes.
           </p>
           <SearchForm id="hero-search" placeholder="Try Kennedy Space Center, airboat or Kissimmee" />
+          <Link href="/start-planning" className="btn btn-primary hero-plan-cta">
+            Start Planning
+            <ArrowIcon size={18} />
+          </Link>
           <DatePicker variant="hero" label="When are you visiting?" />
           <nav className="hero-tags" aria-label="Popular searches">
             {heroSearches.map((s) => (
@@ -148,6 +153,8 @@ export default async function HomePage() {
           </nav>
         </div>
       </section>
+
+      <InstagramFeed />
 
       {top10.length > 0 && (
         <section className="top10" aria-labelledby="top10-title">
