@@ -19,9 +19,10 @@ import { post as disneySpringsHours } from "@/content/posts/disney-springs-hours
 import { post as citywalkHours } from "@/content/posts/citywalk-hours";
 import { parkCalendarPosts } from "@/content/park-calendars";
 import { post as epicMap } from "@/content/posts/epic-universe-map";
+import { post as volcanoMap } from "@/content/posts/volcano-bay-map";
 import { post as halloweenGuide } from "@/content/posts/halloween-guide";
 
-export const posts: Post[] = [halloweenGuide, epicMap, ...parkCalendarPosts, citywalkHours, disneySpringsHours, universalAttractions, whereToStay, gatorVsWild, kscTicketsVsTour, discoveryCove, goCity, top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
+export const posts: Post[] = [halloweenGuide, volcanoMap, epicMap, ...parkCalendarPosts, citywalkHours, disneySpringsHours, universalAttractions, whereToStay, gatorVsWild, kscTicketsVsTour, discoveryCove, goCity, top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
   b.published.localeCompare(a.published),
 );
 

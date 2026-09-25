@@ -439,7 +439,7 @@ export const parkCalendars: ParkCalendar[] = [
     summary:
       "Go on a hot weekday morning in late spring, summer or early fall and arrive before opening. Volcano Bay has closed for part of the cooler months in recent years, so check the calendar before you plan a winter visit.",
     intro:
-      "Volcano Bay is Universal's water theme park, built around the 200-foot Krakatau volcano. Instead of standing in lines, you use a wearable TapuTapu band to join virtual lines and get a buzz when it is your turn, which means more time floating and less time on stairs.",
+      "Volcano Bay is Universal's water theme park, built around the 200-foot Krakatau volcano. Three villages ring the volcano, and the whole park can be walked end to end in under 10 minutes. TapuTapu virtual lines have been retired, so you now wait in each slide's queue.",
     months: {
       1: "Check the calendar; the park has closed for part of the cooler months in recent years",
       2: "Check the calendar for seasonal operation",
@@ -449,23 +449,24 @@ export const parkCalendars: ParkCalendar[] = [
       12: "Check the calendar for seasonal operation",
     },
     timeOfDay: [
-      "**Opening:** virtual lines fill up through the day. Arrive early and join the most popular slides first.",
-      "**Midday:** the lazy river and wave pool are best while you wait for your TapuTapu to buzz.",
+      "**Opening:** waits are shortest in the first hour. Head straight to Krakatau Aqua Coaster or the Rainforest Village slides.",
+      "**Midday:** slide queues peak, so it is a good time for the lazy river, the wave pool and lunch.",
       "**Afternoon:** summer storms can pause slides and pools for lightning.",
     ],
     events: [],
     tips: [
-      "Every guest gets a TapuTapu wristband for virtual lines and cashless payments.",
+      "Download the park map before you go and rent a locker first thing.",
       "Bring water shoes; the paths get hot.",
       "Arrive early on summer weekends; the park can reach capacity.",
     ],
     faqs: [
       { q: "Is Volcano Bay open all year?", a: "In recent years Volcano Bay has closed for part of the cooler months. Check Universal's calendar for your dates." },
-      { q: "How do lines work at Volcano Bay?", a: "You use the TapuTapu wristband to join virtual lines, then return when it buzzes." },
+      { q: "How do lines work at Volcano Bay?", a: "TapuTapu virtual lines have been retired. You walk to each slide and wait in its queue, and the Universal Orlando app shows live wait times." },
       { q: "What is the best time to visit Volcano Bay?", a: "A hot weekday morning in late spring, summer or early fall, arriving before opening." },
     ],
     hotels: "Universal Orlando",
     links: [
+      { label: "Volcano Bay map and layout (PDF map)", href: "/blog/volcano-bay-map-layout" },
       { label: "Best water parks in Orlando", href: "/blog/best-water-parks-in-orlando-florida" },
       { label: "Universal CityWalk hours and best days", href: "/blog/hours-best-days-universal-citywalk" },
     ],
