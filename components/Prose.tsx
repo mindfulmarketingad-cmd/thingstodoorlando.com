@@ -10,6 +10,14 @@ function InlineNodes({ nodes, links, hotels = true }: { nodes: Inline[]; links?:
         if (n.type === "strong") return <strong key={i}>{txt(n.value)}</strong>;
         if (n.type === "link") {
           const label = n.strong ? <strong>{n.value}</strong> : n.value;
+          // Downloadable files skip client-side routing and open in a new tab.
+          if (/^\/[\w/.-]+\.pdf$/.test(n.href)) {
+            return (
+              <a key={i} href={n.href} target="_blank" rel="noopener">
+                {label}
+              </a>
+            );
+          }
           if (n.href.startsWith("/")) {
             return (
               <Link key={i} href={links?.get(n.href) ?? n.href}>
