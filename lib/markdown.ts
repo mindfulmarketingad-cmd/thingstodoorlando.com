@@ -13,7 +13,8 @@ export type Block =
   | { type: "p"; inline: Inline[] }
   | { type: "ul"; items: Inline[][] }
   | { type: "ol"; items: Inline[][] }
-  | { type: "callout"; inline: Inline[] };
+  | { type: "callout"; inline: Inline[] }
+  | { type: "table"; head: Inline[][]; rows: Inline[][][] };
 
 const headingId = (t: string) =>
   t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -41,6 +42,7 @@ export function parseMarkdown(src: string): Block[] {
   const lines = src.trim().split("\n");
   let para: string[] = [];
   let list: { type: "ul" | "ol"; items: Inline[][] } | null = null;
+  let table: { type: "table"; head: Inline[][]; rows: Inline[][][] } | null = null;
 
   const flushPara = () => {
     if (para.length) blocks.push({ type: "p", inline: parseInline(para.join(" ")) });
@@ -50,14 +52,35 @@ export function parseMarkdown(src: string): Block[] {
     if (list) blocks.push(list);
     list = null;
   };
+  const flushTable = () => {
+    if (table) blocks.push(table);
+    table = null;
+  };
+  const cells = (line: string) =>
+    line
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((c) => parseInline(c.trim()));
 
   for (const raw of lines) {
     const line = raw.trim();
     if (!line) {
       flushPara();
       flushList();
+      flushTable();
       continue;
     }
+    // "| a | b |" rows: first row is the header, "|---|" separator rows are skipped.
+    if (line.startsWith("|")) {
+      flushPara();
+      flushList();
+      if (/^\|[\s:|-]+\|?$/.test(line)) continue;
+      if (!table) table = { type: "table", head: cells(line), rows: [] };
+      else table.rows.push(cells(line));
+      continue;
+    }
+    flushTable();
     let m: RegExpMatchArray | null;
     if ((m = line.match(/^(##|###)\s+(.*)$/))) {
       flushPara();
@@ -83,6 +106,7 @@ export function parseMarkdown(src: string): Block[] {
   }
   flushPara();
   flushList();
+  flushTable();
   return blocks;
 }
 
@@ -91,5 +115,5 @@ export function extractLinks(src: string): string[] {
 }
 
 export function wordCount(src: string): number {
-  return src.replace(/[#>*\-\[\]()]/g, " ").split(/\s+/).filter(Boolean).length;
+  return src.replace(/[#>*\-\[\]()|]/g, " ").split(/\s+/).filter(Boolean).length;
 }

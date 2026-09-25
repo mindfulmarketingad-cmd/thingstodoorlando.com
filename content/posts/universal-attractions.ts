@@ -193,7 +193,7 @@ You can book official Universal Orlando tickets, including park-to-park options 
 
 [[products:3088_1D_UO,3088P1,375447P87,375447P84]]
 
-If your trip is mostly about the parks, a hotel near Universal saves hours of driving. Browse our [best hotels in Orlando](/place-to-stay) or read about [luxury resort hotels](/place-to-stay/luxury-resort-hotels-in-orlando), which include Universal's premier hotels with Express included.
+Planning dinner after the parks? See the [Universal CityWalk hours and best days to go](/blog/hours-best-days-universal-citywalk). If your trip is mostly about the parks, a hotel near Universal saves hours of driving. Browse our [best hotels in Orlando](/place-to-stay) or read about [luxury resort hotels](/place-to-stay/luxury-resort-hotels-in-orlando), which include Universal's premier hotels with Express included.
 
 [[hotels:Universal Orlando]]
 

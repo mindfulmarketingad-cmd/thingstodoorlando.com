@@ -587,6 +587,7 @@ export const stayGuides: StayGuide[] = [
     hotelArea: "disney",
     related: [
       { label: "Things to do near Disney World", href: "/book-now/things-to-do-near-disney-world" },
+      { label: "Disney Springs hours and best days to visit", href: "/blog/hours-best-days-disney-springs" },
       { label: "Best theme parks in Orlando", href: "/blog/best-theme-parks-in-orlando" },
       { label: "Best hotels for Disney Marathon Weekend", href: "/place-to-stay/best-hotels-for-disney-marathon-weekend" },
     ],

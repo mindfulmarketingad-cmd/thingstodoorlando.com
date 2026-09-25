@@ -86,6 +86,33 @@ export default function Prose({
                 ))}
               </ol>
             );
+          case "table":
+            return (
+              <div key={i} className="table-wrap">
+                <table className="compare-table">
+                  <thead>
+                    <tr>
+                      {b.head.map((c, j) => (
+                        <th key={j} scope="col">
+                          <InlineNodes nodes={c} links={links} hotels={hotelLinks} />
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {b.rows.map((r, j) => (
+                      <tr key={j}>
+                        {r.map((c, k) => (
+                          <td key={k}>
+                            <InlineNodes nodes={c} links={links} hotels={hotelLinks} />
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
           case "callout":
             return (
               <div key={i} className="callout">

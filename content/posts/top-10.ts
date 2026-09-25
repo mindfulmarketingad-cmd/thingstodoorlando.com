@@ -59,7 +59,7 @@ Disney Springs is a large outdoor shopping, dining and entertainment district th
 - **Cost:** Free admission and free parking. Dining and activities vary by venue.
 - **Best for:** Rest days, rainy days and evenings out.
 
-**Tip:** It is one of the best free things to do in Orlando. See more in our guide to [free and cheap things to do in Orlando](/blog/free-and-cheap-things-to-do-in-orlando).
+**Tip:** It is one of the best free things to do in Orlando. Check the [Disney Springs hours and best days to visit](/blog/hours-best-days-disney-springs), and see more in our guide to [free and cheap things to do in Orlando](/blog/free-and-cheap-things-to-do-in-orlando).
 
 ## 4. Universal CityWalk
 
@@ -68,7 +68,7 @@ Right outside the Universal parks, CityWalk is packed with themed restaurants, l
 - **Cost:** Free entry. Parking fees at the Universal garages vary by time of day, so check current rates. Individual venue costs vary.
 - **Best for:** Couples, groups of friends and families grabbing dinner.
 
-**Tip:** Mini golf and live music make it a fun evening even if you are not visiting the parks.
+**Tip:** Mini golf and live music make it a fun evening even if you are not visiting the parks. See the [CityWalk hours and best days to go](/blog/hours-best-days-universal-citywalk), including free parking after 6 p.m.
 
 ## 5. ICON Park and The Wheel
 

@@ -1042,6 +1042,7 @@ export const collections: CollectionConfig[] = [
     related: [
       { label: "Cheap theme park tickets", href: "/book-now/cheap-theme-park-tickets" },
       { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
+      { label: "Disney Springs hours and best days to visit", href: "/blog/hours-best-days-disney-springs" },
       { label: "Best theme parks in Orlando", href: "/blog/best-theme-parks-in-orlando" },
     ],
   },
@@ -1105,6 +1106,7 @@ export const collections: CollectionConfig[] = [
     related: [
       { label: "Cheap food tours and dining", href: "/book-now/cheap-food-tours-and-dining" },
       { label: "Drinks and nightlife", href: "/book-now/drinks-and-nightlife" },
+      { label: "Universal CityWalk hours and best days", href: "/blog/hours-best-days-universal-citywalk" },
       { label: "Best hotels downtown", href: "/place-to-stay#downtown" },
     ],
   },
