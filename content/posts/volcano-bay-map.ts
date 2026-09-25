@@ -12,6 +12,7 @@ export const post: Post = {
   category: "Theme Parks",
   illustration: "water",
   featuredListings: [],
+  heroProduct: "3088P1",
   map: { park: "Universal's Volcano Bay", url: "/maps/volcano-bay-map.pdf", format: "PDF" },
   body: `
 > **Download the map:** [Volcano Bay park map (PDF)](/maps/volcano-bay-map.pdf). The official park map from Universal Orlando Resort, with every slide, pool, restaurant and height limit. Save it to your phone or print it before you go.

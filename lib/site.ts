@@ -43,5 +43,6 @@ export const footerNav = [
 ] as const;
 
 export function absoluteUrl(path = "/") {
+  if (/^https?:\/\//.test(path)) return path;
   return `${site.url}${path === "/" ? "" : path}`;
 }

@@ -6,7 +6,7 @@ import { guides } from "@/data/guides";
 import { categories, categoryByKey } from "./categories";
 import { score } from "./score";
 import { slugify } from "./slug";
-import type { CategoryKey, Listing } from "./types";
+import type { CategoryKey, Listing, ListingImage } from "./types";
 import { freetextProducts, mapProduct, productCodesForDate, searchDestinationProducts } from "./viator";
 
 /** Keyword rules used to place live products into site categories. */
@@ -92,6 +92,13 @@ function readSnapshot(): Snapshot {
     snapshotCache = { fetchedAt: null, products: [] };
   }
   return snapshotCache;
+}
+
+/** Cover photo for a product from the snapshot, used for blog featured images. */
+export function snapshotImage(productCode: string): ListingImage | undefined {
+  const raw = readSnapshot().products.find((p) => p.productCode === productCode);
+  const listing = raw ? mapProduct(raw, [], "theme-parks") : null;
+  return listing?.imageLarge ?? listing?.image;
 }
 
 export function snapshotDate(): string | null {

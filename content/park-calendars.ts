@@ -394,6 +394,7 @@ export const parkCalendars: ParkCalendar[] = [
   {
     slug: "epic-universe-calendar-best-days",
     title: "Epic Universe Calendar & Best Days to Go",
+    heroProduct: "3088_2D_UO",
     illustration: "theme-parks",
     park: "Universal Epic Universe",
     group: "universal",
@@ -431,6 +432,7 @@ export const parkCalendars: ParkCalendar[] = [
   {
     slug: "volcano-bay-calendar-best-days",
     title: "Volcano Bay Calendar & Best Days to Go",
+    heroProduct: "3088P1",
     illustration: "water",
     park: "Universal's Volcano Bay",
     group: "water",
@@ -474,6 +476,7 @@ export const parkCalendars: ParkCalendar[] = [
   {
     slug: "typhoon-lagoon-calendar-best-days",
     title: "Typhoon Lagoon Calendar & Best Days to Go",
+    heroProduct: "3805P7",
     illustration: "water",
     park: "Disney's Typhoon Lagoon",
     group: "water",
@@ -517,6 +520,7 @@ export const parkCalendars: ParkCalendar[] = [
   {
     slug: "blizzard-beach-calendar-best-days",
     title: "Blizzard Beach Calendar & Best Days to Go",
+    heroProduct: "3805P7",
     illustration: "water",
     park: "Disney's Blizzard Beach",
     group: "water",
