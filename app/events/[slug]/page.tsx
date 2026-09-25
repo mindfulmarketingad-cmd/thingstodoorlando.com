@@ -56,6 +56,8 @@ const SPECIAL_COPY: Record<Exclude<SpecialSlug, "this-weekend">, { intro: string
 
 Few places on earth do Halloween like Orlando. The major theme parks run separately ticketed after-dark events for weeks, downtown hosts ghost tours year round, and October weather is finally cooler and drier after summer.
 
+For every event this year with dates, ages, costs and scare levels, see our [Orlando Halloween Events Guide 2026](/blog/orlando-halloween-events-guide-2026).
+
 ## Choosing the right Halloween event
 
 - **For young kids:** Mickey's Not-So-Scary Halloween Party at Magic Kingdom is built for families, with a parade, fireworks and trick-or-treating.

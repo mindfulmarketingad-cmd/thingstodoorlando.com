@@ -3513,3 +3513,160 @@ p {
 .instagram-feed {
   padding-bottom: 24px;
 }
+
+/* ---------- Halloween finder ---------- */
+.hw-finder {
+  margin: 24px 0 32px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.hw-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hw-tabs button,
+.hw-chips button {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.hw-tabs button[aria-selected="true"],
+.hw-chips button[aria-pressed="true"] {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: #fff;
+}
+.hw-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 14px;
+}
+.hw-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hw-range,
+.hw-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.hw-range input {
+  accent-color: var(--orange);
+}
+.hw-check input {
+  accent-color: var(--orange);
+  width: 18px;
+  height: 18px;
+}
+.hw-count {
+  margin: 16px 0 10px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.hw-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.hw-card {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--orange);
+  border-radius: 12px;
+  background: #fff;
+}
+.hw-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.hw-card h4 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.02rem;
+}
+.hw-card h4 a {
+  color: var(--navy);
+}
+.hw-now {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #e8f7ee;
+  color: #1b7a43;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.hw-meta {
+  margin: 4px 0 6px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.hw-blurb {
+  margin: 0 0 10px;
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+.hw-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.hw-tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--blue-50);
+  color: var(--blue-700);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+.hw-tag.is-free {
+  background: #e8f7ee;
+  color: #1b7a43;
+}
+.hw-scare {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.hw-scare-bar {
+  display: inline-flex;
+  gap: 2px;
+}
+.hw-scare-bar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.hw-scare-bar span.on {
+  background: var(--orange);
+}
+.hw-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}

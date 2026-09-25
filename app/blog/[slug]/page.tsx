@@ -9,6 +9,8 @@ import ListingCard from "@/components/ListingCard";
 import PageHero from "@/components/PageHero";
 import RankedList from "@/components/RankedList";
 import HotelCta from "@/components/HotelCta";
+import HalloweenFinder from "@/components/HalloweenFinder";
+import { halloweenEvents } from "@/data/halloween-2026";
 import Prose from "@/components/Prose";
 import { featuredImage, formatDate, getPost, posts, readingMinutes, relatedPosts } from "@/lib/blog";
 import { getAllListings, getGuideLinkMap, getLiveListings } from "@/lib/listings";
@@ -85,6 +87,7 @@ export default async function PostPage({ params }: Props) {
         return { kind: "list" as const, id: `picks-${codes[0]?.toLowerCase()}`, items };
       }
       if (m[1] === "hotels") return { kind: "hotels" as const, area: m[2] };
+      if (m[1] === "halloween-events") return { kind: "halloween" as const };
       return { kind: "md" as const, blocks: [] };
     }),
   );
@@ -161,6 +164,8 @@ export default async function PostPage({ params }: Props) {
                 s.blocks.length ? <Prose key={i} blocks={s.blocks} links={links} /> : null
               ) : s.kind === "hotels" ? (
                 <HotelCta key={i} area={s.area} />
+              ) : s.kind === "halloween" ? (
+                <HalloweenFinder key={i} events={halloweenEvents} />
               ) : s.items.length ? (
                 <div key={i} style={{ margin: "24px 0 32px" }}>
                   <RankedList items={s.items} anchor={(n) => `${s.id}-${n + 1}`} headingLevel={3} />

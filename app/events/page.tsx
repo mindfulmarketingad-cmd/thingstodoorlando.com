@@ -45,6 +45,9 @@ export default function EventsPage() {
                 <Link href="/events/halloween-in-orlando">Halloween in Orlando</Link>
               </li>
               <li>
+                <Link href="/blog/orlando-halloween-events-guide-2026">Halloween events guide 2026</Link>
+              </li>
+              <li>
                 <Link href="/events/christmas-in-orlando">Christmas in Orlando</Link>
               </li>
               <li>

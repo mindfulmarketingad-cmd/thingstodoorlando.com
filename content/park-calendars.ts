@@ -152,6 +152,7 @@ export const parkCalendars: ParkCalendar[] = [
     links: [
       { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
       { label: "Things to do near Disney World", href: "/book-now/things-to-do-near-disney-world" },
+      { label: "Orlando Halloween events guide 2026", href: "/blog/orlando-halloween-events-guide-2026" },
     ],
   },
   {
@@ -342,6 +343,7 @@ export const parkCalendars: ParkCalendar[] = [
     links: [
       { label: "Universal Studios Orlando attractions list", href: "/blog/universal-studios-orlando-attractions-list" },
       { label: "Universal CityWalk hours and best days", href: "/blog/hours-best-days-universal-citywalk" },
+      { label: "Orlando Halloween events guide 2026", href: "/blog/orlando-halloween-events-guide-2026" },
     ],
   },
   {
@@ -600,6 +602,7 @@ export const parkCalendars: ParkCalendar[] = [
     links: [
       { label: "Hotels near SeaWorld Orlando", href: "/place-to-stay/hotels-near-seaworld-orlando" },
       { label: "Is Discovery Cove worth it?", href: "/blog/is-discovery-cove-worth-it" },
+      { label: "Orlando Halloween events guide 2026", href: "/blog/orlando-halloween-events-guide-2026" },
     ],
   },
   {
