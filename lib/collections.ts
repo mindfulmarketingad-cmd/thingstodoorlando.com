@@ -417,6 +417,7 @@ export const collections: CollectionConfig[] = [
       { label: "All theme park tickets and tours", href: "/book-now/theme-parks" },
       { label: "Best theme parks in Orlando", href: "/blog/best-theme-parks-in-orlando" },
       { label: "Cheap family activities", href: "/book-now/cheap-family-activities" },
+      { label: "Hotels near LEGOLAND Florida", href: "/place-to-stay/hotels-near-legoland-florida" },
     ],
   },
   {
@@ -469,6 +470,7 @@ export const collections: CollectionConfig[] = [
       { label: "All family-friendly tours", href: "/book-now/family-friendly" },
       { label: "Things to do in Orlando with kids", href: "/blog/best-things-to-do-in-orlando-with-kids" },
       { label: "Best family-friendly tours", href: "/blog/best-family-friendly-tours-in-orlando-florida" },
+      { label: "Family hotels in Orlando", href: "/place-to-stay/family-hotels-in-orlando" },
     ],
   },
   {
@@ -521,6 +523,7 @@ export const collections: CollectionConfig[] = [
       { label: "All day trips from Orlando", href: "/book-now/day-trips" },
       { label: "Kennedy Space Center tours", href: "/book-now/kennedy-space-center" },
       { label: "KSC tickets vs a tour", href: "/blog/kennedy-space-center-tickets-vs-tour-with-transport" },
+      { label: "Hotels near Kennedy Space Center", href: "/place-to-stay/hotels-near-kennedy-space-center" },
     ],
   },
   {
@@ -677,6 +680,7 @@ export const collections: CollectionConfig[] = [
     related: [
       { label: "Private fishing charters", href: "/book-now/private-fishing-charters-in-orlando" },
       { label: "Helicopter and balloon rides", href: "/book-now/hot-air-balloons" },
+      { label: "Luxury resort hotels in Orlando", href: "/place-to-stay/luxury-resort-hotels-in-orlando" },
       { label: "Airboat and wildlife tours", href: "/book-now/airboat-and-wildlife" },
     ],
   },
@@ -792,8 +796,8 @@ export const collections: CollectionConfig[] = [
     ],
     related: [
       { label: "Cheap attractions and sightseeing", href: "/book-now/cheap-attractions-and-sightseeing" },
-      { label: "Best hotels in Orlando by area", href: "/place-to-stay#international-drive" },
-      { label: "Where to stay in Orlando", href: "/blog/where-to-stay-in-orlando" },
+      { label: "Hotels near the Orange County Convention Center", href: "/place-to-stay/hotels-near-orange-county-convention-center" },
+      { label: "Hotels near SeaWorld Orlando", href: "/place-to-stay/hotels-near-seaworld-orlando" },
     ],
   },
   {
@@ -913,7 +917,7 @@ export const collections: CollectionConfig[] = [
     ],
     related: [
       { label: "Cheap theme park tickets", href: "/book-now/cheap-theme-park-tickets" },
-      { label: "Best hotels near Disney World", href: "/place-to-stay#disney" },
+      { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
       { label: "Best theme parks in Orlando", href: "/blog/best-theme-parks-in-orlando" },
     ],
   },
@@ -1038,7 +1042,7 @@ export const collections: CollectionConfig[] = [
     related: [
       { label: "Cheap kayak and water activities", href: "/book-now/cheap-kayak-and-water-activities" },
       { label: "Cheap date night ideas", href: "/book-now/cheap-date-night-ideas" },
-      { label: "Best hotels in Winter Park", href: "/place-to-stay#winter-park" },
+      { label: "Hotels near downtown Winter Park", href: "/place-to-stay/hotels-near-downtown-winter-park" },
     ],
   },
 ];

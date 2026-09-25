@@ -5,6 +5,8 @@ import HotelLink from "@/components/HotelLink";
 import { getHotels, type HotelArea } from "@/lib/hotels";
 import { linkHotels } from "@/components/LinkHotels";
 import PageHero from "@/components/PageHero";
+import StayMap from "@/components/StayMap";
+import { stayGuides } from "@/data/stay-guides";
 import { pageMetadata } from "@/lib/metadata";
 
 export const revalidate = 21600;
@@ -16,7 +18,6 @@ export const metadata = pageMetadata({
   path: "/place-to-stay",
 });
 
-const STAY22_MAP = "https://www.stay22.com/embed/6ab56c2028c02a2c437b791e";
 
 interface Area {
   id: HotelArea;
@@ -43,6 +44,7 @@ const areas: Area[] = [
       { name: "Waldorf Astoria Orlando", note: "Quiet luxury in Bonnet Creek, minutes from Disney Springs." },
     ],
     nearby: [
+      { label: "Hotels near Disney World guide", href: "/place-to-stay/hotels-near-disney-world" },
       { label: "Things to do near Disney World", href: "/book-now/things-to-do-near-disney-world" },
       { label: "Best theme parks in Orlando", href: "/blog/best-theme-parks-in-orlando" },
       { label: "Theme park tickets and tours", href: "/book-now/theme-parks" },
@@ -80,6 +82,7 @@ const areas: Area[] = [
       { name: "Hilton Orlando", note: "Lazy river and a short drive to SeaWorld." },
     ],
     nearby: [
+      { label: "Hotels near the Convention Center", href: "/place-to-stay/hotels-near-orange-county-convention-center" },
       { label: "Things to do near International Drive", href: "/book-now/things-to-do-near-international-drive" },
       { label: "Things to do on International Drive", href: "/search/international-drive" },
       { label: "Sightseeing tours", href: "/book-now/sightseeing" },
@@ -123,6 +126,7 @@ const areas: Area[] = [
     intro: "Brick streets, Park Avenue boutiques and the Scenic Boat Tour give Winter Park a small-town feel just north of downtown.",
     hotels: [{ name: "The Alfond Inn", note: "Boutique hotel with a contemporary art collection near Park Avenue." }],
     nearby: [
+      { label: "Hotels near downtown Winter Park guide", href: "/place-to-stay/hotels-near-downtown-winter-park" },
       { label: "Things to do near Winter Park", href: "/book-now/things-to-do-near-winter-park" },
       { label: "Kayaking tours in Orlando", href: "/blog/best-kayaking-tours-in-orlando" },
       { label: "Relaxation and spas", href: "/book-now/relaxation-and-spas" },
@@ -136,6 +140,7 @@ const areas: Area[] = [
     intro: "Staying at the airport takes the stress out of early departures and the drive to Port Canaveral and the Space Coast.",
     hotels: [{ name: "Hyatt Regency Orlando International Airport", note: "Inside the main terminal, with runway views." }],
     nearby: [
+      { label: "Hotels near Lake Nona guide", href: "/place-to-stay/hotels-near-lake-nona" },
       { label: "Kennedy Space Center trips", href: "/book-now/kennedy-space-center" },
       { label: "Day trips from Orlando", href: "/book-now/day-trips" },
     ],
@@ -180,21 +185,26 @@ export default function PlaceToStayPage() {
             <h2 id="map-title">Orlando hotel map with live prices</h2>
             <p>Zoom in on any area to compare hotel and vacation rental prices across booking sites.</p>
           </div>
-          <div className="stay-map">
-            <iframe
-              id="stay22-widget"
-              title="Map of Orlando hotels with live prices"
-              src={STAY22_MAP}
-              width="100%"
-              height="428"
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
+          <StayMap />
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="guides-title">
+        <div className="container">
+          <div className="section-head">
+            <h2 id="guides-title">Hotel guides for Orlando&apos;s top spots</h2>
+            <p>Where to stay near the attractions, events and neighborhoods travelers ask us about most.</p>
           </div>
-          <p className="stay-map-note">
-            Hotel prices and availability come from our partner Stay22 and may earn us a commission at no extra cost to
-            you. See our <Link href="/disclaimer">disclaimer</Link>.
-          </p>
+          <ul className="stay-guide-grid">
+            {stayGuides.map((g) => (
+              <li key={g.slug}>
+                <Link href={`/place-to-stay/${g.slug}`}>
+                  <strong>{g.h1}</strong>
+                  <span>{g.description.split(":")[0]}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

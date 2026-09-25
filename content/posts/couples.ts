@@ -68,7 +68,7 @@ Ready to plan? See every [romantic thing to do in Orlando](/book-now/couples) or
 
 ## Where to stay for a romantic trip
 
-Winter Park and Downtown Orlando are the most romantic bases, with walkable restaurants, bars and lakes. See our picks for the [best hotels in Orlando Florida](/place-to-stay), from boutique inns to resorts with quiet pools.
+Winter Park and Downtown Orlando are the most romantic bases, with walkable restaurants, bars and lakes. See our picks for the [best hotels in Orlando Florida](/place-to-stay), our guide to [hotels near downtown Winter Park](/place-to-stay/hotels-near-downtown-winter-park), and the [best luxury resort hotels in Orlando](/place-to-stay/luxury-resort-hotels-in-orlando).
 
 ## Frequently asked questions
 

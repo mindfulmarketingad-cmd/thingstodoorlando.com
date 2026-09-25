@@ -6,6 +6,7 @@ import { featuredSearches } from "@/lib/featured-searches";
 import { listicles } from "@/lib/listicles";
 import { MONTHS } from "@/data/events";
 import { getIndexableCollections } from "@/lib/collections";
+import { stayGuides } from "@/data/stay-guides";
 import { getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -65,6 +66,19 @@ export default async function SitemapPage() {
               {categories.map((c) => (
                 <li key={c.key}>
                   <Link href={`/book-now/${c.slug}`}>{c.label} Tours and Events in Orlando Florida</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <h2>Places to stay</h2>
+            <ul>
+              <li>
+                <Link href="/place-to-stay">Best Hotels In Orlando Florida</Link>
+              </li>
+              {stayGuides.map((g) => (
+                <li key={g.slug}>
+                  <Link href={`/place-to-stay/${g.slug}`}>{g.h1}</Link>
                 </li>
               ))}
             </ul>

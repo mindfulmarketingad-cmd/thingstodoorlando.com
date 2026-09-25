@@ -4,6 +4,18 @@ import Faq from "./Faq";
 import HotelSection from "./HotelSection";
 import { areaForCategory } from "@/lib/hotels";
 import { getIndexableCollections } from "@/lib/collections";
+import { stayGuideBySlug } from "@/data/stay-guides";
+
+/** Hotel guides worth linking from each category page. */
+const CATEGORY_STAYS: Partial<Record<string, string[]>> = {
+  space: ["hotels-near-kennedy-space-center", "best-hotels-for-rocket-launch-viewing", "hotels-near-cocoa-beach"],
+  "theme-parks": ["hotels-near-disney-world", "hotels-near-seaworld-orlando", "hotels-near-legoland-florida"],
+  family: ["family-hotels-in-orlando", "hotels-near-legoland-florida"],
+  couples: ["hotels-near-downtown-winter-park", "luxury-resort-hotels-in-orlando"],
+  "day-trips": ["hotels-near-cocoa-beach", "hotels-near-port-canaveral"],
+  relaxation: ["luxury-resort-hotels-in-orlando"],
+  water: ["hotels-near-cocoa-beach"],
+};
 import JsonLd from "./JsonLd";
 import PageHero from "./PageHero";
 import { linkHotels } from "./LinkHotels";
@@ -37,6 +49,7 @@ export default async function CategoryPage({ category }: { category: Category })
     ...indexable.filter((c) => c.category === category.key),
     ...indexable.filter((c) => c.kind === "budget"),
   ];
+  const stays = (CATEGORY_STAYS[category.key] ?? []).map((s) => stayGuideBySlug.get(s)!).filter(Boolean);
 
   return (
     <>
@@ -73,6 +86,11 @@ export default async function CategoryPage({ category }: { category: Category })
                 {browse.map((c) => (
                   <li key={c.slug}>
                     <Link href={`/book-now/${c.slug}`}>{c.h1}</Link>
+                  </li>
+                ))}
+                {stays.map((g) => (
+                  <li key={g.slug}>
+                    <Link href={`/place-to-stay/${g.slug}`}>{g.h1}</Link>
                   </li>
                 ))}
               </ul>

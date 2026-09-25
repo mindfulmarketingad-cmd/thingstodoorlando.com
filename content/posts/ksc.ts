@@ -60,6 +60,8 @@ The Space Coast now has frequent launches, and seeing one is a highlight of any 
 
 > **Important:** Launch dates move often because of weather and technical checks. Book tours with free cancellation and treat any launch as a bonus.
 
+Want to be close when a launch actually goes? See the [best hotels for rocket launch viewing](/place-to-stay/best-hotels-for-rocket-launch-viewing) and our guide to [hotels near Kennedy Space Center](/place-to-stay/hotels-near-kennedy-space-center).
+
 ## Tips for the best day
 
 1. **Arrive at opening.** Morning crowds are lighter and the Florida heat is milder.
@@ -75,6 +77,8 @@ Yes, especially for kids ages 6 and up who can appreciate the exhibits and simul
 ## Combine it with the beach
 
 Cocoa Beach is about 20 minutes south of the Visitor Complex. If you are driving, a late afternoon swim or dinner by the ocean makes a great end to the day. Prefer the Gulf side? A [Clearwater Beach day trip](/book-now/clearwater-beach-day-trip-from-orlando) is another easy option on a separate day.
+
+Planning a night on the coast? Compare [hotels near Cocoa Beach](/place-to-stay/hotels-near-cocoa-beach), or [hotels near Port Canaveral](/place-to-stay/hotels-near-port-canaveral) if you are sailing.
 
 ## Ready to book?
 

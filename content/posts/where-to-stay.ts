@@ -33,6 +33,8 @@ Staying inside Walt Disney World puts you closest to Magic Kingdom, EPCOT, Holly
 - **Pros:** Short commutes, early park access at Disney resorts, Disney Springs nearby.
 - **Cons:** On-property rooms are pricey; off-property hotels usually mean driving and paying for theme park parking.
 
+For a deeper look by park, see our guide to [hotels near Disney World](/place-to-stay/hotels-near-disney-world).
+
 [[hotels:Disney World]]
 
 ## 2. Universal Orlando Resort area
@@ -54,6 +56,8 @@ International Drive, or I-Drive, is Orlando's tourist corridor, with hundreds of
 - **Cons:** Busy traffic, and a car or rideshare is still useful for the theme parks.
 
 Explore what is nearby in our guide to [things to do on International Drive](/search/international-drive).
+
+Attending a show? See [hotels near the Orange County Convention Center](/place-to-stay/hotels-near-orange-county-convention-center) and [hotels near SeaWorld Orlando](/place-to-stay/hotels-near-seaworld-orlando).
 
 [[hotels:International Drive]]
 
@@ -89,6 +93,8 @@ Winter Park, just north of downtown, is the most charming place to stay in the O
 - **Pros:** Walkable, beautiful, great restaurants and a relaxed pace.
 - **Cons:** Fewer places to stay and a longer drive to the theme parks.
 
+See our full guide to [hotels near downtown Winter Park](/place-to-stay/hotels-near-downtown-winter-park).
+
 [[hotels:Winter Park]]
 
 ## 7. Near Orlando International Airport and Lake Nona
@@ -98,6 +104,8 @@ If you have an early flight, a late arrival or a cruise out of Port Canaveral, s
 - **Best for:** Short stays, early flights and cruise travelers.
 - **Pros:** Convenient for flights and the drive to Port Canaveral.
 - **Cons:** Far from most attractions and nightlife.
+
+Flying out early or sailing from Port Canaveral? See [hotels near Lake Nona](/place-to-stay/hotels-near-lake-nona) and [hotels near Port Canaveral before a cruise](/place-to-stay/hotels-near-port-canaveral).
 
 ## How to choose the right area
 

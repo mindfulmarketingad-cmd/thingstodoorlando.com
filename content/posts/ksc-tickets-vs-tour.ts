@@ -72,6 +72,8 @@ When comparing, add up the full cost of driving yourself: admission for everyone
 
 For a full walkthrough of the Visitor Complex, read our [Kennedy Space Center day trip guide](/blog/kennedy-space-center-day-trip-guide), or compare every [Kennedy Space Center tour](/book-now/kennedy-space-center).
 
+Staying on the Space Coast instead of Orlando makes the drive-yourself option much easier. See [hotels near Kennedy Space Center](/place-to-stay/hotels-near-kennedy-space-center).
+
 ## Frequently asked questions
 
 ### Do Kennedy Space Center tours from Orlando include admission?

@@ -7,6 +7,7 @@ import { authors } from "@/data/authors";
 import { MONTHS } from "@/data/events";
 import { getLiveListings } from "@/lib/listings";
 import { getIndexableCollections } from "@/lib/collections";
+import { stayGuides } from "@/data/stay-guides";
 import { absoluteUrl } from "@/lib/site";
 
 export const revalidate = 21600;
@@ -92,5 +93,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...pages, ...cats, ...collectionPages, ...searches, ...eventPages, ...lists, ...blog, ...authorPages, ...live];
+  const stayPages = stayGuides.map((g) => ({
+    url: absoluteUrl(`/place-to-stay/${g.slug}`),
+    lastModified: legalUpdated,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...pages, ...cats, ...collectionPages, ...stayPages, ...searches, ...eventPages, ...lists, ...blog, ...authorPages, ...live];
 }
