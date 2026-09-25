@@ -56,7 +56,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   // The Viator snapshot is read from disk at runtime; ship it with every server function.
-  outputFileTracingIncludes: { "/**": ["./data/viator-products.json", "./data/stay22-hotels.json"] },
+  outputFileTracingIncludes: { "/**": ["./data/viator-products.json", "./data/viator-availability.json", "./data/stay22-hotels.json"] },
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],

@@ -176,7 +176,7 @@ export default function PlaceToStayPage() {
       <PageHero
         title="Best Hotels In Orlando Florida"
         intro="These are the best hotels in Orlando, Florida, sorted by area so you can stay close to the parks, attractions and neighborhoods you came for. Compare live prices from top booking sites on the map, then plan your days with our guides."
-        crumbs={[{ name: "Place To Stay", href: "/place-to-stay" }]}
+        crumbs={[{ name: "Hotels", href: "/place-to-stay" }]}
       />
 
       <section className="section" style={{ paddingTop: 40 }} aria-labelledby="map-title">

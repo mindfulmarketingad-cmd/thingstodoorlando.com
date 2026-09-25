@@ -48,10 +48,15 @@ export default function BookNowExplorer({
   initial,
   total,
   lockedCategory,
+  onlySlugs,
+  hideDatePicker = false,
 }: {
   initial: Listing[];
   total: number;
   lockedCategory?: CategoryKey;
+  /** Restrict the full catalog to these listings (e.g. bookable today). */
+  onlySlugs?: string[];
+  hideDatePicker?: boolean;
 }) {
   const [listings, setListings] = useState<Listing[]>(initial);
   const [loaded, setLoaded] = useState(initial.length >= total);
@@ -92,14 +97,19 @@ export default function BookNowExplorer({
       .then((r) => (r.ok ? (r.json() as Promise<Listing[]>) : Promise.reject(r.status)))
       .then((data) => {
         if (cancelled) return;
-        setListings(lockedCategory ? data.filter((l) => l.categories.includes(lockedCategory)) : data);
+        const allowed = onlySlugs ? new Set(onlySlugs) : null;
+        setListings(
+          data.filter(
+            (l) => (!lockedCategory || l.categories.includes(lockedCategory)) && (!allowed || allowed.has(l.slug)),
+          ),
+        );
         setLoaded(true);
       })
       .catch(() => {});
     return () => {
       cancelled = true;
     };
-  }, [loaded, lockedCategory]);
+  }, [loaded, lockedCategory, onlySlugs]);
 
   // Restore filters from the URL (shareable links) once on mount.
   useEffect(() => {
@@ -265,7 +275,7 @@ export default function BookNowExplorer({
           <p className="result-count" aria-live="polite">
             {count.toLocaleString("en-US")} {count === 1 ? "experience" : "experiences"} found
           </p>
-          <DatePicker variant="inline" />
+          {!hideDatePicker && <DatePicker variant="inline" />}
           <div className="field">
             <label htmlFor="sort">Sort by</label>
             <select id="sort" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>

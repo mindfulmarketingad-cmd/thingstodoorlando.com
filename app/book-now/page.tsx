@@ -37,6 +37,9 @@ export default async function BookNowPage() {
           <nav aria-label="Browse by category" style={{ marginBottom: 32 }}>
             <h2 className="sr-only">Browse by category</h2>
             <ul className="pill-links">
+              <li>
+                <Link href="/book-now/today">Available today</Link>
+              </li>
               {categories
                 .filter((c) => (counts.get(c.key) ?? 0) > 0)
                 .map((c) => (

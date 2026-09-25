@@ -23,7 +23,8 @@ export const mainNav = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
   { href: "/events", label: "Events" },
-  { href: "/place-to-stay", label: "Place To Stay" },
+  { href: "/place-to-stay", label: "Hotels" },
+  { href: "/book-now/today", label: "Events Today" },
   { href: "/about", label: "About" },
   { href: "/search", label: "Search" },
   // Primary CTA sits at the far right of the header.

@@ -8,9 +8,9 @@ on:
     paths:
       - scripts/fetch-viator.mjs
       - .github/workflows/sync-viator.yml
-  # Uncomment to refresh prices and ratings weekly (Mondays 09:00 UTC).
-  # schedule:
-  #   - cron: "0 9 * * 1"
+  # Daily at 09:00 UTC (5 a.m. in Orlando) so /book-now/today and prices stay current.
+  schedule:
+    - cron: "0 9 * * *"
 
 permissions:
   contents: write
@@ -34,12 +34,14 @@ jobs:
         run: node scripts/fetch-viator.mjs
       - name: Commit snapshot
         run: |
-          if git diff --quiet -- data/viator-products.json; then
+          if [ -z "$(git status --porcelain -- data/viator-products.json data/viator-availability.json)" ]; then
             echo "No changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
           git add data/viator-products.json
+          [ -f data/viator-availability.json ] && git add data/viator-availability.json
           git commit -m "Update Viator product snapshot"
+          git pull --rebase
           git push

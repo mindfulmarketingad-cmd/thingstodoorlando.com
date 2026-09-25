@@ -212,6 +212,31 @@ export async function searchDestinationProducts(start = 1, count = 50): Promise<
   return data?.products ?? null;
 }
 
+/** Product codes Viator reports as bookable on one date (YYYY-MM-DD), cached for an hour. */
+export async function productCodesForDate(date: string): Promise<string[] | null> {
+  if (!viatorEnabled || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return null;
+  const codes: string[] = [];
+  let total = Infinity;
+  for (let start = 1; start <= total && start <= 2000; start += 50) {
+    const data = await viatorFetch<{ products?: RawProduct[]; totalCount?: number }>("/products/search", {
+      method: "POST",
+      revalidate: 3600,
+      body: {
+        filtering: { destination: DESTINATION_ID, startDate: date, endDate: date },
+        sorting: { sort: "TRAVELER_RATING", order: "DESCENDING" },
+        pagination: { start, count: 50 },
+        currency: "USD",
+      },
+    });
+    if (!data) return codes.length ? codes : null;
+    total = data.totalCount ?? 0;
+    const batch = data.products ?? [];
+    for (const p of batch) if (p.productCode) codes.push(p.productCode);
+    if (!batch.length) break;
+  }
+  return codes;
+}
+
 /** Free-text product search scoped to the destination. */
 export async function freetextProducts(term: string, count = 24): Promise<RawProduct[] | null> {
   const data = await viatorFetch<{ products?: { results?: RawProduct[] } }>("/search/freetext", {

@@ -62,7 +62,7 @@ export default async function StayGuidePage({ params }: Props) {
         title={g.h1}
         intro={g.description}
         crumbs={[
-          { name: "Place To Stay", href: "/place-to-stay" },
+          { name: "Hotels", href: "/place-to-stay" },
           { name: g.label, href: path },
         ]}
       />

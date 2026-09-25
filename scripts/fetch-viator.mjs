@@ -121,3 +121,48 @@ writeFileSync(
   JSON.stringify({ fetchedAt: new Date().toISOString(), destinationId: DEST, totalCount: products.length, products }),
 );
 console.log(`Saved ${products.length} products to ${OUT}`);
+
+// 3. Which products are bookable on each of the next 30 days (Orlando time), for /book-now/today.
+//    Uses the same search with a date filter; kept separate so a failure never loses the product snapshot.
+const AVAIL_OUT = "data/viator-availability.json";
+const DAYS = 30;
+function orlandoDate(offset) {
+  const d = new Date(Date.now() + offset * 86_400_000);
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(d);
+}
+try {
+  const dates = {};
+  for (let i = 0; i < DAYS; i++) {
+    const day = orlandoDate(i);
+    const codes = [];
+    let dayTotal = Infinity;
+    for (let start = 1; start <= dayTotal; start += PAGE) {
+      const data = await api("/products/search", {
+        method: "POST",
+        body: {
+          filtering: { destination: DEST, startDate: day, endDate: day },
+          sorting: { sort: "TRAVELER_RATING", order: "DESCENDING" },
+          pagination: { start, count: PAGE },
+          currency: "USD",
+        },
+      });
+      dayTotal = data.totalCount ?? 0;
+      const batch = data.products || [];
+      for (const p of batch) if (p.productCode) codes.push(p.productCode);
+      if (!batch.length) break;
+      await sleep(200);
+    }
+    dates[day] = [...new Set(codes)];
+    console.log(`${day}: ${dates[day].length} bookable`);
+  }
+  // If the date filter were ignored, every day would list the whole catalog. Don't save a false "today".
+  const counts = Object.values(dates).map((c) => c.length);
+  if (counts.every((n) => n >= products.length)) {
+    console.warn("Date filter returned the full catalog every day; not saving availability.");
+  } else {
+    writeFileSync(AVAIL_OUT, JSON.stringify({ fetchedAt: new Date().toISOString(), dates }));
+    console.log(`Saved availability for ${DAYS} days to ${AVAIL_OUT}`);
+  }
+} catch (err) {
+  console.warn(`Availability step skipped: ${err.message}`);
+}

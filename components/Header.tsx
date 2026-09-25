@@ -11,7 +11,12 @@ export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const isActive = (href: string) =>
+    href === "/"
+      ? pathname === "/"
+      : href === "/book-now"
+        ? pathname.startsWith(href) && pathname !== "/book-now/today"
+        : pathname.startsWith(href);
 
   return (
     <header className="site-header">

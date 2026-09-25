@@ -35,6 +35,9 @@ export default function EventsPage() {
           <nav aria-label="Seasonal guides" style={{ marginBottom: 28 }}>
             <ul className="pill-links">
               <li>
+                <Link href="/book-now/today">Events today</Link>
+              </li>
+              <li>
                 <Link href="/events/this-weekend">This weekend in Orlando</Link>
               </li>
               <li>

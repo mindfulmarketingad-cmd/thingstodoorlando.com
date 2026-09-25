@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: absoluteUrl("/book-now"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: absoluteUrl("/book-now/today"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/place-to-stay"), lastModified: legalUpdated, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/blog"), lastModified: new Date(latestPost), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/search"), lastModified: legalUpdated, changeFrequency: "monthly", priority: 0.5 },
