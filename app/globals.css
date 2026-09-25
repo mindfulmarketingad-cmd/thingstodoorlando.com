@@ -3244,3 +3244,65 @@ p {
 .date-bar + .price-guarantee {
   margin: -4px 0 20px;
 }
+
+/* ---------- Home of the Mouse + Welcome to Orlando ---------- */
+.hero-kicker {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.welcome-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .welcome-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+.welcome h2 {
+  margin: 4px 0 16px;
+}
+.welcome-grid p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.welcome-grid p a,
+.welcome-facts a {
+  color: var(--blue);
+  font-weight: 600;
+}
+.welcome-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.welcome-facts li {
+  display: grid;
+  gap: 4px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--orange);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.welcome-facts strong {
+  color: var(--navy);
+}
+.welcome-facts span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}

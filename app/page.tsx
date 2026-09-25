@@ -131,6 +131,7 @@ export default async function HomePage() {
       <section className="hero" aria-labelledby="hero-title">
         <HeroVideo />
         <div className="hero-inner">
+          <p className="hero-kicker">Home of the Mouse</p>
           <h1 id="hero-title">Things To Do In Orlando</h1>
           <p className="hero-sub">
             Tours, tickets, shows and hidden gems in and around Orlando. Search by attraction or destination and book
@@ -219,6 +220,61 @@ export default async function HomePage() {
           </div>
         </div>
       </div>
+
+      <section className="section welcome" aria-labelledby="welcome-title">
+        <div className="container welcome-grid">
+          <div>
+            <p className="eyebrow">Welcome to Orlando</p>
+            <h2 id="welcome-title">Welcome to Orlando, the Home of the Mouse</h2>
+            <p>
+              Orlando was a quiet Central Florida town of orange groves and lakes until Walt Disney World opened in 1971.
+              Today it welcomes more than 70 million visitors a year, more than almost any destination in the country,
+              and locals still call it by its official nickname, The City Beautiful.
+            </p>
+            <p>
+              The theme parks are the reason most people come, but they are not the whole story. Orlando is ringed by
+              lakes and spring-fed rivers where you can paddle with manatees, it sits an hour from both the Atlantic
+              beaches and the Space Coast launch pads, and its neighborhoods, from Winter Park&apos;s brick streets to
+              the food halls of Mills 50, feel nothing like the tourist corridor.
+            </p>
+            <p>
+              We live here, and this site is how we would plan your trip: the best tours and tickets with real reviews,
+              honest guides, <Link href="/events">what is happening this month</Link> and{" "}
+              <Link href="/place-to-stay">where to stay</Link> for the kind of vacation you want.
+            </p>
+          </div>
+          <ul className="welcome-facts" aria-label="Orlando at a glance">
+            <li>
+              <strong>Getting here</strong>
+              <span>
+                Orlando International Airport (MCO) is about 30 minutes from Disney and 20 from Universal. Brightline
+                trains connect MCO to South Florida.
+              </span>
+            </li>
+            <li>
+              <strong>Getting around</strong>
+              <span>
+                A car is easiest. I-4 links the parks, the I-RIDE Trolley runs International Drive, and SunRail
+                connects downtown with Winter Park.
+              </span>
+            </li>
+            <li>
+              <strong>Weather</strong>
+              <span>
+                Warm all year. Summer afternoons bring short thunderstorms, so plan outdoor fun for the morning. See{" "}
+                <Link href="/blog/best-time-to-visit-orlando">the best time to visit</Link>.
+              </span>
+            </li>
+            <li>
+              <strong>Beyond the parks</strong>
+              <span>
+                Airboats, springs, Kennedy Space Center and Cocoa Beach are all within about an hour.{" "}
+                <Link href="/blog/things-to-do-in-orlando-besides-theme-parks">Things to do besides theme parks</Link>.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
       <section className="section" aria-labelledby="resource-title">
         <div className="container">
