@@ -16,6 +16,8 @@ export interface Post {
   featuredListings: string[];
   /** Viator product code whose photo is used as the article hero image. */
   heroProduct?: string;
+  /** Park map for map-and-layout posts; listed on the /maps hub. */
+  map?: { park: string; url: string; format: "PDF" | "Image" };
   /** Author slug from data/authors.ts; defaults to DEFAULT_AUTHOR. */
   author?: string;
 }

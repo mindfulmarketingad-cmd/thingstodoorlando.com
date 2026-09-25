@@ -23,6 +23,7 @@ export const mainNav = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
   { href: "/events", label: "Events" },
+  { href: "/maps", label: "Theme Park Maps" },
   { href: "/place-to-stay", label: "Hotels" },
   { href: "/book-now/today", label: "Events Today" },
   { href: "/about", label: "About" },

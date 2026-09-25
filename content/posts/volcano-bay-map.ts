@@ -12,6 +12,7 @@ export const post: Post = {
   category: "Theme Parks",
   illustration: "water",
   featuredListings: [],
+  map: { park: "Universal's Volcano Bay", url: "/maps/volcano-bay-map.pdf", format: "PDF" },
   body: `
 > **Download the map:** [Volcano Bay park map (PDF)](/maps/volcano-bay-map.pdf). The official park map from Universal Orlando Resort, with every slide, pool, restaurant and height limit. Save it to your phone or print it before you go.
 
@@ -157,5 +158,7 @@ Yes. Some slides require guests to transfer from a wheelchair, and Guest Service
 ## Navigate Volcano Bay like a local
 
 Download the map, pick a base near what you came for, walk past the crowd at opening, rent a locker early and keep the app handy for wait times. For more planning, see our [best water parks in Orlando](/blog/best-water-parks-in-orlando-florida), [Universal CityWalk hours and best days](/blog/hours-best-days-universal-citywalk) and the [Universal Studios Orlando attractions list](/blog/universal-studios-orlando-attractions-list).
+
+See every park map in one place on our [Theme Park Maps](/maps) page.
 `,
 };

@@ -288,6 +288,19 @@ p {
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
+  white-space: nowrap;
+}
+@media (min-width: 1001px) and (max-width: 1240px) {
+  .main-nav ul {
+    gap: 0;
+  }
+  .main-nav a {
+    padding: 8px 8px;
+    font-size: 0.86rem;
+  }
+  .main-nav a.nav-cta {
+    padding: 8px 12px;
+  }
 }
 .main-nav a:hover,
 .main-nav a[aria-current="page"] {
@@ -317,7 +330,7 @@ p {
   justify-content: center;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1000px) {
   .menu-toggle {
     display: inline-flex;
   }
@@ -3669,4 +3682,12 @@ p {
   margin: 14px 0 0;
   color: var(--muted);
   font-size: 0.8rem;
+}
+
+/* /maps hub */
+.map-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
 }

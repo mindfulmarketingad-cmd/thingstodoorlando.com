@@ -642,6 +642,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "International Drive",
     links: [
+      { label: "Aquatica Orlando map and layout", href: "/blog/aquatica-orlando-map-layout" },
       { label: "Hotels near SeaWorld Orlando", href: "/place-to-stay/hotels-near-seaworld-orlando" },
       { label: "Best water parks in Orlando", href: "/blog/best-water-parks-in-orlando-florida" },
     ],

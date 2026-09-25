@@ -38,6 +38,7 @@ export default async function SitemapPage() {
               <li><Link href="/book-now/today">Events Today in Orlando</Link></li>
               <li><Link href="/start-planning">Start Planning Your Orlando Trip</Link></li>
               <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/maps">Orlando Theme Park Maps</Link></li>
               <li><Link href="/place-to-stay">Best Hotels In Orlando Florida</Link></li>
               <li><Link href="/search">Search</Link></li>
               <li><Link href="/about">About</Link></li>

@@ -12,6 +12,7 @@ export const post: Post = {
   category: "Theme Parks",
   illustration: "theme-parks",
   featuredListings: [],
+  map: { park: "Epic Universe", url: "/maps/epic-universe-map.pdf", format: "PDF" },
   body: `
 **Epic Universe uses a hub-and-spoke layout.** Celestial Park is the central hub, and four themed worlds branch off it through their own portals: Super Nintendo World, the Wizarding World of Harry Potter: Ministry of Magic, How to Train Your Dragon: Isle of Berk and Dark Universe. Each world is sealed off from the others by sight and sound, and the only way between them is back through Celestial Park. The Chronos tower in the middle of the hub is the park's icon, and the Universal Orlando app has an interactive map with your location and live wait times.
 
@@ -140,5 +141,7 @@ The worlds and indoor queues offer some shade, but Celestial Park and the portal
 ## Navigate Epic Universe like a local
 
 Plan your route before you arrive, finish each world before moving on, start where the crowds are not, use Celestial Park as your base and save time for the park after dark. For the rest of the resort, see our [Universal Studios Orlando attractions list](/blog/universal-studios-orlando-attractions-list), the [Islands of Adventure calendar](/blog/islands-of-adventure-calendar-best-days) and the [Universal Studios Florida calendar](/blog/universal-studios-florida-calendar-best-days).
+
+See every park map in one place on our [Theme Park Maps](/maps) page.
 `,
 };
