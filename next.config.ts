@@ -26,11 +26,11 @@ const hotelImageHosts: string[] = (() => {
 const csp = [
   "default-src 'self'",
   // Next.js injects inline bootstrap scripts; GA loads from googletagmanager.
-  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://elfsightcdn.com https://*.elfsightcdn.com https://*.elfsight.com${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://elfsightcdn.com https://*.elfsightcdn.com https://*.elfsight.com https://scripts.stay22.com https://*.stay22.com${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline' https://*.elfsight.com https://*.elfsightcdn.com https://fonts.googleapis.com",
-  `img-src 'self' data: blob: ${viatorImageHosts.map((h) => `https://${h}`).join(" ")} https://www.googletagmanager.com https://*.google-analytics.com https://i.ytimg.com https://*.elfsightcdn.com https://*.elfsight.com https://*.cdninstagram.com https://*.fbcdn.net${hotelImageHosts.map((h) => ` https://${h}`).join("")}`,
+  `img-src 'self' data: blob: ${viatorImageHosts.map((h) => `https://${h}`).join(" ")} https://www.googletagmanager.com https://*.google-analytics.com https://i.ytimg.com https://*.elfsightcdn.com https://*.elfsight.com https://*.cdninstagram.com https://*.fbcdn.net https://*.stay22.com${hotelImageHosts.map((h) => ` https://${h}`).join("")}`,
   "font-src 'self' https://*.elfsightcdn.com https://fonts.gstatic.com",
-  "connect-src 'self' https://*.elfsight.com https://*.elfsightcdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
+  "connect-src 'self' https://*.elfsight.com https://*.elfsightcdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.stay22.com",
   "frame-src https://www.youtube-nocookie.com https://www.stay22.com https://*.elfsight.com https://www.instagram.com",
   "frame-ancestors 'none'",
   "object-src 'none'",
