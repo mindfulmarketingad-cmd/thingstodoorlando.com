@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import BookNowExplorer from "@/components/BookNowExplorer";
 import EventCard from "@/components/EventCard";
 import Faq from "@/components/Faq";
@@ -12,8 +13,6 @@ import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import { recommendedOrder, slimListing } from "@/lib/slim";
 
-// Re-render hourly so the page rolls over to the new day shortly after midnight in Orlando.
-export const revalidate = 3600;
 
 export const metadata = pageMetadata({
   title: "Events Today in Orlando: Tours & Things To Do Today",
@@ -26,6 +25,9 @@ export const metadata = pageMetadata({
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export default async function TodayPage() {
+  // Render per request so "today" is always the current day in Orlando. Viator
+  // responses are still cached for an hour per date in the data cache.
+  await connection();
   const { year, month, day } = orlandoToday();
   const iso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
   const date = new Date(Date.UTC(year, month - 1, day));
