@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BookButton from "./BookButton";
 import DatePicker from "./DatePicker";
+import PriceGuarantee from "./PriceGuarantee";
 import ListingMedia from "./ListingMedia";
 import Stars from "./Stars";
 import { formatPrice } from "./ListingCard";
@@ -31,6 +32,7 @@ export default function RankedList({
           <span>Every &quot;Check availability&quot; button opens the booking page for this date.</span>
         </div>
       )}
+      {showDate && <PriceGuarantee />}
     <ol className="rank-list">
       {items.map((l, i) => (
         <li key={l.slug} id={anchor(i)} className="rank-item">

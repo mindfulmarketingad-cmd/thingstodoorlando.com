@@ -3221,3 +3221,26 @@ p {
   color: var(--muted);
   font-size: 0.86rem;
 }
+
+.price-guarantee {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+.price-guarantee svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--blue);
+}
+.price-guarantee a {
+  color: var(--blue);
+  font-weight: 600;
+}
+.rank-list + .price-guarantee,
+.date-bar + .price-guarantee {
+  margin: -4px 0 20px;
+}

@@ -14,6 +14,7 @@ import JsonLd from "@/components/JsonLd";
 import ListingCard, { formatPrice } from "@/components/ListingCard";
 import ListingMedia from "@/components/ListingMedia";
 import PageHero from "@/components/PageHero";
+import PriceGuarantee from "@/components/PriceGuarantee";
 import Stars from "@/components/Stars";
 import { CheckIcon, ClockIcon, PinIcon, ShieldIcon, TagIcon, XIcon } from "@/components/Icons";
 import { posts } from "@/lib/blog";
@@ -412,6 +413,7 @@ export default async function ListingPage({ params }: Props) {
             </ul>
             <DatePicker />
             <BookButton href={listing.bookingUrl} label={ctaLabel} item={listing.title} />
+            {!isGuide && <PriceGuarantee />}
             <p className="fine-print">
               You will be taken to Viator to complete your booking. We may earn a commission at no extra cost to you.{" "}
               <Link href="/disclaimer">Disclosure</Link>.
