@@ -14,6 +14,8 @@ export interface Post {
   body: string;
   /** Guide or listing slugs to feature at the end of the post. */
   featuredListings: string[];
+  /** Our own photo used as the featured and hero image; wins over heroProduct. */
+  heroImage?: { src: string; alt: string; width: number; height: number };
   /** Viator product code whose photo is used as the article hero image. */
   heroProduct?: string;
   /** Park map for map-and-layout posts; listed on the /maps hub. */

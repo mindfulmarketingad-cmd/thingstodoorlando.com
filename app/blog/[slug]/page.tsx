@@ -92,7 +92,11 @@ export default async function PostPage({ params }: Props) {
     }),
   );
   const heroListing = post.heroProduct ? live.find((l) => l.productCode === post.heroProduct) : undefined;
-  const heroImg = heroListing ? (heroListing.imageLarge ?? heroListing.image) : undefined;
+  const heroImg = post.heroImage
+    ? { url: post.heroImage.src, alt: post.heroImage.alt, width: post.heroImage.width, height: post.heroImage.height }
+    : heroListing
+      ? (heroListing.imageLarge ?? heroListing.image)
+      : undefined;
   // "## Frequently asked questions" followed by "### Question" + answer paragraphs becomes FAQPage schema.
   const faqItems = (() => {
     const blocks = segments.flatMap((s) => (s.kind === "md" ? s.blocks : []));

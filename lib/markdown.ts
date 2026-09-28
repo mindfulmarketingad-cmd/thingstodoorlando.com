@@ -14,7 +14,8 @@ export type Block =
   | { type: "ul"; items: Inline[][] }
   | { type: "ol"; items: Inline[][] }
   | { type: "callout"; inline: Inline[] }
-  | { type: "table"; head: Inline[][]; rows: Inline[][][] };
+  | { type: "table"; head: Inline[][]; rows: Inline[][][] }
+  | { type: "img"; src: string; alt: string; width: number; height: number; caption?: string };
 
 const headingId = (t: string) =>
   t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -95,6 +96,11 @@ export function parseMarkdown(src: string): Block[] {
         list = { type: kind, items: [] };
       }
       list.items.push(parseInline(m[1]));
+    } else if ((m = line.match(/^!\[([^\]]+)\]\((\/[\w/.-]+)\s+(\d+)x(\d+)(?:\s+"([^"]*)")?\)$/))) {
+      // ![alt](/local/path.webp 1400x1050 "Caption"): local images only.
+      flushPara();
+      flushList();
+      blocks.push({ type: "img", alt: m[1], src: m[2], width: Number(m[3]), height: Number(m[4]), caption: m[5] });
     } else if ((m = line.match(/^>\s?(.*)$/))) {
       flushPara();
       flushList();

@@ -3691,3 +3691,21 @@ p {
   gap: 10px;
   margin-top: 14px;
 }
+
+/* Photos inside blog posts */
+.prose-figure {
+  margin: 28px 0;
+}
+.prose-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 720px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.prose-figure figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

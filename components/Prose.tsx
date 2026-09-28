@@ -121,6 +121,13 @@ export default function Prose({
                 </table>
               </div>
             );
+          case "img":
+            return (
+              <figure key={i} className="prose-figure" style={b.height > b.width ? { maxWidth: 460 } : undefined}>
+                <img src={b.src} alt={b.alt} width={b.width} height={b.height} loading="lazy" decoding="async" />
+                {b.caption && <figcaption>{b.caption}</figcaption>}
+              </figure>
+            );
           case "callout":
             return (
               <div key={i} className="callout">
