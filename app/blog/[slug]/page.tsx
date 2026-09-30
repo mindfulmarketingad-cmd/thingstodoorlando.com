@@ -10,6 +10,8 @@ import PageHero from "@/components/PageHero";
 import RankedList from "@/components/RankedList";
 import HotelCta from "@/components/HotelCta";
 import HalloweenFinder from "@/components/HalloweenFinder";
+import PhotoTiles from "@/components/PhotoTiles";
+import MonthEvents from "@/components/MonthEvents";
 import { halloweenEvents } from "@/data/halloween-2026";
 import Prose from "@/components/Prose";
 import { featuredImage, formatDate, getPost, posts, readingMinutes, relatedPosts } from "@/lib/blog";
@@ -75,6 +77,8 @@ export default async function PostPage({ params }: Props) {
   //   [[top-rated]]            ten highest-rated Viator experiences
   //   [[products:CODE,CODE]]   specific Viator products by product code
   //   [[hotels]] / [[hotels:Area]]  Stay22 hotel call to action
+  //   [[tiles:Label|#anchor|CODE|Sub;...]]  photo tiles linking to sections
+  //   [[month-events]]         this month's and next month's family-friendly events
   const live = await getLiveListings();
   const segments = await Promise.all(
     post.body.split(/(\[\[[^\]]+\]\])/).map(async (part) => {
@@ -88,6 +92,16 @@ export default async function PostPage({ params }: Props) {
       }
       if (m[1] === "hotels") return { kind: "hotels" as const, area: m[2] };
       if (m[1] === "halloween-events") return { kind: "halloween" as const };
+      if (m[1] === "month-events") return { kind: "month-events" as const };
+      if (m[1] === "tiles") {
+        // [[tiles:Label|#anchor|PRODUCTCODE|Subtitle; ...]]: photo from the product's listing.
+        const tiles = (m[2] ?? "").split(";").map((t) => {
+          const [label, href, code, sub] = t.split("|").map((x) => x.trim());
+          const l = live.find((x) => x.productCode === code);
+          return { label, href, sub, image: l ? (l.imageLarge ?? l.image) : undefined };
+        });
+        return { kind: "tiles" as const, tiles };
+      }
       return { kind: "md" as const, blocks: [] };
     }),
   );
@@ -170,6 +184,10 @@ export default async function PostPage({ params }: Props) {
                 <HotelCta key={i} area={s.area} />
               ) : s.kind === "halloween" ? (
                 <HalloweenFinder key={i} events={halloweenEvents} />
+              ) : s.kind === "tiles" ? (
+                <PhotoTiles key={i} tiles={s.tiles} />
+              ) : s.kind === "month-events" ? (
+                <MonthEvents key={i} exclude={/horror nights|haunt|scare|terror/i} />
               ) : s.items.length ? (
                 <div key={i} style={{ margin: "24px 0 32px" }}>
                   <RankedList items={s.items} anchor={(n) => `${s.id}-${n + 1}`} headingLevel={3} />
