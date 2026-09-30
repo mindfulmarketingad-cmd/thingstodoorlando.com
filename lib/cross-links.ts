@@ -19,6 +19,11 @@ const STAY_TO_BOOK: Record<string, string[]> = {
   "family-hotels-in-orlando": ["family-friendly", "cheap-family-activities", "theme-parks", "things-to-do-in-orlando-under-50"],
   "best-hotels-for-disney-marathon-weekend": ["things-to-do-near-disney-world", "relaxation-and-spas", "food-and-dining"],
   "best-hotels-for-rocket-launch-viewing": ["kennedy-space-center", "cheap-day-trips-from-orlando", "top-tourist-attractions-in-orlando-florida"],
+  "hotels-near-exploria-stadium": ["things-to-do-near-downtown-orlando", "sports", "drinks-and-nightlife", "food-and-dining"],
+  "hotels-near-universal-orlando-resort": ["things-to-do-near-international-drive", "theme-parks", "cheap-theme-park-tickets", "family-friendly"],
+  "hotels-near-rdv-sportsplex": ["things-to-do-near-winter-park", "sports", "cheap-kayak-and-water-activities"],
+  "hotels-near-westgate-orlando": ["things-to-do-near-international-drive", "theme-parks", "family-friendly", "dinner-shows"],
+  "hotels-near-liki-tiki-village": ["things-to-do-near-disney-world", "things-to-do-near-kissimmee", "theme-parks", "family-friendly"],
   "luxury-resort-hotels-in-orlando": ["private-tours-in-orlando", "cute-date-ideas-orlando-florida", "relaxation-and-spas", "hot-air-balloons"],
 };
 

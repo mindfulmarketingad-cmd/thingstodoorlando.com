@@ -1219,6 +1219,509 @@ export const stayGuides: StayGuide[] = [
       { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
     ],
   },
+  {
+    slug: "hotels-near-exploria-stadium",
+    place: "Exploria Stadium (Inter&Co Stadium)",
+    h1: "Hotels Near Exploria Stadium Orlando Florida",
+    title: "Hotels Near Exploria Stadium (Inter&Co Stadium), Orlando",
+    description:
+      "Where to stay near Exploria Stadium, now Inter&Co Stadium: downtown Orlando hotels within walking distance, SunRail and parking tips for Orlando City and Pride games.",
+    label: "Near Exploria Stadium",
+    intro: [
+      "Exploria Stadium is the soccer-specific stadium at 655 West Church Street, just west of downtown Orlando. It opened on February 24, 2017, holds 25,500 fans and is home to Orlando City SC of Major League Soccer and the Orlando Pride of the National Women's Soccer League. The stadium has since been renamed Inter&Co Stadium under a naming-rights deal with the Brazil-based financial company Inter&Co, but plenty of locals and search results still call it Exploria.",
+      "For a match, the best move is a downtown hotel you can walk from. Several are within about a mile of the gates, SunRail's Church Street Station is an 8-minute walk, and you skip the scramble for event parking. If your trip is mostly about the theme parks, you can still come in for a game from International Drive or Kissimmee, but plan for a 20 to 30 minute drive or rideshare each way.",
+    ],
+    areas: [
+      {
+        name: "Downtown Orlando",
+        drive: "About a 10 to 25 minute walk to the stadium",
+        text: "Downtown's hotels sit east of the stadium around Church Street, Orange Avenue and Lake Eola. After the final whistle you walk back through the bars and restaurants on Church Street and Orange Avenue instead of sitting in garage traffic.",
+        pros: ["Walk to and from the match", "Bars and restaurants before and after the game", "Near SunRail and the Kia Center"],
+        cons: ["Paid parking at most hotels", "Streets are busy on match nights"],
+      },
+      {
+        name: "International Drive and the tourist corridor",
+        drive: "About 20 to 30 minutes by car",
+        text: "If the match is one night of a theme park vacation, stay near the parks and drive or rideshare in. Leave early; downtown traffic builds before kickoff.",
+        pros: ["Close to Universal, SeaWorld and the Convention Center", "More resort pools and family rooms"],
+        cons: ["A drive to every match", "Event parking or rideshare surge pricing"],
+      },
+      {
+        name: "Along the SunRail line",
+        drive: "Train to Church Street Station, then an 8-minute walk",
+        text: "SunRail runs north and south through Orlando with a stop at Church Street, about 700 meters from the stadium. A hotel near a SunRail station lets you skip driving downtown altogether, as long as the train schedule fits your match time.",
+        pros: ["No downtown driving or parking", "Stations in Winter Park and other nearby towns"],
+        cons: ["Check the train schedule against kickoff and the final whistle"],
+      },
+    ],
+    hotels: [
+      { name: "Marriott Orlando Downtown", area: "Downtown Orlando", note: "About 0.85 km from the stadium, one of the closest full-service hotels." },
+      { name: "Aloft Orlando Downtown", area: "Downtown Orlando", note: "About 1.2 km from the stadium, a modern hotel in the downtown core." },
+      { name: "Crowne Plaza Orlando-Downtown", area: "Downtown Orlando", note: "About 1.4 km from the stadium." },
+      { name: "Embassy Suites by Hilton Orlando Downtown", area: "Downtown Orlando", note: "About 1.4 km from the stadium, all suites, good for groups of fans." },
+      { name: "Hilton Garden Inn Orlando Downtown", area: "Downtown Orlando", note: "About 1.5 km from the stadium." },
+      { name: "Courtyard Orlando Downtown", area: "Downtown Orlando", note: "About 1.9 km from the stadium." },
+      { name: "The Delaney Hotel", area: "Downtown Orlando", note: "About 2.2 km from the stadium, a smaller boutique option." },
+    ],
+    driveTimes: [
+      { to: "Church Street SunRail Station (walk)", time: "8 min" },
+      { to: "LYNX Central Station (walk)", time: "17 min" },
+      { to: "International Drive", time: "20–30 min" },
+      { to: "Orlando International Airport (MCO)", time: "20–25 min" },
+      { to: "Walt Disney World", time: "25–35 min" },
+    ],
+    localTips: [
+      {
+        heading: "Use SunRail's Church Street stop",
+        text: "Church Street Station is about 700 meters from the stadium, an 8-minute walk. It is also a short walk from the Kia Center, so the same stop works for Orlando Magic and Solar Bears games.",
+      },
+      {
+        heading: "Parking is limited at the stadium",
+        text: "There is little on-site parking. Fans use paid downtown garages, such as the garages on Church Street and Pine Street, and team-run lots nearby. Staying downtown and walking avoids the whole problem.",
+      },
+      {
+        heading: "It is the same stadium",
+        text: "Exploria Stadium, Orlando City Stadium and Inter&Co Stadium are all the same venue at 655 West Church Street. Your tickets may show the newer name.",
+      },
+      {
+        heading: "Make a night of it downtown",
+        text: "Church Street and Orange Avenue are packed with bars and restaurants within walking distance of the stadium, and Lake Eola Park is a short walk east.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is Exploria Stadium the same as Inter&Co Stadium?",
+        a: "Yes. Exploria Stadium was renamed Inter&Co Stadium under a naming-rights agreement with Inter&Co. It is the same stadium at 655 West Church Street, home of Orlando City SC and the Orlando Pride.",
+      },
+      {
+        q: "What hotels are closest to Exploria Stadium?",
+        a: "The Marriott Orlando Downtown is about 0.85 km away. Aloft Orlando Downtown, Crowne Plaza Orlando-Downtown, Embassy Suites Orlando Downtown and Hilton Garden Inn Orlando Downtown are all within about 1.5 km.",
+      },
+      {
+        q: "Can I walk to Exploria Stadium from downtown Orlando?",
+        a: "Yes. The stadium is just west of downtown, about a 10-minute walk from the downtown core and an 8-minute walk from SunRail's Church Street Station.",
+      },
+      {
+        q: "How many people does Exploria Stadium hold?",
+        a: "Exploria Stadium, now Inter&Co Stadium, holds 25,500 fans.",
+      },
+      {
+        q: "How far is Exploria Stadium from the theme parks?",
+        a: "Plan on about 20 to 30 minutes by car from International Drive and Universal, and a little longer from Walt Disney World, depending on traffic.",
+      },
+    ],
+    tours: /downtown orlando|lake eola|milk district|mills 50|food tour|brewery|bar crawl|pub crawl/i,
+    toursHeading: "Things to do in downtown Orlando",
+    hotelArea: "downtown",
+    related: [
+      { label: "Things to do near downtown Orlando", href: "/book-now/things-to-do-near-downtown-orlando" },
+      { label: "Orlando events calendar", href: "/events" },
+      { label: "Hotels near Downtown Winter Park", href: "/place-to-stay/hotels-near-downtown-winter-park" },
+    ],
+  },
+  {
+    slug: "hotels-near-universal-orlando-resort",
+    place: "Universal Orlando Resort",
+    h1: "Hotels in Orlando Near Universal Orlando Resort",
+    title: "Hotels Near Universal Orlando Resort: On-Site Tiers & Perks",
+    description:
+      "Every Universal Orlando hotel by tier, which ones include Express Unlimited, Epic Universe hotels, Early Park Admission and nearby off-site options on I-Drive.",
+    label: "Near Universal Orlando",
+    intro: [
+      "Universal Orlando Resort has four theme parks: Universal Studios Florida, Islands of Adventure, Volcano Bay and Epic Universe, plus the CityWalk dining and entertainment district. Its on-site hotels are grouped into three tiers: Value, Prime Value and the Signature Collection. The tier decides your perks, and one perk in particular, free Universal Express Unlimited, only comes with three hotels.",
+      "Staying on-site gets every guest Early Park Admission, up to an hour before regular opening (valid park tickets required). Staying off-site on International Drive or Turkey Lake Road can save money and still keeps you a short drive away. This guide breaks down every Universal hotel, who each one suits and when an off-site hotel makes more sense.",
+    ],
+    areas: [
+      {
+        name: "Signature Collection (on-site)",
+        drive: "Walk or boat to CityWalk and the original parks",
+        text: "Loews Portofino Bay, the Hard Rock Hotel, Loews Royal Pacific, Loews Sapphire Falls and the Universal Helios Grand Hotel. Portofino Bay, Hard Rock and Royal Pacific include Universal Express Unlimited for Universal Studios Florida and Islands of Adventure. The Helios Grand sits at Epic Universe with its own entrance into the park.",
+        pros: ["Express Unlimited at three hotels", "Closest to the parks", "Resort pools and upscale dining"],
+        cons: ["The highest rates at the resort", "Express does not include Epic Universe attractions"],
+      },
+      {
+        name: "Prime Value (on-site)",
+        drive: "Short walk or shuttle to the parks",
+        text: "Aventura, Stella Nova and Terra Luna. Aventura is the only one with multi-room suites. Stella Nova and Terra Luna each have 750 modern standard rooms and are the go-to hotels for guests spending most of their time at Epic Universe.",
+        pros: ["Modern rooms at mid-range rates", "Early Park Admission", "Stella Nova and Terra Luna are closest to Epic Universe"],
+        cons: ["No Express Unlimited", "Fewer suites"],
+      },
+      {
+        name: "Value (on-site)",
+        drive: "Short walk or shuttle to the parks",
+        text: "Cabana Bay Beach Resort and the two Endless Summer hotels, Surfside and Dockside. They offer standard rooms and family suites at the lowest on-site rates.",
+        pros: ["Lowest on-site prices", "Family suites", "Early Park Admission"],
+        cons: ["No Express Unlimited", "Busier pools in peak season"],
+      },
+      {
+        name: "Off-site: International Drive and Turkey Lake Road",
+        drive: "About 5 to 15 minutes by car",
+        text: "International Drive and Turkey Lake Road are lined with chain hotels, timeshare resorts and restaurants a short drive from Universal. It is usually the cheapest way to stay close.",
+        pros: ["Lower rates and more choice", "Restaurants and attractions within walking distance on I-Drive"],
+        cons: ["No Early Park Admission", "Daily parking at Universal"],
+      },
+    ],
+    hotels: [
+      { name: "Loews Portofino Bay Hotel", area: "Signature Collection", note: "Italian seaside theme, includes Universal Express Unlimited for the original two parks." },
+      { name: "Hard Rock Hotel at Universal Orlando", area: "Signature Collection", note: "Includes Universal Express Unlimited for the original two parks." },
+      { name: "Loews Royal Pacific Resort", area: "Signature Collection", note: "South Pacific theme, includes Universal Express Unlimited for the original two parks." },
+      { name: "Loews Sapphire Falls Resort", area: "Signature Collection", note: "Caribbean theme, Signature Collection without Express Unlimited." },
+      { name: "Universal Helios Grand Hotel", area: "Signature Collection", note: "At Epic Universe, with its own entrance into the park." },
+      { name: "Universal Stella Nova Resort", area: "Prime Value", note: "750 modern rooms, a gateway hotel for Epic Universe." },
+      { name: "Universal Terra Luna Resort", area: "Prime Value", note: "750 modern rooms, a gateway hotel for Epic Universe." },
+      { name: "Universal's Aventura Hotel", area: "Prime Value", note: "The only Prime Value hotel with multi-room suites." },
+      { name: "Universal's Cabana Bay Beach Resort", area: "Value", note: "Retro 1950s and 60s theme with family suites." },
+      { name: "Universal's Endless Summer Resort – Surfside Inn and Suites", area: "Value", note: "Budget rooms and family suites." },
+      { name: "Universal's Endless Summer Resort – Dockside Inn and Suites", area: "Value", note: "Budget rooms and family suites." },
+    ],
+    driveTimes: [
+      { to: "Epic Universe (from the original resort area)", time: "10 min" },
+      { to: "International Drive", time: "5–10 min" },
+      { to: "SeaWorld Orlando", time: "15 min" },
+      { to: "Orlando International Airport (MCO)", time: "20–25 min" },
+      { to: "Walt Disney World", time: "20–25 min" },
+    ],
+    localTips: [
+      {
+        heading: "Express Unlimited is the big perk, with a catch",
+        text: "Only Portofino Bay, the Hard Rock Hotel and Royal Pacific include Universal Express Unlimited, and it covers Universal Studios Florida and Islands of Adventure only. Epic Universe attractions are not included.",
+      },
+      {
+        heading: "Early Park Admission comes with every on-site hotel",
+        text: "All on-site guests can enter up to an hour before regular opening at no extra cost, with valid theme park tickets. Arrive for it on your busiest park day.",
+      },
+      {
+        heading: "Pick your hotel by your park",
+        text: "If your trip is mostly Epic Universe, Stella Nova, Terra Luna or the Helios Grand keep you close. If it is Universal Studios and Islands of Adventure, the Signature Collection hotels near CityWalk are the best location.",
+      },
+      {
+        heading: "Count parking in the price",
+        text: "Off-site hotels usually mean paying to park at Universal each day, and on-site hotels charge for overnight parking too. Compare the total before you choose.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Which Universal hotels include Express Pass?",
+        a: "Loews Portofino Bay, the Hard Rock Hotel and Loews Royal Pacific include Universal Express Unlimited for Universal Studios Florida and Islands of Adventure. It does not cover Epic Universe attractions.",
+      },
+      {
+        q: "What are the Universal Orlando hotel tiers?",
+        a: "Value (Cabana Bay Beach Resort and Endless Summer Surfside and Dockside), Prime Value (Aventura, Stella Nova and Terra Luna) and the Signature Collection (Portofino Bay, Hard Rock, Royal Pacific, Sapphire Falls and the Universal Helios Grand Hotel).",
+      },
+      {
+        q: "Which hotel is closest to Epic Universe?",
+        a: "The Universal Helios Grand Hotel has its own entrance into Epic Universe. Stella Nova and Terra Luna are the Prime Value hotels next to the park.",
+      },
+      {
+        q: "Do Universal hotel guests get early entry?",
+        a: "Yes. Early Park Admission, up to one hour before regular opening, is included for all on-site hotel guests. Valid theme park admission is required.",
+      },
+      {
+        q: "Is it cheaper to stay off-site near Universal?",
+        a: "Usually. Hotels on International Drive and Turkey Lake Road are a short drive away and often cost less, but you give up Early Park Admission and pay for daily parking at Universal.",
+      },
+    ],
+    tours: /universal|citywalk|volcano bay|epic universe|islands of adventure/i,
+    toursHeading: "Universal Orlando tickets and experiences",
+    hotelArea: "universal",
+    related: [
+      { label: "Universal Studios Orlando attractions list", href: "/blog/universal-studios-orlando-attractions-list" },
+      { label: "Epic Universe map and layout", href: "/blog/epic-universe-map-layout" },
+      { label: "Universal CityWalk hours and best days", href: "/blog/hours-best-days-universal-citywalk" },
+    ],
+  },
+  {
+    slug: "hotels-near-rdv-sportsplex",
+    place: "RDV Sportsplex",
+    h1: "Hotels Near RDV Sportsplex Orlando",
+    title: "Hotels Near RDV Sportsplex, Maitland: Walkable Options",
+    description:
+      "Hotels near RDV Sportsplex and the Orlando Ice Den in Maitland: walkable options for hockey, tennis and club events, plus Altamonte Springs and Winter Park.",
+    label: "Near RDV Sportsplex",
+    intro: [
+      "RDV Sportsplex is a 365,000-square-foot sports, fitness and wellness complex at 8701 Maitland Summit Boulevard, Orlando, in the Maitland area north of downtown. It opened in 1998, backed by the DeVos family, owners of the Orlando Magic, and it houses a full-service athletic club, a tennis center, the two-rink Orlando Ice Den, a spa, restaurants and medical offices. The Magic trained here for years before moving to their own facility near the Kia Center.",
+      "Most visitors come for a youth hockey tournament, a tennis event or a club competition, and the good news is that several hotels are less than a mile away. This guide covers the closest ones, when Altamonte Springs or Winter Park is the better base, and how far you are from everything else.",
+    ],
+    areas: [
+      {
+        name: "Maitland Summit and Maitland Center",
+        drive: "Walking distance to about 5 minutes",
+        text: "The office parks around Maitland Summit Boulevard and Pembrook Drive have a handful of business and extended-stay hotels within a mile of the Sportsplex. They are the easiest choice for early rink times and multi-day tournaments.",
+        pros: ["Closest hotels to the Sportsplex", "Suites and kitchens for team stays", "Quick access to I-4"],
+        cons: ["Quiet at night, few restaurants within walking distance"],
+      },
+      {
+        name: "Altamonte Springs",
+        drive: "About 5 to 10 minutes",
+        text: "Just north along I-4, Altamonte Springs has more hotels plus the restaurants and shopping around Uptown Altamonte and the Altamonte Mall.",
+        pros: ["More dining and shopping", "Wide choice of chain hotels"],
+        cons: ["A short drive to the rinks"],
+      },
+      {
+        name: "Winter Park",
+        drive: "About 10 to 15 minutes",
+        text: "Winter Park's Park Avenue has boutique shopping, sidewalk cafes and the Scenic Boat Tour, a nice way to fill downtime between games.",
+        pros: ["The most charming place to stay nearby", "Great restaurants"],
+        cons: ["Higher rates", "Fewer family suites"],
+      },
+    ],
+    hotels: [
+      { name: "Extended Stay America Suites Orlando Maitland (Pembrook Dr)", area: "Maitland", note: "About 0.2 miles from the Sportsplex, suites with kitchens." },
+      { name: "Courtyard by Marriott Orlando Altamonte Springs/Maitland", area: "Maitland", note: "About 0.3 miles from the Sportsplex." },
+      { name: "Homewood Suites by Hilton Orlando-Maitland", area: "Maitland", note: "About 0.6 miles away, all suites, good for families and teams." },
+      { name: "Sheraton Orlando North Hotel", area: "Maitland", note: "About 0.6 miles away, a full-service hotel." },
+      { name: "Hilton Orlando/Altamonte Springs", area: "Altamonte Springs", note: "About 1.6 miles away." },
+    ],
+    driveTimes: [
+      { to: "Downtown Winter Park", time: "10–15 min" },
+      { to: "Downtown Orlando", time: "15–20 min" },
+      { to: "Orlando International Airport (MCO)", time: "30–35 min" },
+      { to: "Universal Orlando", time: "25–35 min" },
+      { to: "Walt Disney World", time: "35–45 min" },
+    ],
+    localTips: [
+      {
+        heading: "Book early for tournament weekends",
+        text: "The Orlando Ice Den hosts youth hockey tournaments and league play, with seating for more than 500 spectators. The closest hotels fill up fast when a big tournament is in town.",
+      },
+      {
+        heading: "Check the address, not just the city",
+        text: "The Sportsplex has an Orlando mailing address (32810) but sits in the Maitland area. Hotels listed as Maitland or Altamonte Springs are usually closer than ones listed as Orlando.",
+      },
+      {
+        heading: "Stay off I-4 at rush hour",
+        text: "I-4 between Maitland and downtown gets heavy on weekday mornings and evenings. A hotel within walking distance takes the commute out of early practice times.",
+      },
+      {
+        heading: "Fill the downtime in Winter Park",
+        text: "Between games, Park Avenue in Winter Park is minutes away for lunch, shopping or the Scenic Boat Tour on the Winter Park chain of lakes.",
+      },
+    ],
+    faqs: [
+      {
+        q: "What is the address of RDV Sportsplex?",
+        a: "RDV Sportsplex is at 8701 Maitland Summit Blvd., Orlando, FL 32810, in the Maitland area north of downtown Orlando.",
+      },
+      {
+        q: "What hotels are walking distance from RDV Sportsplex?",
+        a: "Extended Stay America Suites Orlando Maitland on Pembrook Drive (about 0.2 miles) and the Courtyard Orlando Altamonte Springs/Maitland (about 0.3 miles) are the closest. Homewood Suites Orlando-Maitland and the Sheraton Orlando North are about 0.6 miles away.",
+      },
+      {
+        q: "What is at RDV Sportsplex?",
+        a: "A full-service athletic club, a tennis center, the Orlando Ice Den with two ice rinks, a spa, restaurants and medical offices.",
+      },
+      {
+        q: "Do the Orlando Magic still practice at RDV Sportsplex?",
+        a: "No. The Magic trained at RDV Sportsplex for years but have moved to their own practice facility near the Kia Center downtown. The Sportsplex still operates as an athletic club and ice complex.",
+      },
+      {
+        q: "How far is RDV Sportsplex from the theme parks?",
+        a: "Plan on about 25 to 35 minutes to Universal and 35 to 45 minutes to Walt Disney World, depending on I-4 traffic.",
+      },
+    ],
+    tours: /winter park|maitland|altamonte|scenic boat/i,
+    toursHeading: "Things to do near Maitland and Winter Park",
+    hotelArea: "winter-park",
+    related: [
+      { label: "Hotels near Downtown Winter Park", href: "/place-to-stay/hotels-near-downtown-winter-park" },
+      { label: "Things to do near Winter Park", href: "/book-now/things-to-do-near-winter-park" },
+      { label: "Sports in Orlando", href: "/book-now/sports" },
+    ],
+  },
+  {
+    slug: "hotels-near-westgate-orlando",
+    place: "Westgate Lakes Resort & Spa",
+    h1: "Hotels Near Westgate Orlando",
+    title: "Hotels Near Westgate Orlando Resorts: Westgate Lakes & More",
+    description:
+      "Hotels near Westgate Lakes Resort & Spa on Turkey Lake Road and the other Westgate Orlando resorts, with addresses, what is nearby and drive times to the parks.",
+    label: "Near Westgate Orlando",
+    intro: [
+      "Westgate Resorts runs several resorts across Orlando, and the flagship in the city itself is Westgate Lakes Resort & Spa at 9500 Turkey Lake Road, Orlando, FL 32819. It is a lakefront villa resort of about 2,000 units, from studios up to five-bedroom villas, with an outdoor water park, an 18-hole mini golf course, a marina, heated pools, an arcade, a fitness center and bicycle rentals.",
+      "If you are meeting family or friends who own at Westgate, or you want to stay near one of its resorts without booking a villa, there are plenty of hotels close by. Westgate Lakes sits between Universal, International Drive and the Dr. Phillips restaurant area, so it is one of the most convenient corners of Orlando. This guide covers the hotels nearby and the addresses of the other Westgate Orlando resorts so you head to the right one.",
+    ],
+    areas: [
+      {
+        name: "Turkey Lake Road and Dr. Phillips",
+        drive: "Next door to Westgate Lakes",
+        text: "Westgate Lakes sits on Turkey Lake Road near Dr. P. Phillips Hospital, about a 3-minute walk away, and close to the restaurants along Sand Lake Road's Restaurant Row.",
+        pros: ["Closest to Westgate Lakes", "Great restaurants nearby", "Short drive to Universal"],
+        cons: ["Few hotels directly on Turkey Lake Road", "A car is useful"],
+      },
+      {
+        name: "International Drive",
+        drive: "About 5 minutes",
+        text: "I-Drive's big hotels, including the Rosen Plaza at 9700 International Drive, are just east. Pointe Orlando is about a 14-minute walk from Westgate Lakes.",
+        pros: ["Huge choice of hotels", "Walk to restaurants and attractions", "Near the Convention Center"],
+        cons: ["Busy traffic on I-Drive"],
+      },
+      {
+        name: "Near the other Westgate resorts",
+        drive: "Depends on the resort",
+        text: "Westgate Palace is on Carrier Drive off northern I-Drive, Westgate Leisure Resort is on Villa De Costa Drive south of SeaWorld, Westgate Blue Tree Resort is on Cypress Run Drive near Lake Buena Vista, and Westgate Town Center and Westgate Vacation Villas are in the Kissimmee area. Check which one your group is staying at before you book nearby.",
+        pros: ["Stay close to the exact resort you are visiting"],
+        cons: ["The resorts are spread across town"],
+      },
+    ],
+    hotels: [
+      { name: "Westgate Lakes Resort & Spa", area: "Turkey Lake Road", note: "The resort itself: lakefront villas from studios to five bedrooms, a water park and mini golf." },
+      { name: "Rosen Plaza Hotel", area: "International Drive", note: "At 9700 International Drive, about 0.2 miles from Turkey Lake Road, with 800 rooms and suites." },
+      { name: "Westgate Palace", area: "International Drive (north)", note: "At 6145 Carrier Drive, a Westgate resort near northern I-Drive." },
+      { name: "Westgate Leisure Resort", area: "South of SeaWorld", note: "At 6950 Villa De Costa Drive, Orlando, FL 32821." },
+      { name: "Westgate Blue Tree Resort", area: "Lake Buena Vista", note: "At 12007 Cypress Run Drive, Orlando, FL 32836, close to Disney." },
+    ],
+    driveTimes: [
+      { to: "Universal Orlando Resort (from Westgate Lakes)", time: "5–10 min" },
+      { to: "SeaWorld Orlando", time: "10 min" },
+      { to: "Orange County Convention Center", time: "10 min" },
+      { to: "Walt Disney World", time: "10–15 min" },
+      { to: "Orlando International Airport (MCO)", time: "20–25 min" },
+    ],
+    localTips: [
+      {
+        heading: "Confirm which Westgate",
+        text: "\"Westgate Orlando\" can mean several resorts. Westgate Lakes is on Turkey Lake Road in Orlando, but Westgate Town Center and Westgate Vacation Villas are in Kissimmee, a 20-minute drive away. Check the address on the reservation.",
+      },
+      {
+        heading: "Eat on Restaurant Row",
+        text: "Sand Lake Road in Dr. Phillips, a few minutes from Westgate Lakes, is Orlando's Restaurant Row, with some of the best dinners in the tourist area.",
+      },
+      {
+        heading: "Visiting a Westgate guest?",
+        text: "Timeshare resorts often limit pool and water park access to registered guests. Ask the resort before you plan a pool day with friends staying there.",
+      },
+      {
+        heading: "Walk to Pointe Orlando",
+        text: "From Westgate Lakes, Pointe Orlando's restaurants and shops on International Drive are about a 14-minute walk.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Where is Westgate Lakes Resort & Spa?",
+        a: "At 9500 Turkey Lake Road, Orlando, FL 32819, between Universal Orlando, International Drive and the Dr. Phillips area.",
+      },
+      {
+        q: "How many Westgate resorts are in Orlando?",
+        a: "Westgate's Central Florida resorts include Westgate Lakes Resort & Spa, Westgate Palace, Westgate Vacation Villas, Westgate Towers, Westgate Town Center, Westgate Leisure Resort and Westgate Blue Tree Resort.",
+      },
+      {
+        q: "What hotels are near Westgate Lakes?",
+        a: "The Rosen Plaza Hotel at 9700 International Drive is about 0.2 miles from Turkey Lake Road, and many more hotels line International Drive a few minutes away.",
+      },
+      {
+        q: "How far is Westgate Lakes from Universal?",
+        a: "About a 5 to 10 minute drive, depending on traffic.",
+      },
+      {
+        q: "What amenities does Westgate Lakes have?",
+        a: "An outdoor water park, an 18-hole mini golf course, heated pools, a marina, an arcade, a basketball court, bicycle rentals and a fitness center.",
+      },
+    ],
+    tours: /international drive|i-drive|icon park|wonderworks|universal/i,
+    toursHeading: "Things to do near Westgate Lakes",
+    hotelArea: "international-drive",
+    related: [
+      { label: "Things to do near International Drive", href: "/book-now/things-to-do-near-international-drive" },
+      { label: "Hotels near Universal Orlando Resort", href: "/place-to-stay/hotels-near-universal-orlando-resort" },
+      { label: "Hotels near the Orange County Convention Center", href: "/place-to-stay/hotels-near-orange-county-convention-center" },
+    ],
+  },
+  {
+    slug: "hotels-near-liki-tiki-village",
+    place: "Liki Tiki Village (Aqua Sol)",
+    h1: "Hotels Near Liki Tiki Village Orlando",
+    title: "Hotels Near Liki Tiki Village (Aqua Sol Orlando West)",
+    description:
+      "Liki Tiki Village is now Hilton Vacation Club Aqua Sol Orlando West. Where it is, what is on site and the hotels nearby at Flamingo Crossings and west of Disney.",
+    label: "Near Liki Tiki Village",
+    intro: [
+      "Liki Tiki Village is a Polynesian-themed vacation resort on 64 acres at 17777 Bali Boulevard, Winter Garden, FL 34787, just off US 192 on the west side of Walt Disney World. After Hilton Grand Vacations acquired Diamond Resorts, it was rebranded Hilton Vacation Club Aqua Sol Orlando West, so you may see either name on your reservation.",
+      "The resort has villas with full kitchens, two outdoor pools, the Liki Tiki Lagoon water adventure area, mini golf, paddle boats on the lake, tennis courts, a game room and Shipwreck Sally's Bar & Grill. Disney's Animal Kingdom is about a 10-minute drive. If your group is staying there and you need a room nearby, or you want to be close without booking a villa, this guide covers the closest options.",
+    ],
+    areas: [
+      {
+        name: "Flamingo Crossings",
+        drive: "About 7 to 8 minutes",
+        text: "Flamingo Crossings is a cluster of newer chain hotels, restaurants and shops on the western edge of Walt Disney World, including the TownePlace Suites by Marriott Flamingo Crossings at 13295 Hartzog Road.",
+        pros: ["Newer hotels at moderate rates", "Suites with kitchens", "Close to Disney's western parks"],
+        cons: ["You need a car", "Limited nightlife"],
+      },
+      {
+        name: "West US 192 and the Winter Garden resort area",
+        drive: "About 5 to 10 minutes",
+        text: "Along US 192 west of Disney and nearby roads there are larger family resorts, such as Grove Resort & Water Park at 14501 Grove Resort Avenue, with suites and big pool areas.",
+        pros: ["Family resorts with water parks", "Condo-style suites for groups"],
+        cons: ["Resort fees are common", "Spread out, car needed"],
+      },
+      {
+        name: "Walt Disney World",
+        drive: "About 10 to 20 minutes",
+        text: "If the trip is mostly Disney, a Disney resort gets you Disney transportation and early theme park entry, while still being a short drive from Liki Tiki for group dinners.",
+        pros: ["Disney transportation and perks"],
+        cons: ["Higher rates"],
+      },
+    ],
+    hotels: [
+      { name: "Hilton Vacation Club Aqua Sol Orlando West (Liki Tiki Village)", area: "Winter Garden", note: "The resort itself, at 17777 Bali Blvd., with villas, a water park and mini golf." },
+      { name: "TownePlace Suites by Marriott Orlando at Flamingo Crossings", area: "Flamingo Crossings", note: "At 13295 Hartzog Road, all suites with kitchens and free breakfast." },
+      { name: "Grove Resort & Water Park", area: "Winter Garden", note: "At 14501 Grove Resort Avenue, a condo resort with its own water park." },
+    ],
+    driveTimes: [
+      { to: "Flamingo Crossings", time: "7–8 min" },
+      { to: "Disney's Animal Kingdom", time: "10 min" },
+      { to: "Disney's Hollywood Studios", time: "15 min" },
+      { to: "Universal Orlando", time: "25–30 min" },
+      { to: "Orlando International Airport (MCO)", time: "35–40 min" },
+    ],
+    localTips: [
+      {
+        heading: "Look for both names",
+        text: "Booking sites list the resort as Liki Tiki Village, Liki Tiki Village by Diamond Resorts or Hilton Vacation Club Aqua Sol Orlando West. They are all the same place at 17777 Bali Blvd.",
+      },
+      {
+        heading: "It has a Winter Garden address but sits near Disney",
+        text: "The mailing address is Winter Garden, but the resort is just off US 192 west of Walt Disney World, much closer to Disney than to downtown Winter Garden.",
+      },
+      {
+        heading: "Groceries matter here",
+        text: "The villas have full kitchens, so a grocery run on day one saves a lot of money on breakfasts and lunches.",
+      },
+      {
+        heading: "Visitors and amenities",
+        text: "Vacation club resorts usually limit the water park and pools to registered guests. Check with the front desk before planning a pool day with friends staying there.",
+      },
+    ],
+    faqs: [
+      {
+        q: "What is Liki Tiki Village called now?",
+        a: "Liki Tiki Village was rebranded Hilton Vacation Club Aqua Sol Orlando West after Hilton Grand Vacations acquired Diamond Resorts.",
+      },
+      {
+        q: "Where is Liki Tiki Village?",
+        a: "At 17777 Bali Blvd., Winter Garden, FL 34787, just off US 192 on the west side of Walt Disney World.",
+      },
+      {
+        q: "How far is Liki Tiki Village from Disney?",
+        a: "Disney's Animal Kingdom is about a 10-minute drive, and the rest of Walt Disney World is roughly 10 to 20 minutes away.",
+      },
+      {
+        q: "What hotels are near Liki Tiki Village?",
+        a: "The closest cluster is Flamingo Crossings, about 7 to 8 minutes away, including the TownePlace Suites by Marriott at 13295 Hartzog Road. Grove Resort & Water Park at 14501 Grove Resort Avenue is also nearby.",
+      },
+      {
+        q: "Does Liki Tiki Village have a water park?",
+        a: "Yes. The Liki Tiki Lagoon water adventure area is on site, along with two outdoor pools, mini golf and paddle boats.",
+      },
+    ],
+    tours: /disney|kissimmee|celebration|animal kingdom/i,
+    toursHeading: "Things to do near Disney and Kissimmee",
+    hotelArea: "disney",
+    related: [
+      { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
+      { label: "Things to do near Disney World", href: "/book-now/things-to-do-near-disney-world" },
+      { label: "Family hotels in Orlando", href: "/place-to-stay/family-hotels-in-orlando" },
+    ],
+  },
 ];
 
 export const stayGuideBySlug = new Map(stayGuides.map((g) => [g.slug, g]));
