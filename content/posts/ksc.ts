@@ -12,9 +12,8 @@ export const post: Post = {
   category: "Day Trips",
   illustration: "space",
   featuredListings: [
-    "kennedy-space-center-day-trip-from-orlando",
-    "rocket-launch-viewing-tours-on-the-space-coast",
-    "clearwater-beach-day-trip-from-orlando",
+    "kennedy-space-center-with-transport-from-orlando-and-kissimmee",
+    "clearwater-beach-day-trip-from-orlando-with-upgrade-options",
   ],
   body: `
 If you only take one day trip from Orlando, make it Kennedy Space Center. The Visitor Complex on Merritt Island is where the story of American spaceflight is told through real hardware: a Saturn V moon rocket, Space Shuttle Atlantis and the launch pads that sent astronauts to the Moon and the International Space Station. This guide walks you through everything you need to plan a Kennedy Space Center day trip from Orlando.
@@ -26,7 +25,7 @@ The Visitor Complex is roughly 50 miles east of Orlando International Airport. M
 ### Should you drive or take a tour?
 
 - **Drive yourself** if you already have a rental car and want complete flexibility.
-- **Book a guided day trip** if you want round-trip transportation, admission bundled in and zero navigation. Most [Kennedy Space Center day trips](/book-now/kennedy-space-center-day-trip-from-orlando) pick up from major hotel areas.
+- **Book a guided day trip** if you want round-trip transportation, admission bundled in and zero navigation. Most [Kennedy Space Center day trips](/book-now/kennedy-space-center-with-transport-from-orlando-and-kissimmee) pick up from major hotel areas.
 
 ## What to see at Kennedy Space Center
 
@@ -56,7 +55,7 @@ Plan on five to seven hours at the complex. Add travel time, and a Kennedy Space
 
 ## Seeing a rocket launch
 
-The Space Coast now has frequent launches, and seeing one is a highlight of any Florida trip. Some launches can be viewed from the Visitor Complex with special tickets, while others are best seen from public areas along the Indian River or Cocoa Beach. A [launch viewing tour](/book-now/rocket-launch-viewing-tours-on-the-space-coast) handles transportation and positioning, which is a big help given launch-day traffic.
+The Space Coast now has frequent launches, and seeing one is a highlight of any Florida trip. Some launches can be viewed from the Visitor Complex with special tickets, while others are best seen from public areas along the Indian River or Cocoa Beach. A [launch viewing tour](/book-now/kennedy-space-center) handles transportation and positioning, which is a big help given launch-day traffic.
 
 > **Important:** Launch dates move often because of weather and technical checks. Book tours with free cancellation and treat any launch as a bonus.
 
@@ -76,7 +75,7 @@ Yes, especially for kids ages 6 and up who can appreciate the exhibits and simul
 
 ## Combine it with the beach
 
-Cocoa Beach is about 20 minutes south of the Visitor Complex. If you are driving, a late afternoon swim or dinner by the ocean makes a great end to the day. Prefer the Gulf side? A [Clearwater Beach day trip](/book-now/clearwater-beach-day-trip-from-orlando) is another easy option on a separate day.
+Cocoa Beach is about 20 minutes south of the Visitor Complex. If you are driving, a late afternoon swim or dinner by the ocean makes a great end to the day. Prefer the Gulf side? A [Clearwater Beach day trip](/book-now/clearwater-beach-day-trip-from-orlando-with-upgrade-options) is another easy option on a separate day.
 
 Planning a night on the coast? Compare [hotels near Cocoa Beach](/place-to-stay/hotels-near-cocoa-beach), or [hotels near Port Canaveral](/place-to-stay/hotels-near-port-canaveral) if you are sailing.
 

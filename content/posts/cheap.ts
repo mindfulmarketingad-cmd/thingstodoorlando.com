@@ -12,10 +12,9 @@ export const post: Post = {
   category: "Budget Travel",
   illustration: "food-and-city",
   featuredListings: [
-    "lake-eola-park-and-swan-boats",
-    "winter-park-scenic-boat-tour-and-park-avenue-stroll",
-    "kayak-and-paddleboard-tours-on-central-florida-springs",
-    "gatorland-admission-and-wildlife-encounters",
+    "sea-life-orlando-aquarium-admission-ticket-at-icon-park",
+    "florida-everglades-airboat-tour-and-wild-florida-admission-with-optional-lunch",
+    "wonderworks-orlando",
   ],
   body: `
 Theme park tickets add up quickly, but some of the best things to do in Orlando cost little or nothing at all. Whether you want to balance a splurge day or you are a local looking for weekend ideas, this list of free and cheap things to do in Orlando will help you stretch your budget.
@@ -26,7 +25,7 @@ Theme park tickets add up quickly, but some of the best things to do in Orlando 
 
 ### Walk around Lake Eola Park
 
-Downtown's signature park is free to enjoy. The loop around the lake is just under one mile, the fountain lights up in the evening, and swans glide across the water. On Sundays, a farmers market sets up along the shore. Swan boat rentals are a small extra if you want to get on the water. Learn more in our [Lake Eola guide](/book-now/lake-eola-park-and-swan-boats).
+Downtown's signature park is free to enjoy. The loop around the lake is just under one mile, the fountain lights up in the evening, and swans glide across the water. On Sundays, a farmers market sets up along the shore. Swan boat rentals are a small extra if you want to get on the water. See more [things to do near downtown Orlando](/book-now/things-to-do-near-downtown-orlando).
 
 ### Explore Disney Springs and Universal CityWalk
 
@@ -34,7 +33,7 @@ Both entertainment districts are free to enter. Window shop, listen to live musi
 
 ### Stroll Winter Park's Park Avenue
 
-Brick streets, boutique shops and shady Central Park make Winter Park a lovely free afternoon. The Saturday farmers market is a local favorite. Add the inexpensive [Scenic Boat Tour](/book-now/winter-park-scenic-boat-tour-and-park-avenue-stroll) for a relaxing hour on the lakes.
+Brick streets, boutique shops and shady Central Park make Winter Park a lovely free afternoon. The Saturday farmers market is a local favorite. Add the inexpensive [Scenic Boat Tour](/book-now/things-to-do-near-winter-park) for a relaxing hour on the lakes.
 
 ### Walk or bike a rail trail
 
@@ -48,19 +47,19 @@ The lakefront park in downtown Kissimmee offers views across Lake Toho, a playgr
 
 ### Swim or paddle at a state park
 
-Wekiwa Springs and Blue Spring State Park charge a modest per-vehicle entry fee, and the water is refreshing all year. Guided [kayak tours](/book-now/kayak-and-paddleboard-tours-on-central-florida-springs) cost more but include gear and a guide.
+Wekiwa Springs and Blue Spring State Park charge a modest per-vehicle entry fee, and the water is refreshing all year. Guided [kayak tours](/book-now/water-adventures) cost more but include gear and a guide.
 
 ### Ride The Wheel at ICON Park
 
-A single ride on [The Wheel](/book-now/icon-park-and-the-wheel-on-international-drive) is one of the more affordable attractions on International Drive and delivers big views, especially at sunset.
+A single ride on [The Wheel](/book-now/things-to-do-near-international-drive) is one of the more affordable attractions on International Drive and delivers big views, especially at sunset.
 
 ### Spend a half day at Gatorland
 
-[Gatorland](/book-now/gatorland-admission-and-wildlife-encounters) typically costs a fraction of a major theme park ticket and delivers hours of entertainment with shows, gators and a breeding marsh boardwalk.
+Gatorland typically costs a fraction of a major theme park ticket and delivers hours of entertainment with shows, gators and a breeding marsh boardwalk.
 
 ### Catch a short airboat ride
 
-Some [airboat operators](/book-now/airboat-rides-and-everglades-style-swamp-tours) offer short rides that are easy on the budget while still giving you a real taste of Florida wildlife.
+Some [airboat operators](/book-now/airboat-and-wildlife) offer short rides that are easy on the budget while still giving you a real taste of Florida wildlife.
 
 ## How to save money on bigger experiences
 

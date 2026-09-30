@@ -562,28 +562,28 @@ export default async function HomePage() {
           </p>
           <h3>Theme parks and attractions</h3>
           <p>
-            <Link href={to("/book-now/walt-disney-world-tickets-and-guided-park-days")}>Walt Disney World</Link>,{" "}
-            <Link href={to("/book-now/universal-orlando-resort-tickets")}>Universal Orlando Resort</Link> and{" "}
-            <Link href={to("/book-now/seaworld-orlando-and-aquatica-tickets")}>SeaWorld Orlando</Link> anchor most itineraries.
+            <Link href={to("/book-now/walt-disney-world-orlando-resort-base-ticket")}>Walt Disney World</Link>,{" "}
+            <Link href={to("/book-now/universal-orlando-park-to-park-tickets-usa-canada-residents")}>Universal Orlando Resort</Link> and{" "}
+            <Link href={"/blog/seaworld-orlando-calendar-best-days"}>SeaWorld Orlando</Link> anchor most itineraries.
             Ticket prices vary by date, so buying early and choosing midweek days can save a meaningful amount. Families
             with younger children should also consider{" "}
-            <Link href={to("/book-now/legoland-florida-day-trip")}>LEGOLAND Florida</Link>, about an hour away.
+            <Link href={to("/book-now/legoland-florida-theme-park-admission-tickets")}>LEGOLAND Florida</Link>, about an hour away.
           </p>
           <h3>Nature and wildlife</h3>
           <p>
-            An <Link href={to("/book-now/airboat-rides-and-everglades-style-swamp-tours")}>airboat ride</Link> is the classic
+            An <Link href={to("/book-now/airboat-and-wildlife")}>airboat ride</Link> is the classic
             way to see wild alligators. In winter,{" "}
-            <Link href={to("/book-now/manatee-encounters-at-blue-spring-and-crystal-river")}>manatees gather in warm springs</Link>{" "}
+            <Link href={to("/book-now/orlando-manatee-encounters")}>manatees gather in warm springs</Link>{" "}
             north of the city, and spring-fed rivers like Wekiwa are perfect for{" "}
-            <Link href={to("/book-now/kayak-and-paddleboard-tours-on-central-florida-springs")}>kayaking</Link> all year.
+            <Link href={to("/book-now/water-adventures")}>kayaking</Link> all year.
           </p>
           <h3>Space, sky and day trips</h3>
           <p>
-            <Link href={to("/book-now/kennedy-space-center-day-trip-from-orlando")}>Kennedy Space Center</Link> is the most
+            <Link href={to("/book-now/kennedy-space-center-with-transport-from-orlando-and-kissimmee")}>Kennedy Space Center</Link> is the most
             popular day trip from Orlando, and seeing a{" "}
-            <Link href={to("/book-now/rocket-launch-viewing-tours-on-the-space-coast")}>rocket launch</Link> is unforgettable.
+            <Link href={to("/book-now/kennedy-space-center")}>rocket launch</Link> is unforgettable.
             For views from above, book a{" "}
-            <Link href={to("/book-now/sunrise-hot-air-balloon-rides-over-central-florida")}>sunrise balloon flight</Link>. The
+            <Link href={to("/book-now/hot-air-balloons")}>sunrise balloon flight</Link>. The
             Gulf beaches, historic St. Augustine and the Everglades are all reachable as{" "}
             <Link href={to("/book-now/day-trips")}>day trips from Orlando</Link>.
           </p>
@@ -591,8 +591,8 @@ export default async function HomePage() {
           <p>
             Orlando&apos;s <Link href={to("/book-now/dinner-shows")}>dinner shows</Link> are an experience you will not find in
             many other cities, and International Drive stays lively late with attractions like{" "}
-            <Link href={to("/book-now/icon-park-and-the-wheel-on-international-drive")}>The Wheel at ICON Park</Link>. For a
-            more local night out, try a <Link href={to("/book-now/orlando-food-tours-and-downtown-walking-tours")}>food tour</Link>{" "}
+            <Link href={to("/book-now/things-to-do-near-international-drive")}>The Wheel at ICON Park</Link>. For a
+            more local night out, try a <Link href={to("/book-now/food-and-dining")}>food tour</Link>{" "}
             in Winter Park or downtown.
           </p>
           <p>

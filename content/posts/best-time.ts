@@ -12,10 +12,9 @@ export const post: Post = {
   category: "Planning",
   illustration: "theme-parks",
   featuredListings: [
-    "walt-disney-world-tickets-and-guided-park-days",
-    "universal-orlando-resort-tickets",
-    "manatee-encounters-at-blue-spring-and-crystal-river",
-    "sunrise-hot-air-balloon-rides-over-central-florida",
+    "walt-disney-world-orlando-resort-base-ticket",
+    "universal-orlando-park-to-park-tickets-usa-canada-residents",
+    "orlando-manatee-encounters",
   ],
   body: `
 Orlando is a year-round destination, but the experience changes a lot depending on when you go. Crowds, heat, rain and prices all move with school calendars and the seasons. This month-by-month guide explains the best time to visit Orlando based on what matters most to you.
@@ -28,11 +27,11 @@ For the best balance of weather, crowds and prices, aim for **late January throu
 
 ### Winter (December to February)
 
-Winter brings mild days and cool mornings, which makes it a fantastic time for outdoor activities. Holiday weeks around Christmas and New Year's are among the most crowded of the year, but January and early February are often calm. Winter is also manatee season, so it is the perfect time to see them at [Blue Spring or Crystal River](/book-now/manatee-encounters-at-blue-spring-and-crystal-river).
+Winter brings mild days and cool mornings, which makes it a fantastic time for outdoor activities. Holiday weeks around Christmas and New Year's are among the most crowded of the year, but January and early February are often calm. Winter is also manatee season, so it is the perfect time to see them at [Blue Spring or Crystal River](/book-now/orlando-manatee-encounters).
 
 ### Spring (March to May)
 
-Spring weather is close to perfect, but spring break creates heavy crowds in March and around Easter. Late April and May are often a sweet spot with warm days and fewer families. Great time for [balloon rides](/book-now/sunrise-hot-air-balloon-rides-over-central-florida) and [spring kayak tours](/book-now/kayak-and-paddleboard-tours-on-central-florida-springs).
+Spring weather is close to perfect, but spring break creates heavy crowds in March and around Easter. Late April and May are often a sweet spot with warm days and fewer families. Great time for [balloon rides](/book-now/hot-air-balloons) and [spring kayak tours](/book-now/water-adventures).
 
 ### Summer (June to August)
 
@@ -59,10 +58,10 @@ After Labor Day, crowds usually drop and prices often follow. It is still warm, 
 
 ## Tips for any time of year
 
-1. **Buy date-based park tickets early.** [Disney](/book-now/walt-disney-world-tickets-and-guided-park-days) and [Universal](/book-now/universal-orlando-resort-tickets) price tickets by date.
+1. **Buy date-based park tickets early.** [Disney](/book-now/walt-disney-world-orlando-resort-base-ticket) and [Universal](/book-now/universal-orlando-park-to-park-tickets-usa-canada-residents) price tickets by date.
 2. **Book tours with free cancellation.** Weather can change plans at any time of year.
 3. **Mix park days and non-park days.** See [things to do in Orlando besides theme parks](/blog/things-to-do-in-orlando-besides-theme-parks).
-4. **Check the launch schedule.** A [rocket launch](/book-now/rocket-launch-viewing-tours-on-the-space-coast) can happen any month.
+4. **Check the launch schedule.** A [rocket launch](/book-now/kennedy-space-center) can happen any month.
 
 Compare experiences for your dates on [Book Now](/book-now).
 

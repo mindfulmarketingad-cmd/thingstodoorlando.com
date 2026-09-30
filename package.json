@@ -9,7 +9,8 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "assets": "node scripts/generate-assets.mjs && node scripts/generate-featured.mjs",
-    "sync:viator": "node scripts/fetch-viator.mjs"
+    "sync:viator": "node scripts/fetch-viator.mjs",
+    "prebuild": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "next": "16.3.6",

@@ -12,10 +12,10 @@ export const post: Post = {
   category: "Nature & Wildlife",
   illustration: "wildlife",
   featuredListings: [
-    "airboat-rides-and-everglades-style-swamp-tours",
-    "everglades-national-park-day-trip-from-orlando",
-    "gatorland-admission-and-wildlife-encounters",
-    "lake-toho-fishing-charters-and-jet-ski-tours",
+    "florida-everglades-airboat-tour-and-wild-florida-admission-with-optional-lunch",
+    "90-minute-everglades-airboat-tour-near-orlando-florida",
+    "orlando-manatee-encounters",
+    "private-lake-toho-bass-fishing-charter-near-orlando",
   ],
   body: `
 An airboat tour is one of the most authentically Florida things you can do near Orlando. These flat-bottomed boats, driven by giant fans, skim across shallow marshes where regular boats cannot go. In about an hour you can go from open-water speed runs to silent drifts beside alligators sunning on the bank. Here is everything you need to know to choose the right Orlando airboat tour.
@@ -24,7 +24,7 @@ An airboat tour is one of the most authentically Florida things you can do near 
 
 Most tours operate on the lakes and marshes south and east of the city, particularly around Kissimmee and Lake Tohopekaliga. This region is the headwaters of the Everglades, the start of a slow-moving river of water that flows south toward Florida Bay. Other operators run tours on Lake Jesup near Sanford, known for its dense alligator population, and along the St. Johns River.
 
-If you want the full Everglades experience, a [day trip to Everglades National Park](/book-now/everglades-national-park-day-trip-from-orlando) is possible, but it is a long day. For most visitors, [airboat rides near Kissimmee](/book-now/airboat-rides-and-everglades-style-swamp-tours) deliver the experience in a fraction of the time.
+If you want the full Everglades experience, a day trip to Everglades National Park is possible, but it is a long day. For most visitors, [airboat rides near Kissimmee](/book-now/airboat-and-wildlife) deliver the experience in a fraction of the time.
 
 ## What will you see?
 
@@ -72,7 +72,7 @@ Yes, when run by licensed operators. Children must stay seated and typically wea
 
 ## Pair it with other wildlife experiences
 
-Round out a nature day with [Gatorland](/book-now/gatorland-admission-and-wildlife-encounters) or a [Lake Toho fishing charter](/book-now/lake-toho-fishing-charters-and-jet-ski-tours). In winter, don't miss the [manatees at Blue Spring and Crystal River](/book-now/manatee-encounters-at-blue-spring-and-crystal-river).
+Round out a nature day with Gatorland or a [Lake Toho fishing charter](/book-now/private-lake-toho-bass-fishing-charter-near-orlando). In winter, don't miss the [manatees at Blue Spring and Crystal River](/book-now/orlando-manatee-encounters).
 
 Compare every option on our [airboat tours page](/book-now/airboat-and-wildlife), or browse by category on [Book Now](/book-now).
 

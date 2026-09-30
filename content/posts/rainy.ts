@@ -12,10 +12,8 @@ export const post: Post = {
   category: "Planning",
   illustration: "dinner-shows",
   featuredListings: [
-    "medieval-knights-dinner-tournament-in-kissimmee",
-    "pirate-dinner-shows-in-orlando",
-    "murder-mystery-and-comedy-dinner-shows",
-    "icon-park-and-the-wheel-on-international-drive",
+    "medieval-times-dinner-show-in-orlando",
+    "pirates-dinner-adventure-show-in-orlando",
   ],
   body: `
 Central Florida's rainy season runs roughly from June through September, and afternoon thunderstorms are a near-daily event in summer. The good news is that most storms pass within an hour or two, and Orlando has plenty of indoor options. Here are the best rainy day things to do in Orlando, plus tips for handling storms on park days.
@@ -24,11 +22,11 @@ Central Florida's rainy season runs roughly from June through September, and aft
 
 ### Kennedy Space Center exhibits
 
-While the Rocket Garden is outdoors, many of the major exhibits at [Kennedy Space Center](/book-now/kennedy-space-center-day-trip-from-orlando), including Space Shuttle Atlantis and the Apollo/Saturn V Center, are indoors. It is a strong choice on an unsettled day.
+While the Rocket Garden is outdoors, many of the major exhibits at [Kennedy Space Center](/book-now/kennedy-space-center-with-transport-from-orlando-and-kissimmee), including Space Shuttle Atlantis and the Apollo/Saturn V Center, are indoors. It is a strong choice on an unsettled day.
 
 ### ICON Park on International Drive
 
-[ICON Park](/book-now/icon-park-and-the-wheel-on-international-drive) has an aquarium, a wax museum, restaurants and The Wheel's enclosed, climate-controlled capsules. It is easy to wait out a storm here.
+[ICON Park](/book-now/things-to-do-near-international-drive) has an aquarium, a wax museum, restaurants and The Wheel's enclosed, climate-controlled capsules. It is easy to wait out a storm here.
 
 ### Orlando Science Center
 
@@ -46,9 +44,9 @@ International Drive has several indoor go-kart tracks, arcades and escape rooms 
 
 Dinner shows are fully indoors and naturally fill a stormy evening:
 
-- [Medieval knights tournament](/book-now/medieval-knights-dinner-tournament-in-kissimmee) for families
-- [Pirate dinner adventure](/book-now/pirate-dinner-shows-in-orlando) for younger kids
-- [Murder mystery and comedy shows](/book-now/murder-mystery-and-comedy-dinner-shows) for couples and groups
+- [Medieval knights tournament](/book-now/medieval-times-dinner-show-in-orlando) for families
+- [Pirate dinner adventure](/book-now/pirates-dinner-adventure-show-in-orlando) for younger kids
+- [Murder mystery and comedy shows](/book-now/dinner-shows) for couples and groups
 
 See all options on our [dinner shows page](/book-now/dinner-shows).
 
@@ -62,7 +60,7 @@ See all options on our [dinner shows page](/book-now/dinner-shows).
 
 ## Book with flexibility
 
-For outdoor experiences like [balloon rides](/book-now/sunrise-hot-air-balloon-rides-over-central-florida), [airboat tours](/book-now/airboat-rides-and-everglades-style-swamp-tours) and [kayak trips](/book-now/kayak-and-paddleboard-tours-on-central-florida-springs), choose tours with free cancellation or weather rescheduling. Many operators will move you to another day if conditions are unsafe. Filter tours on [Book Now](/book-now) to compare policies.
+For outdoor experiences like [balloon rides](/book-now/hot-air-balloons), [airboat tours](/book-now/airboat-and-wildlife) and [kayak trips](/book-now/water-adventures), choose tours with free cancellation or weather rescheduling. Many operators will move you to another day if conditions are unsafe. Filter tours on [Book Now](/book-now) to compare policies.
 
 ## Frequently asked questions
 

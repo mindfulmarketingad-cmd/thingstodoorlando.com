@@ -12,57 +12,57 @@ export const post: Post = {
   category: "Local Guides",
   illustration: "wildlife",
   featuredListings: [
-    "airboat-rides-and-everglades-style-swamp-tours",
-    "kayak-and-paddleboard-tours-on-central-florida-springs",
-    "sunrise-hot-air-balloon-rides-over-central-florida",
-    "winter-park-scenic-boat-tour-and-park-avenue-stroll",
+    "kennedy-space-center-with-transport-from-orlando-and-kissimmee",
+    "florida-everglades-airboat-tour-and-wild-florida-admission-with-optional-lunch",
+    "orlando-manatee-encounters",
+    "pirates-dinner-adventure-show-in-orlando",
   ],
   body: `
 Plenty of visitors spend a week in Orlando and never leave the resort corridor. That is a shame, because some of the best things to do in Orlando have nothing to do with roller coasters. Central Florida has hundreds of lakes, some of the clearest springs on earth, an active spaceport and a food scene that has quietly become one of the most interesting in the Southeast. Whether you need a break between park days or you are a local looking for something new, this list covers the experiences worth your time.
 
 ## 1. Paddle a crystal clear spring
 
-Central Florida sits on one of the largest concentrations of freshwater springs in the world. Wekiwa Springs State Park, less than 30 minutes from downtown, has water that stays close to 72 degrees all year. A [guided kayak or paddleboard tour](/book-now/kayak-and-paddleboard-tours-on-central-florida-springs) takes you down shaded spring runs where turtles, herons and fish are easy to spot. In winter, head north to Blue Spring State Park for a [manatee encounter](/book-now/manatee-encounters-at-blue-spring-and-crystal-river).
+Central Florida sits on one of the largest concentrations of freshwater springs in the world. Wekiwa Springs State Park, less than 30 minutes from downtown, has water that stays close to 72 degrees all year. A [guided kayak or paddleboard tour](/book-now/water-adventures) takes you down shaded spring runs where turtles, herons and fish are easy to spot. In winter, head north to Blue Spring State Park for a [manatee encounter](/book-now/orlando-manatee-encounters).
 
 ## 2. Ride an airboat through the Everglades headwaters
 
-The lakes south of Orlando feed the Everglades, and [airboat tours near Kissimmee](/book-now/airboat-rides-and-everglades-style-swamp-tours) are a fast, fun way to explore them. Expect alligators, wading birds and possibly a bald eagle. Tours usually last about an hour, so this fits easily into a morning. Compare operators on our [airboat tours page](/book-now/airboat-and-wildlife).
+The lakes south of Orlando feed the Everglades, and [airboat tours near Kissimmee](/book-now/airboat-and-wildlife) are a fast, fun way to explore them. Expect alligators, wading birds and possibly a bald eagle. Tours usually last about an hour, so this fits easily into a morning. Compare operators on our [airboat tours page](/book-now/airboat-and-wildlife).
 
 ## 3. Visit Kennedy Space Center
 
-An hour east, the [Kennedy Space Center Visitor Complex](/book-now/kennedy-space-center-day-trip-from-orlando) is one of the best museums in the country. See Space Shuttle Atlantis, a full Saturn V rocket and working launch pads. The Space Coast now hosts frequent launches, so check whether a [launch viewing tour](/book-now/rocket-launch-viewing-tours-on-the-space-coast) lines up with your dates.
+An hour east, the [Kennedy Space Center Visitor Complex](/book-now/kennedy-space-center-with-transport-from-orlando-and-kissimmee) is one of the best museums in the country. See Space Shuttle Atlantis, a full Saturn V rocket and working launch pads. The Space Coast now hosts frequent launches, so check whether a [launch viewing tour](/book-now/kennedy-space-center) lines up with your dates.
 
 ## 4. Float over Central Florida in a hot air balloon
 
-Balloon flights launch at sunrise when the air is calmest. You drift over lakes, pastures and on clear mornings the distant theme park skylines. A [sunrise balloon ride](/book-now/sunrise-hot-air-balloon-rides-over-central-florida) is one of the most memorable things to do in Orlando, especially for couples and special occasions.
+Balloon flights launch at sunrise when the air is calmest. You drift over lakes, pastures and on clear mornings the distant theme park skylines. A [sunrise balloon ride](/book-now/hot-air-balloons) is one of the most memorable things to do in Orlando, especially for couples and special occasions.
 
 ## 5. Spend a morning in Winter Park
 
-Winter Park feels like a different town, even though it is only 20 minutes from downtown. Take the [Scenic Boat Tour](/book-now/winter-park-scenic-boat-tour-and-park-avenue-stroll) through three lakes and narrow canals, then walk Park Avenue for boutiques, cafes and the Morse Museum's famous Tiffany glass collection.
+Winter Park feels like a different town, even though it is only 20 minutes from downtown. Take the [Scenic Boat Tour](/book-now/things-to-do-near-winter-park) through three lakes and narrow canals, then walk Park Avenue for boutiques, cafes and the Morse Museum's famous Tiffany glass collection.
 
 ## 6. Eat your way through the city
 
-Orlando's best food is found in neighborhoods most tourists never see. The Mills 50 district is known for Vietnamese and other Asian cuisines, downtown has a growing cocktail scene, and Winter Park leans toward chef-driven bistros. A [guided food tour](/book-now/orlando-food-tours-and-downtown-walking-tours) is an efficient way to sample several spots in one afternoon. Adults can add a [brewery or cocktail tour](/book-now/orlando-brewery-and-craft-cocktail-tours) with a designated driver.
+Orlando's best food is found in neighborhoods most tourists never see. The Mills 50 district is known for Vietnamese and other Asian cuisines, downtown has a growing cocktail scene, and Winter Park leans toward chef-driven bistros. A [guided food tour](/book-now/food-and-dining) is an efficient way to sample several spots in one afternoon. Adults can add a [brewery or cocktail tour](/book-now/drinks-and-nightlife) with a designated driver.
 
 ## 7. Take a helicopter flight at night
 
-A [helicopter tour](/book-now/helicopter-tours-over-orlando-and-the-theme-parks) shows you the scale of Orlando in minutes. Evening flights timed with park fireworks are especially popular. Routes range from a quick hop to half-hour loops, so it is easy to fit into a free evening on International Drive.
+A [helicopter tour](/book-now/private-helicopter-after-hours-48-miles-tour-theme-parks-and-downtown) shows you the scale of Orlando in minutes. Evening flights timed with park fireworks are especially popular. Routes range from a quick hop to half-hour loops, so it is easy to fit into a free evening on International Drive.
 
 ## 8. Meet the gators at Gatorland
 
-Orlando's original attraction still delivers. [Gatorland](/book-now/gatorland-admission-and-wildlife-encounters) is home to thousands of alligators and crocodiles and has a zip line that runs right over the gator pools.
+Orlando's original attraction still delivers. Gatorland is home to thousands of alligators and crocodiles and has a zip line that runs right over the gator pools.
 
 ## 9. Catch a dinner show
 
-From jousting knights to pirate ships to murder mysteries, Orlando's dinner shows are a genre of their own. See all the options on our [dinner shows page](/book-now/dinner-shows), including [mystery and comedy shows](/book-now/murder-mystery-and-comedy-dinner-shows) for date nights.
+From jousting knights to pirate ships to murder mysteries, Orlando's dinner shows are a genre of their own. See all the options on our [dinner shows page](/book-now/dinner-shows), including [mystery and comedy shows](/book-now/dinner-shows) for date nights.
 
 ## 10. Take an easy day trip
 
 Orlando sits in the middle of the state, which makes day trips simple:
 
-- **Beaches:** [Clearwater Beach](/book-now/clearwater-beach-day-trip-from-orlando) on the Gulf is about two hours west.
-- **History:** [St. Augustine](/book-now/st-augustine-day-trip-from-orlando), founded in 1565, is about two hours northeast.
-- **Wilderness:** [Everglades National Park](/book-now/everglades-national-park-day-trip-from-orlando) is a long but rewarding day.
+- **Beaches:** [Clearwater Beach](/book-now/clearwater-beach-day-trip-from-orlando-with-upgrade-options) on the Gulf is about two hours west.
+- **History:** [St. Augustine](/book-now/day-trip-to-historic-st-augustine-from-orlando-with-hotel-pickup), founded in 1565, is about two hours northeast.
+- **Wilderness:** Everglades National Park is a long but rewarding day.
 
 Browse every option on our [day trips from Orlando page](/book-now/day-trips).
 
