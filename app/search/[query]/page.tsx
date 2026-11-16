@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import { linkHotels } from "@/components/LinkHotels";
 import SearchForm from "@/components/SearchForm";
 import { featuredSearchBySlug, featuredSearches } from "@/lib/featured-searches";
-import { pageMetadata } from "@/lib/metadata";
+import { completeMetaDescription, noindexFollow, pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import { searchSite } from "@/lib/search";
 import { isSafeSearchSlug, unslug } from "@/lib/slug";
@@ -20,12 +20,12 @@ function titleCase(s: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { query } = await params;
-  if (!isSafeSearchSlug(query)) return { title: "Search", robots: { index: false, follow: true } };
+  if (!isSafeSearchSlug(query)) return { title: "Search", robots: noindexFollow };
   const featured = featuredSearchBySlug.get(query);
   if (featured) {
     return pageMetadata({
       title: featured.title,
-      description: featured.intro.length > 160 ? `${featured.intro.slice(0, 155).replace(/\s+\S*$/, "")}...` : featured.intro,
+      description: completeMetaDescription(featured.intro, featured.intro),
       path: `/search/${featured.slug}`,
     });
   }

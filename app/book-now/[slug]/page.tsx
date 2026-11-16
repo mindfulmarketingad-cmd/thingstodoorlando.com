@@ -19,12 +19,12 @@ import Stars from "@/components/Stars";
 import { CheckIcon, ClockIcon, PinIcon, ShieldIcon, TagIcon, XIcon } from "@/components/Icons";
 import { posts } from "@/lib/blog";
 import { categories, categoryByKey, categoryBySlug } from "@/lib/categories";
-import { getGuideLinkMap, getListingBySlug, getLiveListings, getRelatedListings } from "@/lib/listings";
+import { getListingBySlug, getLiveListings, getRelatedListings, retiredListingRedirect } from "@/lib/listings";
 import { extractLinks } from "@/lib/markdown";
 import { listingFaqs } from "@/lib/faqs";
 import { comparableListings } from "@/lib/listicles";
 import { tourInsights } from "@/data/tour-insights";
-import { pageMetadata } from "@/lib/metadata";
+import { completeMetaDescription, noindexFollow, pageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site";
 import type { Listing, ListingDetail } from "@/lib/types";
 import { getProductDetail } from "@/lib/viator";
@@ -45,9 +45,8 @@ export async function generateStaticParams() {
 }
 
 function metaDescription(l: Listing) {
-  const base = l.summary.replace(/\.\.\.$/, "");
-  const text = `${base}${base.endsWith(".") ? "" : "."} Compare prices, reviews and availability.`;
-  return text.length > 155 ? `${text.slice(0, 152).replace(/\s+\S*$/, "")}...` : text;
+  const fallback = `${l.title}. Compare prices, reviews and availability.`;
+  return completeMetaDescription(l.description || l.summary, fallback);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -57,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return pageMetadata({
       title: categoryTitle(category),
       absoluteTitle: true,
-      description: `${category.intro.split(". ")[0]}. Compare prices, reviews and availability.`.slice(0, 160),
+      description: completeMetaDescription(category.intro, `${category.shortName} tours in Orlando. Compare prices, reviews and availability.`),
       path: `/book-now/${category.slug}`,
     });
   }
@@ -74,11 +73,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         image: img ? { url: img.url, width: img.width, height: img.height, alt: img.alt } : undefined,
       }),
       // Thin collections stay reachable but out of the index until they fill up.
-      ...(data.indexable ? {} : { robots: { index: false, follow: true } }),
+      ...(data.indexable ? {} : { robots: noindexFollow }),
     };
   }
   const listing = await getListingBySlug(slug);
-  if (!listing) return { title: "Experience not found", robots: { index: false } };
+  if (!listing) return { title: "Experience not found", robots: noindexFollow };
   // Full product titles keep every page's <title> unique (search engines truncate display, not indexing).
   return pageMetadata({
     title: listing.title,
@@ -125,16 +124,17 @@ export default async function ListingPage({ params }: Props) {
 
   const base = await getListingBySlug(slug);
   if (!base) {
-    // Retired editorial guide URLs point to the matching real tour.
-    const target = (await getGuideLinkMap()).get(`/book-now/${slug}`);
-    if (target) permanentRedirect(target);
+    // Retired guides and renamed Viator titles redirect. Anything else is a real 404,
+    // never a 500 from a missing snapshot row.
+    const target = await retiredListingRedirect(slug);
+    if (target && target !== `/book-now/${slug}`) permanentRedirect(target);
     notFound();
   }
 
   const [listing, related, comparable] = await Promise.all([
-    getProductDetail(base),
-    getRelatedListings(base, 6),
-    comparableListings(base, 3),
+    getProductDetail(base).catch((): ListingDetail => base),
+    getRelatedListings(base, 6).catch(() => [] as Listing[]),
+    comparableListings(base, 3).catch(() => [] as Listing[]),
   ]);
   const insight = base.productCode ? tourInsights[base.productCode] : undefined;
   const primary = categoryByKey[listing.categories[0]];
@@ -168,7 +168,7 @@ export default async function ListingPage({ params }: Props) {
             {listing.gallery && listing.gallery.length > 1 && (
               <div className="gallery">
                 {listing.gallery.slice(1, 5).map((img) => (
-                  <img key={img.url} src={img.url} alt={img.alt} loading="lazy" width={240} height={240} />
+                  <img key={img.url} src={img.url} alt={img.alt?.trim() || listing.title} loading="lazy" width={240} height={240} />
                 ))}
               </div>
             )}
@@ -205,7 +205,7 @@ export default async function ListingPage({ params }: Props) {
 
             <div className="prose">
               <h2>About this experience</h2>
-              {listing.description
+              {(listing.description || listing.summary || "")
                 .split(/(?<=\.)\s+(?=[A-Z])/)
                 .reduce<string[][]>((acc, sentence, i) => {
                   if (i % 3 === 0) acc.push([]);
@@ -258,7 +258,7 @@ export default async function ListingPage({ params }: Props) {
               ) : null}
             </div>
 
-            {insight && (
+            {insight?.verdict && insight.skipIf && Array.isArray(insight.bestFor) && Array.isArray(insight.tips) && (
               <div className="insight-box">
                 <h2>Our take</h2>
                 <p className="insight-verdict">{insight.verdict}</p>

@@ -35,7 +35,7 @@ export default function MapsPage() {
                 <div className="card-media is-featured">
                   <img
                     src={featuredImage(p.slug).url}
-                    alt=""
+                    alt={p.title}
                     width={1200}
                     height={630}
                     loading={i < 3 ? "eager" : "lazy"}

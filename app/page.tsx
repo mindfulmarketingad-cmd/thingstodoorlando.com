@@ -302,6 +302,7 @@ export default async function HomePage() {
                   title={c.shortName}
                   subtitle={c.blurb}
                   image={photo?.url ?? `/illustrations/${c.illustration}.svg`}
+                  alt={photo?.alt?.trim() || `${c.shortName} in Orlando`}
                 />
               );
             })}
@@ -472,7 +473,7 @@ export default async function HomePage() {
                 <div className="card-media is-featured">
                   <img
                     src={featuredImage(p.slug).url}
-                    alt=""
+                    alt={p.title}
                     width={1200}
                     height={630}
                     loading="lazy"

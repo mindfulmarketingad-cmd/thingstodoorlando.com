@@ -5,7 +5,7 @@ import { cache } from "react";
 import { guides } from "@/data/guides";
 import { categories, categoryByKey } from "./categories";
 import { score } from "./score";
-import { slugify } from "./slug";
+import { bestRenamedSlug, slugify } from "./slug";
 import type { CategoryKey, Listing, ListingImage } from "./types";
 import { freetextProducts, mapProduct, productCodesForDate, searchDestinationProducts } from "./viator";
 
@@ -158,11 +158,16 @@ export const getLiveListings = cache(async (): Promise<Listing[]> => {
     if (!snapshotListings) {
       const byCode = new Map<string, Listing>();
       for (const raw of snap.products) {
-        const cats = classifyProduct(raw);
-        const mapped = mapProduct(raw, cats, categoryByKey[cats[0]].illustration);
-        if (mapped?.productCode && !byCode.has(mapped.productCode)) {
-          mapped.tags = raw.tagNames;
-          byCode.set(mapped.productCode, mapped);
+        try {
+          const cats = classifyProduct(raw);
+          const key = cats[0] ?? "sightseeing";
+          const mapped = mapProduct(raw, cats.length ? cats : [key], categoryByKey[key]?.illustration ?? "theme-parks");
+          if (mapped?.productCode && !byCode.has(mapped.productCode)) {
+            mapped.tags = raw.tagNames;
+            byCode.set(mapped.productCode, mapped);
+          }
+        } catch (err) {
+          console.error("[listings] skipped product", raw?.productCode, (err as Error).message);
         }
       }
       snapshotListings = assignSlugs([...byCode.values()]);
@@ -177,8 +182,15 @@ export const getLiveListings = cache(async (): Promise<Listing[]> => {
 
   const byCode = new Map<string, Listing>();
   const add = (raw: RawProduct, seed: CategoryKey[]) => {
-    const cats = classifyProduct(raw, seed);
-    const mapped = mapProduct(raw, cats, categoryByKey[cats[0]].illustration);
+    let mapped: Listing | null = null;
+    try {
+      const cats = classifyProduct(raw, seed);
+      const key = cats[0] ?? "sightseeing";
+      mapped = mapProduct(raw, cats.length ? cats : [key], categoryByKey[key]?.illustration ?? "theme-parks");
+    } catch (err) {
+      console.error("[listings] skipped product", raw?.productCode, (err as Error).message);
+      return;
+    }
     if (!mapped || !mapped.productCode) return;
     const existing = byCode.get(mapped.productCode);
     if (existing) {
@@ -214,6 +226,21 @@ export const getAllListings = cache(async (): Promise<Listing[]> => getLiveListi
 export async function getListingBySlug(slug: string): Promise<Listing | undefined> {
   const all = await getAllListings();
   return all.find((l) => l.slug === slug);
+}
+
+/**
+ * Where a retired /book-now/{slug} should send visitors.
+ * Old editorial guides redirect to the matching tour or its category.
+ * A renamed Viator title (slug no longer matches) redirects to that tour
+ * when the match is unambiguous. Anything else should 404.
+ */
+export async function retiredListingRedirect(slug: string): Promise<string | undefined> {
+  const guides = await getGuideLinkMap();
+  const guide = guides.get(`/book-now/${slug}`);
+  if (guide) return guide;
+  const live = await getLiveListings();
+  const renamed = bestRenamedSlug(slug, live.map((l) => l.slug));
+  return renamed ? `/book-now/${renamed}` : undefined;
 }
 
 /** Top rated real products in a category. */
