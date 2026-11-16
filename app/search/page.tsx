@@ -8,6 +8,9 @@ import { posts } from "@/lib/blog";
 import { pageMetadata } from "@/lib/metadata";
 import { slugify } from "@/lib/slug";
 
+// Query string searches must not be written to the ISR cache.
+export const dynamic = "force-dynamic";
+
 export const metadata = pageMetadata({
   title: "Search Things To Do In Orlando",
   description:

@@ -13,8 +13,6 @@ export const metadata = pageMetadata({
   path: "/blog",
 });
 
-export const revalidate = 21600;
-
 export default async function BlogPage() {
   const lists = (await Promise.all(listicles.map((l) => getRankedListicle(l.slug)))).filter(
     (l): l is NonNullable<typeof l> => !!l && l.items.length > 0,

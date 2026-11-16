@@ -11,8 +11,6 @@ import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import { recommendedOrder, slimListing } from "@/lib/slim";
 
-export const revalidate = 21600;
-
 export const metadata = pageMetadata({
   title: "Book Orlando Tours, Tickets & Activities",
   description:

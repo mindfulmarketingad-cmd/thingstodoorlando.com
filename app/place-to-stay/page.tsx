@@ -9,8 +9,6 @@ import StayMap from "@/components/StayMap";
 import { stayGuides } from "@/data/stay-guides";
 import { pageMetadata } from "@/lib/metadata";
 
-export const revalidate = 21600;
-
 export const metadata = pageMetadata({
   title: "Best Hotels In Orlando Florida: Where To Stay By Area",
   description:

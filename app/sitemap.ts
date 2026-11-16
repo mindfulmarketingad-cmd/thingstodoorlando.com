@@ -10,8 +10,6 @@ import { getIndexableCollections } from "@/lib/collections";
 import { stayGuides } from "@/data/stay-guides";
 import { absoluteUrl } from "@/lib/site";
 
-export const revalidate = 21600;
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const latestPost = posts.reduce((d, p) => (p.updated > d ? p.updated : d), "2026-09-24");
   const legalUpdated = new Date("2026-09-24");

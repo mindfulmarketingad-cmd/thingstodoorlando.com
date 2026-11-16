@@ -19,7 +19,7 @@ import Stars from "@/components/Stars";
 import { CheckIcon, ClockIcon, PinIcon, ShieldIcon, TagIcon, XIcon } from "@/components/Icons";
 import { posts } from "@/lib/blog";
 import { categories, categoryByKey, categoryBySlug } from "@/lib/categories";
-import { getListingBySlug, getLiveListings, getRelatedListings, retiredListingRedirect } from "@/lib/listings";
+import { getListingBySlug, getLiveListings, getRelatedListings, guideSlugs, retiredListingRedirect } from "@/lib/listings";
 import { extractLinks } from "@/lib/markdown";
 import { listingFaqs } from "@/lib/faqs";
 import { comparableListings } from "@/lib/listicles";
@@ -29,19 +29,20 @@ import { absoluteUrl } from "@/lib/site";
 import type { Listing, ListingDetail } from "@/lib/types";
 import { getProductDetail } from "@/lib/viator";
 
-export const revalidate = 21600;
-export const dynamicParams = true;
+// Every known slug is prerendered. Unknown slugs 404 without an on-demand ISR write.
+export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   const live = await getLiveListings();
-  return [
-    ...categories.map((c) => ({ slug: c.slug })),
-    ...collections.map((c) => ({ slug: c.slug })),
-    // Top products are prebuilt; the rest render on first request and are cached.
-    ...live.slice(0, 200).map((l) => ({ slug: l.slug })),
-  ];
+  const slugs = new Set<string>([
+    ...categories.map((c) => c.slug),
+    ...collections.map((c) => c.slug),
+    ...guideSlugs.map((g) => g.slug),
+    ...live.map((l) => l.slug),
+  ]);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 function metaDescription(l: Listing) {

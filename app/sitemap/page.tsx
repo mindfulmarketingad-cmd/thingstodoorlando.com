@@ -10,8 +10,6 @@ import { stayGuides } from "@/data/stay-guides";
 import { getLiveListings } from "@/lib/listings";
 import { pageMetadata } from "@/lib/metadata";
 
-export const revalidate = 21600;
-
 export const metadata = pageMetadata({
   title: "Sitemap",
   description: "A complete list of every page on ThingsToDoOrlando.com: tour categories, every bookable tour, popular searches and blog posts.",

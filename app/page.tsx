@@ -22,8 +22,6 @@ import { eventsForMonths, MONTHS, monthSlug, orlandoToday } from "@/lib/events";
 import { itemListSchema } from "@/lib/schema";
 import type { CategoryKey } from "@/lib/types";
 
-export const revalidate = 21600;
-
 export const metadata = pageMetadata({
   title: "Things To Do In Orlando | Tours, Events & More",
   absoluteTitle: true,

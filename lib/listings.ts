@@ -7,7 +7,7 @@ import { categories, categoryByKey } from "./categories";
 import { score } from "./score";
 import { bestRenamedSlug, slugify } from "./slug";
 import type { CategoryKey, Listing, ListingImage } from "./types";
-import { freetextProducts, mapProduct, productCodesForDate, searchDestinationProducts } from "./viator";
+import { freetextProducts, mapProduct, searchDestinationProducts } from "./viator";
 
 /** Keyword rules used to place live products into site categories. */
 const CATEGORY_RULES: Record<CategoryKey, RegExp> = {
@@ -117,19 +117,18 @@ function readAvailability() {
 }
 
 /**
- * Listings Viator reports as bookable on a date. Live from the API when a key
- * is configured, otherwise from the daily availability snapshot. Returns null
- * when neither source covers the date, so pages never guess.
+ * Listings the availability snapshot says are bookable on a date.
+ * The snapshot is refreshed by the daily Viator commit, not by ISR.
+ * Returns null when that date is not in the snapshot, so the page never guesses.
  */
 export async function getListingsAvailableOn(
   date: string,
-): Promise<{ listings: Listing[]; source: "live" | "snapshot" } | null> {
-  const live = await getLiveListings();
-  const fromApi = await productCodesForDate(date);
-  const codes = fromApi ?? readAvailability()?.dates[date] ?? null;
+): Promise<{ listings: Listing[]; source: "snapshot" } | null> {
+  const codes = readAvailability()?.dates[date] ?? null;
   if (!codes) return null;
+  const live = await getLiveListings();
   const set = new Set(codes);
-  return { listings: live.filter((l) => l.productCode && set.has(l.productCode)), source: fromApi ? "live" : "snapshot" };
+  return { listings: live.filter((l) => l.productCode && set.has(l.productCode)), source: "snapshot" };
 }
 
 
