@@ -64,6 +64,67 @@ export function faqSchema(faqs: { q: string; a: string }[]) {
   };
 }
 
+export function eventSchema(event: {
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  url: string;
+  officialUrl: string;
+  venueName: string;
+  locality?: string;
+  streetAddress?: string;
+  organizer?: string;
+  offer?: { low: string; high?: string };
+}) {
+  const offer = event.offer
+    ? event.offer.high
+      ? {
+          "@type": "AggregateOffer",
+          lowPrice: event.offer.low,
+          highPrice: event.offer.high,
+          priceCurrency: "USD",
+          url: event.officialUrl,
+          availability: "https://schema.org/InStock",
+        }
+      : {
+          "@type": "Offer",
+          price: event.offer.low,
+          priceCurrency: "USD",
+          url: event.officialUrl,
+          availability: "https://schema.org/InStock",
+        }
+    : undefined;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: event.name,
+    description: event.description,
+    startDate: event.startDate,
+    endDate: event.endDate,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    url: event.url,
+    location: {
+      "@type": "Place",
+      name: event.venueName,
+      address: {
+        "@type": "PostalAddress",
+        ...(event.streetAddress ? { streetAddress: event.streetAddress } : {}),
+        addressLocality: event.locality || "Orlando",
+        addressRegion: "FL",
+        addressCountry: "US",
+      },
+    },
+    organizer: {
+      "@type": "Organization",
+      name: event.organizer || event.venueName,
+      url: event.officialUrl,
+    },
+    ...(offer ? { offers: offer } : {}),
+  };
+}
+
 export function itemListSchema(name: string, items: { name: string; href: string }[]) {
   return {
     "@context": "https://schema.org",

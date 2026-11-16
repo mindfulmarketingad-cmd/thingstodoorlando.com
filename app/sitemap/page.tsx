@@ -4,7 +4,8 @@ import { posts } from "@/lib/blog";
 import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
 import { listicles } from "@/lib/listicles";
-import { MONTHS } from "@/data/events";
+import { events, MONTHS } from "@/data/events";
+import { eventFilters } from "@/lib/events";
 import { getIndexableCollections } from "@/lib/collections";
 import { stayGuides } from "@/data/stay-guides";
 import { getLiveListings } from "@/lib/listings";
@@ -57,6 +58,16 @@ export default async function SitemapPage() {
               {MONTHS.map((m) => (
                 <li key={m}>
                   <Link href={`/events/${m.toLowerCase()}`}>Things To Do In Orlando In {m}</Link>
+                </li>
+              ))}
+              {Object.entries(eventFilters).map(([slug, f]) => (
+                <li key={slug}>
+                  <Link href={`/events/${slug}`}>{f.title}</Link>
+                </li>
+              ))}
+              {events.filter((e) => e.detail).map((e) => (
+                <li key={e.slug}>
+                  <Link href={`/events/${e.slug}`}>{e.name}</Link>
                 </li>
               ))}
             </ul>

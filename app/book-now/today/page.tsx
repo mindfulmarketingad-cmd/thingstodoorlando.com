@@ -6,8 +6,7 @@ import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
 import UseTodayDate from "@/components/UseTodayDate";
-import { events } from "@/data/events";
-import { orlandoToday } from "@/lib/events";
+import { eventsInSeasonOn, eventsOnDate, orlandoToday, toIso } from "@/lib/events";
 import { getListingsAvailableOn } from "@/lib/listings";
 import { stayLinksForBookNow } from "@/lib/cross-links";
 import { pageMetadata } from "@/lib/metadata";
@@ -40,8 +39,8 @@ export default async function TodayPage() {
   const available = await getListingsAvailableOn(iso);
   const items = available ? recommendedOrder(available.listings) : [];
 
-  const onToday = events.filter((e) => e.weekly === weekday || (e.fixedDay === day && e.months.includes(month)));
-  const inSeason = events.filter((e) => !e.weekly && !e.fixedDay && e.months.includes(month) && e.months.length < 12);
+  const onToday = eventsOnDate(toIso({ year, month, day }));
+  const inSeason = eventsInSeasonOn(toIso({ year, month, day })).filter((e) => !onToday.some((o) => o.slug === e.slug));
 
   const faqs = [
     {
