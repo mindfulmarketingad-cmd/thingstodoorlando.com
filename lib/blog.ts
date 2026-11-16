@@ -22,10 +22,29 @@ import { parkCalendarPosts } from "@/content/park-calendars";
 import { post as epicMap } from "@/content/posts/epic-universe-map";
 import { post as volcanoMap } from "@/content/posts/volcano-bay-map";
 import { post as aquaticaMap } from "@/content/posts/aquatica-map";
+import { post as magicKingdomMap } from "@/content/posts/magic-kingdom-map";
+import { post as epcotMap } from "@/content/posts/epcot-map";
+import { post as hollywoodStudiosMap } from "@/content/posts/hollywood-studios-map";
+import { post as animalKingdomMap } from "@/content/posts/animal-kingdom-map";
+import { post as universalStudiosMap } from "@/content/posts/universal-studios-florida-map";
+import { post as islandsMap } from "@/content/posts/islands-of-adventure-map";
+import { post as typhoonMap } from "@/content/posts/typhoon-lagoon-map";
+import { post as blizzardMap } from "@/content/posts/blizzard-beach-map";
+import { post as seaworldMap } from "@/content/posts/seaworld-orlando-map";
+import { post as discoveryCoveMap } from "@/content/posts/discovery-cove-map";
+import { post as legolandMap } from "@/content/posts/legoland-florida-map";
+import { post as peppaMap } from "@/content/posts/peppa-pig-theme-park-map";
+import { post as gatorlandMap } from "@/content/posts/gatorland-map";
+import { post as funSpotOrlandoMap } from "@/content/posts/fun-spot-orlando-map";
+import { post as funSpotKissimmeeMap } from "@/content/posts/fun-spot-kissimmee-map";
+import { post as iconParkMap } from "@/content/posts/icon-park-map";
+import { post as islandH2oMap } from "@/content/posts/island-h2o-map";
+import { post as disneySpringsMap } from "@/content/posts/disney-springs-map";
+import { post as citywalkMap } from "@/content/posts/universal-citywalk-map";
 import { post as luau } from "@/content/posts/luau-in-orlando";
 import { post as halloweenGuide } from "@/content/posts/halloween-guide";
 
-export const posts: Post[] = [halloweenGuide, luau, aquaticaMap, volcanoMap, epicMap, ...parkCalendarPosts, citywalkHours, disneySpringsHours, universalAttractions, whereToStay, gatorVsWild, kscTicketsVsTour, discoveryCove, goCity, top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
+export const posts: Post[] = [halloweenGuide, luau, magicKingdomMap, epcotMap, hollywoodStudiosMap, animalKingdomMap, universalStudiosMap, islandsMap, disneySpringsMap, seaworldMap, citywalkMap, legolandMap, typhoonMap, blizzardMap, iconParkMap, discoveryCoveMap, gatorlandMap, funSpotOrlandoMap, funSpotKissimmeeMap, islandH2oMap, peppaMap, aquaticaMap, volcanoMap, epicMap, ...parkCalendarPosts, citywalkHours, disneySpringsHours, universalAttractions, whereToStay, gatorVsWild, kscTicketsVsTour, discoveryCove, goCity, top10, kids, noParks, couples, ksc, airboat, cheap, rainy, bestTime].sort((a, b) =>
   b.published.localeCompare(a.published),
 );
 
