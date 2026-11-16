@@ -4,7 +4,8 @@ import { categories } from "@/lib/categories";
 import { featuredSearches } from "@/lib/featured-searches";
 import { listicles } from "@/lib/listicles";
 import { authors } from "@/data/authors";
-import { MONTHS } from "@/data/events";
+import { EVENTS_UPDATED, events } from "@/data/events";
+import { eventFilters } from "@/lib/events";
 import { getLiveListings, snapshotDate } from "@/lib/listings";
 import { getIndexableCollections } from "@/lib/collections";
 import { stayGuides } from "@/data/stay-guides";
@@ -58,14 +59,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  const eventPages = ["", ...MONTHS.map((m) => `/${m.toLowerCase()}`), "/halloween-in-orlando", "/christmas-in-orlando", "/this-weekend"].map(
-    (p) => ({
-      url: absoluteUrl(`/events${p}`),
-      lastModified: freshest,
-      changeFrequency: (p === "/this-weekend" || p === "" ? "daily" : "weekly") as "daily" | "weekly",
-      priority: p === "" ? 0.9 : 0.7,
-    }),
-  );
+  const eventsUpdated = new Date(`${EVENTS_UPDATED}T12:00:00Z`);
+  const eventPaths = [
+    "",
+    "/this-weekend",
+    "/halloween-in-orlando",
+    "/christmas-in-orlando",
+    ...["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"].map(
+      (m) => `/${m}`,
+    ),
+    ...Object.keys(eventFilters).map((s) => `/${s}`),
+    ...events.filter((e) => e.detail).map((e) => `/${e.slug}`),
+  ];
+  const eventPages = eventPaths.map((p) => ({
+    url: absoluteUrl(`/events${p}`),
+    lastModified: eventsUpdated,
+    changeFrequency: (p === "/this-weekend" || p === "" ? "weekly" : "weekly") as "weekly",
+    priority: p === "" ? 0.9 : p.split("/").length > 2 ? 0.6 : 0.7,
+  }));
 
   const lists = listicles.map((l) => ({
     url: absoluteUrl(`/blog/${l.slug}`),

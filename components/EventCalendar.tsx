@@ -2,14 +2,25 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import type { EventCategory, OrlandoEvent } from "@/data/events";
+import { eventPath, type EventCategory, type OrlandoEvent } from "@/data/events";
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const SHORT = MONTHS.map((m) => m.slice(0, 3));
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const WEEKLY_DAY: Record<string, number> = { Sunday: 0, Monday: 1, Saturday: 6 };
+const WEEKLY_NAME = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-export const CATEGORY_ORDER: EventCategory[] = ["Festival", "Holiday", "Halloween", "Sports", "Arts", "Market", "Fireworks", "Space"];
+export const CATEGORY_ORDER: EventCategory[] = [
+  "Festival",
+  "Holiday",
+  "Halloween",
+  "Sports",
+  "Arts",
+  "Market",
+  "Fireworks",
+  "Space",
+  "Nightlife",
+  "District",
+];
 
 type View = "month" | "year";
 
@@ -38,7 +49,9 @@ export default function EventCalendar({
   const [cats, setCats] = useState<Set<EventCategory>>(new Set(CATEGORY_ORDER));
 
   const visible = useMemo(() => events.filter((e) => cats.has(e.category)), [events, cats]);
-  const running = visible.filter((e) => !e.weekly && !e.fixedDay && e.months.includes(month));
+  const running = visible.filter(
+    (e) => !e.weekly && !e.recurring && !e.fixedDay && !e.dates?.length && e.months.includes(month) && e.months.length < 12,
+  );
 
   const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
   const firstDow = new Date(Date.UTC(year, month - 1, 1)).getUTCDay();
@@ -46,10 +59,12 @@ export default function EventCalendar({
 
   const eventsOn = (d: number) => {
     const dow = new Date(Date.UTC(year, month - 1, d)).getUTCDay();
+    const iso = `${year}-${String(month).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
     return visible.filter(
       (e) =>
-        (e.weekly && WEEKLY_DAY[e.weekly] === dow) ||
-        (e.fixedDay === d && e.months.includes(month)),
+        (e.weekly && e.weekly === WEEKLY_NAME[dow]) ||
+        (e.span === "annual" && e.fixedDay === d && e.months.includes(month)) ||
+        !!e.dates?.includes(iso),
     );
   };
 
@@ -190,8 +205,8 @@ export default function EventCalendar({
               })}
             </div>
             <p className="cal-note">
-              Markets and date-certain events appear on their days. Seasonal events change dates every year, so they are
-              listed alongside. Confirm with the organizer before you plan.
+              Party nights, game days and markets are on the day they happen. Festivals that run for weeks are listed
+              beside the grid. Anything marked unconfirmed on the event card is not a posted organizer date.
             </p>
           </div>
 
@@ -202,7 +217,7 @@ export default function EventCalendar({
                 {selected.length ? (
                   <ul className="cal-list">
                     {selected.map((e) => (
-                      <EventRow key={e.slug} e={e} month={month} />
+                      <EventRow key={e.slug} e={e} />
                     ))}
                   </ul>
                 ) : (
@@ -215,7 +230,7 @@ export default function EventCalendar({
               {running.length ? (
                 <ul className="cal-list">
                   {running.map((e) => (
-                    <EventRow key={e.slug} e={e} month={month} />
+                    <EventRow key={e.slug} e={e} />
                   ))}
                 </ul>
               ) : (
@@ -261,7 +276,7 @@ export default function EventCalendar({
                   .map((e) => (
                     <tr key={e.slug}>
                       <th scope="row" className="cal-tl-name">
-                        <Link href={`/events/${slugOf(e.months[0])}#${e.slug}`}>{e.name}</Link>
+                        <Link href={eventPath(e)}>{e.name}</Link>
                         <span>{e.timing}</span>
                       </th>
                       {SHORT.map((m, i) => {
@@ -293,12 +308,12 @@ export default function EventCalendar({
   );
 }
 
-function EventRow({ e, month }: { e: OrlandoEvent; month: number }) {
+function EventRow({ e }: { e: OrlandoEvent }) {
   return (
     <li className={`c-${e.category.toLowerCase()}`}>
       <span className="cal-dot" aria-hidden />
       <div>
-        <Link href={`/events/${slugOf(month)}#${e.slug}`}>{e.name}</Link>
+        <Link href={eventPath(e)}>{e.name}</Link>
         <span>
           {e.timing} · {e.where}
         </span>
