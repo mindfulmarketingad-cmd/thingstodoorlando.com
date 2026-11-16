@@ -150,6 +150,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Disney World",
     links: [
+      { label: "Magic Kingdom map and layout", href: "/blog/magic-kingdom-map-layout" },
       { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
       { label: "Things to do near Disney World", href: "/book-now/things-to-do-near-disney-world" },
       { label: "Orlando Halloween events guide 2026", href: "/blog/orlando-halloween-events-guide-2026" },
@@ -206,6 +207,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Disney World",
     links: [
+      { label: "EPCOT map and layout", href: "/blog/epcot-map-layout" },
       { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
       { label: "Disney Springs hours and best days", href: "/blog/hours-best-days-disney-springs" },
     ],
@@ -249,6 +251,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Disney World",
     links: [
+      { label: "Hollywood Studios map and layout", href: "/blog/hollywood-studios-map-layout" },
       { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
       { label: "EPCOT calendar and best days", href: "/blog/epcot-calendar-best-days" },
     ],
@@ -292,6 +295,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Disney World",
     links: [
+      { label: "Animal Kingdom map and layout", href: "/blog/animal-kingdom-map-layout" },
       { label: "Hotels near Disney World", href: "/place-to-stay/hotels-near-disney-world" },
       { label: "Blizzard Beach calendar and best days", href: "/blog/blizzard-beach-calendar-best-days" },
     ],
@@ -341,6 +345,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Universal Orlando",
     links: [
+      { label: "Universal Studios Florida map and layout", href: "/blog/universal-studios-florida-map-layout" },
       { label: "Universal Studios Orlando attractions list", href: "/blog/universal-studios-orlando-attractions-list" },
       { label: "Universal CityWalk hours and best days", href: "/blog/hours-best-days-universal-citywalk" },
       { label: "Orlando Halloween events guide 2026", href: "/blog/orlando-halloween-events-guide-2026" },
@@ -387,6 +392,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Universal Orlando",
     links: [
+      { label: "Islands of Adventure map and layout", href: "/blog/islands-of-adventure-map-layout" },
       { label: "Universal Studios Orlando attractions list", href: "/blog/universal-studios-orlando-attractions-list" },
       { label: "Universal Studios Florida calendar", href: "/blog/universal-studios-florida-calendar-best-days" },
     ],
@@ -513,6 +519,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Disney World",
     links: [
+      { label: "Typhoon Lagoon map and layout", href: "/blog/typhoon-lagoon-map-layout" },
       { label: "Best water parks in Orlando", href: "/blog/best-water-parks-in-orlando-florida" },
       { label: "Blizzard Beach calendar", href: "/blog/blizzard-beach-calendar-best-days" },
     ],
@@ -555,6 +562,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "Disney World",
     links: [
+      { label: "Blizzard Beach map and layout", href: "/blog/blizzard-beach-map-layout" },
       { label: "Best water parks in Orlando", href: "/blog/best-water-parks-in-orlando-florida" },
       { label: "Typhoon Lagoon calendar", href: "/blog/typhoon-lagoon-calendar-best-days" },
     ],
@@ -605,6 +613,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "International Drive",
     links: [
+      { label: "SeaWorld Orlando map and layout", href: "/blog/seaworld-orlando-map-layout" },
       { label: "Hotels near SeaWorld Orlando", href: "/place-to-stay/hotels-near-seaworld-orlando" },
       { label: "Is Discovery Cove worth it?", href: "/blog/is-discovery-cove-worth-it" },
       { label: "Orlando Halloween events guide 2026", href: "/blog/orlando-halloween-events-guide-2026" },
@@ -688,6 +697,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "International Drive",
     links: [
+      { label: "Discovery Cove map and layout", href: "/blog/discovery-cove-map-layout" },
       { label: "Is Discovery Cove worth it?", href: "/blog/is-discovery-cove-worth-it" },
       { label: "Hotels near SeaWorld Orlando", href: "/place-to-stay/hotels-near-seaworld-orlando" },
     ],
@@ -733,6 +743,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "",
     links: [
+      { label: "LEGOLAND Florida map and layout", href: "/blog/legoland-florida-map-layout" },
       { label: "Hotels near LEGOLAND Florida", href: "/place-to-stay/hotels-near-legoland-florida" },
       { label: "Peppa Pig Theme Park calendar", href: "/blog/peppa-pig-theme-park-calendar-best-days" },
     ],
@@ -769,6 +780,7 @@ export const parkCalendars: ParkCalendar[] = [
     ],
     hotels: "",
     links: [
+      { label: "Peppa Pig Theme Park map and layout", href: "/blog/peppa-pig-theme-park-map-layout" },
       { label: "LEGOLAND Florida calendar", href: "/blog/legoland-florida-calendar-best-days" },
       { label: "Hotels near LEGOLAND Florida", href: "/place-to-stay/hotels-near-legoland-florida" },
     ],
