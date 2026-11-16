@@ -25,7 +25,6 @@ import { absoluteUrl, site } from "@/lib/site";
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = false;
-export const revalidate = 21600;
 
 export function generateStaticParams() {
   return [...listicles.map((l) => ({ slug: l.slug })), ...posts.map((p) => ({ slug: p.slug }))];

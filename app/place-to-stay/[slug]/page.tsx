@@ -16,7 +16,6 @@ import { bookNowLinksForStay } from "@/lib/cross-links";
 import { pageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site";
 
-export const revalidate = 21600;
 export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };

@@ -59,12 +59,15 @@ interface RawProductDetail extends RawProduct {
 
 async function viatorFetch<T>(
   path: string,
-  init: { method?: "GET" | "POST"; body?: unknown; revalidate?: number; timeoutMs?: number } = {},
+  init: { method?: "GET" | "POST"; body?: unknown; timeoutMs?: number; cache?: "force-cache" | "no-store" } = {},
 ): Promise<T | null> {
   if (!viatorEnabled) return null;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), init.timeoutMs ?? TIMEOUT_MS);
   try {
+    // No `next.revalidate`. A revalidate interval writes the Data Cache on a
+    // timer (ISR). Static pages bake a force-cache response until the next
+    // deploy; dynamic callers pass no-store so nothing is written.
     const res = await fetch(`${API_BASE}${path}`, {
       method: init.method || "GET",
       headers: {
@@ -75,8 +78,7 @@ async function viatorFetch<T>(
       },
       body: init.body ? JSON.stringify(init.body) : undefined,
       signal: controller.signal,
-      cache: "force-cache",
-      next: { revalidate: init.revalidate ?? 21_600, tags: ["viator"] },
+      cache: init.cache ?? "force-cache",
     });
     if (!res.ok) {
       console.error(`[viator] ${init.method || "GET"} ${path} -> ${res.status}`);
@@ -223,31 +225,6 @@ export async function searchDestinationProducts(start = 1, count = 50): Promise<
   return data?.products ?? null;
 }
 
-/** Product codes Viator reports as bookable on one date (YYYY-MM-DD), cached for an hour. */
-export async function productCodesForDate(date: string): Promise<string[] | null> {
-  if (!viatorEnabled || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return null;
-  const codes: string[] = [];
-  let total = Infinity;
-  for (let start = 1; start <= total && start <= 2000; start += 50) {
-    const data = await viatorFetch<{ products?: RawProduct[]; totalCount?: number }>("/products/search", {
-      method: "POST",
-      revalidate: 3600,
-      body: {
-        filtering: { destination: DESTINATION_ID, startDate: date, endDate: date },
-        sorting: { sort: "TRAVELER_RATING", order: "DESCENDING" },
-        pagination: { start, count: 50 },
-        currency: "USD",
-      },
-    });
-    if (!data) return codes.length ? codes : null;
-    total = data.totalCount ?? 0;
-    const batch = data.products ?? [];
-    for (const p of batch) if (p.productCode) codes.push(p.productCode);
-    if (!batch.length) break;
-  }
-  return codes;
-}
-
 /** Free-text product search scoped to the destination. */
 export async function freetextProducts(term: string, count = 24): Promise<RawProduct[] | null> {
   const data = await viatorFetch<{ products?: { results?: RawProduct[] } }>("/search/freetext", {
@@ -269,12 +246,15 @@ export async function freetextProducts(term: string, count = 24): Promise<RawPro
  * oddly shaped live response must not take the page down with it: the
  * platform kills a function that waits on Viator past its limit (a 5xx),
  * so this call fails fast and the page keeps the snapshot copy.
+ * The response is not given a revalidate interval, so a static page that
+ * calls this during the build stays static until the next deploy.
  */
 export async function getProductDetail(base: Listing): Promise<ListingDetail> {
   if (!base.productCode) return base;
   try {
     const d = await viatorFetch<RawProductDetail>(`/products/${encodeURIComponent(base.productCode)}`, {
       timeoutMs: 3_000,
+      cache: "force-cache",
     });
     if (!d || typeof d !== "object") return base;
     const textOf = (i: unknown) => {

@@ -10,8 +10,6 @@ import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import { parkCalendars } from "@/content/park-calendars";
 
-export const revalidate = 3600;
-
 export const metadata = pageMetadata({
   title: "Orlando Events Calendar: Festivals, Holidays & Events by Month",
   description:

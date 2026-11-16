@@ -12,6 +12,9 @@ import { itemListSchema } from "@/lib/schema";
 import { searchSite } from "@/lib/search";
 import { isSafeSearchSlug, unslug } from "@/lib/slug";
 
+// Any query can be requested. Render it per request instead of caching a page per slug.
+export const dynamic = "force-dynamic";
+
 type Props = { params: Promise<{ query: string }> };
 
 function titleCase(s: string) {

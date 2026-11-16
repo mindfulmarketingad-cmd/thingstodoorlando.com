@@ -25,9 +25,11 @@ export const metadata = pageMetadata({
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+export const dynamic = "force-dynamic";
+
 export default async function TodayPage() {
-  // Render per request so "today" is always the current day in Orlando. Viator
-  // responses are still cached for an hour per date in the data cache.
+  // Uncached SSR so "today" is the current day in Orlando. Availability comes
+  // from the committed snapshot, which updates on the next Viator deploy.
   await connection();
   const { year, month, day } = orlandoToday();
   const iso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
@@ -67,7 +69,7 @@ export default async function TodayPage() {
       <UseTodayDate />
       <PageHero
         title="Events Today in Orlando"
-        intro={`Tours, attractions and events you can book for today, ${label}. Availability refreshes through the day.`}
+        intro={`Tours, attractions and events you can book for today, ${label}. The list follows our latest published availability.`}
         crumbs={[
           { name: "Book Now", href: "/book-now" },
           { name: "Today", href: "/book-now/today" },
@@ -117,7 +119,7 @@ export default async function TodayPage() {
           ) : (
             <div className="empty-state">
               <p>
-                We are refreshing today&apos;s availability. In the meantime, browse every experience and pick your date on
+                Today&apos;s bookable list isn&apos;t in the latest update yet. Browse every experience and pick your date on
                 the booking page.
               </p>
               <Link href="/book-now" className="btn btn-primary">

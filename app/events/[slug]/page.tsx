@@ -23,7 +23,6 @@ import { pageMetadata } from "@/lib/metadata";
 import { itemListSchema } from "@/lib/schema";
 import type { Listing } from "@/lib/types";
 
-export const revalidate = 3600;
 export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };
