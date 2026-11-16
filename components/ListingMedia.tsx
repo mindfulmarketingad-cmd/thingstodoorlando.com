@@ -15,7 +15,7 @@ export default function ListingMedia({
     return (
       <Image
         src={listing.image.url}
-        alt={listing.image.alt}
+        alt={listing.image.alt?.trim() || listing.title}
         width={listing.image.width}
         height={listing.image.height}
         sizes={sizes}

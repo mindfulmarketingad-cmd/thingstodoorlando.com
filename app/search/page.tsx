@@ -13,6 +13,8 @@ export const metadata = pageMetadata({
   description:
     "Search every Orlando tour, attraction, event and travel guide on ThingsToDoOrlando.com by attraction name, activity or area.",
   path: "/search",
+  // The page is a form plus links to indexable destinations. Keep it crawlable, not indexed.
+  noindex: true,
 });
 
 type Props = { searchParams: Promise<{ q?: string | string[] }> };

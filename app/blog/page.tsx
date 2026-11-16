@@ -40,7 +40,7 @@ export default async function BlogPage() {
                 <div className="card-media is-featured">
                   <img
                     src={featuredImage(l.config.slug).url}
-                    alt=""
+                    alt={l.config.title}
                     width={1200}
                     height={630}
                     loading={i < 3 ? "eager" : "lazy"}
@@ -75,7 +75,7 @@ export default async function BlogPage() {
                 <div className="card-media is-featured">
                   <img
                     src={featuredImage(p.slug).url}
-                    alt=""
+                    alt={p.title}
                     width={1200}
                     height={630}
                     loading="lazy"

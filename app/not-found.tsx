@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 
-export const metadata = { title: "Page not found", robots: { index: false, follow: true } };
+export const metadata: Metadata = {
+  title: "Page not found",
+  // A 404 already gets one framework-injected `<meta name="robots" content="noindex">`.
+  // Clearing robots drops the root layout's index and googlebot tags so they are not
+  // emitted next to that tag.
+  robots: null,
+};
 
 export default function NotFound() {
   return (

@@ -5,7 +5,7 @@ import { featuredSearches } from "@/lib/featured-searches";
 import { listicles } from "@/lib/listicles";
 import { authors } from "@/data/authors";
 import { MONTHS } from "@/data/events";
-import { getLiveListings } from "@/lib/listings";
+import { getLiveListings, snapshotDate } from "@/lib/listings";
 import { getIndexableCollections } from "@/lib/collections";
 import { stayGuides } from "@/data/stay-guides";
 import { absoluteUrl } from "@/lib/site";
@@ -13,22 +13,24 @@ import { absoluteUrl } from "@/lib/site";
 export const revalidate = 21600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
   const latestPost = posts.reduce((d, p) => (p.updated > d ? p.updated : d), "2026-09-24");
   const legalUpdated = new Date("2026-09-24");
+  const guidesUpdated = new Date(latestPost);
+  // Snapshot fetch time, not "now": lastmod that changes on every request is ignored.
+  const catalogUpdated = snapshotDate() ? new Date(snapshotDate()!) : guidesUpdated;
+  const freshest = catalogUpdated > guidesUpdated ? catalogUpdated : guidesUpdated;
 
   const pages: MetadataRoute.Sitemap = [
-    { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
-    { url: absoluteUrl("/book-now"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: absoluteUrl("/"), lastModified: freshest, changeFrequency: "daily", priority: 1 },
+    { url: absoluteUrl("/book-now"), lastModified: catalogUpdated, changeFrequency: "daily", priority: 0.9 },
     { url: absoluteUrl("/start-planning"), lastModified: legalUpdated, changeFrequency: "monthly", priority: 0.7 },
-    { url: absoluteUrl("/book-now/today"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: absoluteUrl("/book-now/today"), lastModified: catalogUpdated, changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/place-to-stay"), lastModified: legalUpdated, changeFrequency: "monthly", priority: 0.8 },
-    { url: absoluteUrl("/maps"), lastModified: new Date(latestPost), changeFrequency: "weekly", priority: 0.8 },
-    { url: absoluteUrl("/blog"), lastModified: new Date(latestPost), changeFrequency: "weekly", priority: 0.8 },
-    { url: absoluteUrl("/search"), lastModified: legalUpdated, changeFrequency: "monthly", priority: 0.5 },
+    { url: absoluteUrl("/maps"), lastModified: guidesUpdated, changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/blog"), lastModified: guidesUpdated, changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/about"), lastModified: legalUpdated, changeFrequency: "yearly", priority: 0.4 },
     { url: absoluteUrl("/contact"), lastModified: legalUpdated, changeFrequency: "yearly", priority: 0.3 },
-    { url: absoluteUrl("/sitemap"), lastModified: now, changeFrequency: "weekly", priority: 0.3 },
+    { url: absoluteUrl("/sitemap"), lastModified: freshest, changeFrequency: "weekly", priority: 0.3 },
     { url: absoluteUrl("/disclaimer"), lastModified: legalUpdated, changeFrequency: "yearly", priority: 0.2 },
     { url: absoluteUrl("/privacy"), lastModified: legalUpdated, changeFrequency: "yearly", priority: 0.2 },
     { url: absoluteUrl("/terms"), lastModified: legalUpdated, changeFrequency: "yearly", priority: 0.2 },
@@ -36,14 +38,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const searches = featuredSearches.map((f) => ({
     url: absoluteUrl(`/search/${f.slug}`),
-    lastModified: now,
+    lastModified: catalogUpdated,
     changeFrequency: "daily" as const,
     priority: 0.8,
   }));
 
   const cats = categories.map((c) => ({
     url: absoluteUrl(`/book-now/${c.slug}`),
-    lastModified: now,
+    lastModified: catalogUpdated,
     changeFrequency: "daily" as const,
     priority: 0.9,
   }));
@@ -61,7 +63,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const eventPages = ["", ...MONTHS.map((m) => `/${m.toLowerCase()}`), "/halloween-in-orlando", "/christmas-in-orlando", "/this-weekend"].map(
     (p) => ({
       url: absoluteUrl(`/events${p}`),
-      lastModified: now,
+      lastModified: freshest,
       changeFrequency: (p === "/this-weekend" || p === "" ? "daily" : "weekly") as "daily" | "weekly",
       priority: p === "" ? 0.9 : 0.7,
     }),
@@ -69,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const lists = listicles.map((l) => ({
     url: absoluteUrl(`/blog/${l.slug}`),
-    lastModified: now,
+    lastModified: catalogUpdated,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
@@ -81,17 +83,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const live = (await getLiveListings()).map((l) => ({
-    url: absoluteUrl(`/book-now/${l.slug}`),
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-    ...(l.image ? { images: [l.image.url] } : {}),
-  }));
+  // Only tours in the current snapshot. Removed products are absent here, so they leave the sitemap.
+  const live = (await getLiveListings())
+    .filter((l) => l.slug && l.title)
+    .map((l) => ({
+      url: absoluteUrl(`/book-now/${l.slug}`),
+      lastModified: catalogUpdated,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+      ...(l.image ? { images: [l.image.url] } : {}),
+    }));
 
   const collectionPages = (await getIndexableCollections()).map((c) => ({
     url: absoluteUrl(`/book-now/${c.slug}`),
-    lastModified: now,
+    lastModified: catalogUpdated,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
@@ -103,5 +108,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...pages, ...cats, ...collectionPages, ...stayPages, ...searches, ...eventPages, ...lists, ...blog, ...authorPages, ...live];
+  const seen = new Set<string>();
+  return [...pages, ...cats, ...collectionPages, ...stayPages, ...searches, ...eventPages, ...lists, ...blog, ...authorPages, ...live].filter(
+    (entry) => {
+      if (seen.has(entry.url)) return false;
+      seen.add(entry.url);
+      return true;
+    },
+  );
 }

@@ -6,11 +6,18 @@ import { categoryByKey } from "@/lib/categories";
 import type { Listing } from "@/lib/types";
 
 export function formatPrice(value: number, currency = "USD") {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: value % 1 === 0 ? 0 : 2,
-  }).format(value);
+  const amount = Number.isFinite(value) ? value : 0;
+  const format = (code: string) =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: code,
+      maximumFractionDigits: amount % 1 === 0 ? 0 : 2,
+    }).format(amount);
+  try {
+    return format(currency || "USD");
+  } catch {
+    return format("USD");
+  }
 }
 
 export default function ListingCard({ listing, headingLevel = 3 }: { listing: Listing; headingLevel?: 2 | 3 }) {

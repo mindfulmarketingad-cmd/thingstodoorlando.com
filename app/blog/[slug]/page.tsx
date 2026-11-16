@@ -242,7 +242,7 @@ export default async function PostPage({ params }: Props) {
             {related.map((p) => (
               <article key={p.slug} className="card post-card">
                 <div className="card-media is-featured">
-                  <img src={featuredImage(p.slug).url} alt="" width={1200} height={630} loading="lazy" />
+                  <img src={featuredImage(p.slug).url} alt={p.title} width={1200} height={630} loading="lazy" />
                 </div>
                 <div className="card-body">
                   <span className="post-cat">{p.category}</span>

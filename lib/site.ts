@@ -1,10 +1,29 @@
+/**
+ * Single origin for canonicals, sitemaps, Open Graph and JSON-LD.
+ * Vercel 308-redirects the apex host to www, so the apex must never be emitted.
+ */
+export const CANONICAL_ORIGIN = "https://www.thingstodoorlando.com";
+
+function canonicalOrigin(): string {
+  const raw = (process.env.NEXT_PUBLIC_SITE_URL || CANONICAL_ORIGIN).trim().replace(/\/$/, "");
+  try {
+    const url = new URL(raw);
+    if (url.protocol !== "http:" && url.protocol !== "https:") return CANONICAL_ORIGIN;
+    // Treat an apex value (the historical default, or a stale env var) as www.
+    if (url.hostname === "thingstodoorlando.com") return CANONICAL_ORIGIN;
+    return url.origin;
+  } catch {
+    return CANONICAL_ORIGIN;
+  }
+}
+
 export const site = {
   name: "ThingsToDoOrlando.com",
   shortName: "Things To Do Orlando",
   domain: "thingstodoorlando.com",
   /** Visitor questions and inquiries. Display the vanity form; dial the digits. */
   phone: { display: "1-855-ORL-CITY", tel: "+18556752489", digits: "1-855-675-2489" },
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://thingstodoorlando.com").replace(/\/$/, ""),
+  url: canonicalOrigin(),
   mainKeyword: "Things To Do In Orlando",
   tagline: "Tours, Events & More",
   description:

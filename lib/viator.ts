@@ -59,11 +59,11 @@ interface RawProductDetail extends RawProduct {
 
 async function viatorFetch<T>(
   path: string,
-  init: { method?: "GET" | "POST"; body?: unknown; revalidate?: number } = {},
+  init: { method?: "GET" | "POST"; body?: unknown; revalidate?: number; timeoutMs?: number } = {},
 ): Promise<T | null> {
   if (!viatorEnabled) return null;
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  const timer = setTimeout(() => controller.abort(), init.timeoutMs ?? TIMEOUT_MS);
   try {
     const res = await fetch(`${API_BASE}${path}`, {
       method: init.method || "GET",
@@ -112,9 +112,15 @@ function pickImage(images: RawImage[] | undefined, title: string, targetWidth = 
     const best =
       variants.filter((v) => v.width >= targetWidth).sort((a, b) => a.width - b.width)[0] ||
       variants.sort((a, b) => b.width - a.width)[0];
-    return { url: best.url, width: best.width, height: best.height, alt: img.caption?.trim() || title };
+    return { url: best.url, width: best.width, height: best.height, alt: imageAlt(img.caption, title) };
   }
   return undefined;
+}
+
+/** Blank, missing, or non-text captions fall back to the product title. */
+function imageAlt(caption: unknown, title: string): string {
+  const text = typeof caption === "string" ? caption.replace(/\s+/g, " ").trim() : "";
+  return text || title;
 }
 
 function isAllowedImage(url: string) {
@@ -151,11 +157,16 @@ export function formatDuration(minutes?: number, toMinutes?: number): string | u
   return toMinutes && toMinutes !== minutes ? `${fmt(minutes)} to ${fmt(toMinutes)}` : fmt(minutes);
 }
 
-function clean(text: string | undefined): string {
-  return (text || "")
+function clean(text: unknown): string {
+  if (typeof text !== "string") return "";
+  return text
     .replace(/<[^>]*>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function asArray<T>(value: unknown): T[] {
+  return Array.isArray(value) ? (value as T[]) : [];
 }
 
 function summarize(text: string, max = 180): string {
@@ -252,31 +263,52 @@ export async function freetextProducts(term: string, count = 24): Promise<RawPro
   return data?.products?.results ?? null;
 }
 
-/** Full product content for a detail page. */
+/**
+ * Full product content for a detail page.
+ * The snapshot listing is always enough to render. A slow, failed, or
+ * oddly shaped live response must not take the page down with it: the
+ * platform kills a function that waits on Viator past its limit (a 5xx),
+ * so this call fails fast and the page keeps the snapshot copy.
+ */
 export async function getProductDetail(base: Listing): Promise<ListingDetail> {
   if (!base.productCode) return base;
-  const d = await viatorFetch<RawProductDetail>(`/products/${encodeURIComponent(base.productCode)}`);
-  if (!d) return base;
-  const textOf = (i: { otherDescription?: string; description?: string; typeDescription?: string }) =>
-    clean(i.otherDescription || i.description || i.typeDescription);
-  const gallery = (d.images || [])
-    .slice(0, 8)
-    .map((img) => pickImage([img], base.title, 1024))
-    .filter((i): i is ListingImage => !!i);
-  const fullDescription = clean(d.description);
-  return {
-    ...base,
-    description: fullDescription || base.description,
-    image: pickImage(d.images, base.title, 1024) || base.image,
-    gallery,
-    inclusions: (d.inclusions || []).map(textOf).filter(Boolean).slice(0, 15),
-    exclusions: (d.exclusions || []).map(textOf).filter(Boolean).slice(0, 15),
-    additionalInfo: (d.additionalInfo || []).map((i) => clean(i.description)).filter(Boolean).slice(0, 12),
-    cancellationPolicy: clean(d.cancellationPolicy?.description) || undefined,
-    meetingPoint:
-      clean(d.logistics?.start?.[0]?.description) || clean(d.logistics?.travelerPickup?.additionalInfo) || undefined,
-    bookingUrl: isSafeBookingUrl(d.productUrl) ? d.productUrl : base.bookingUrl,
-  };
+  try {
+    const d = await viatorFetch<RawProductDetail>(`/products/${encodeURIComponent(base.productCode)}`, {
+      timeoutMs: 3_000,
+    });
+    if (!d || typeof d !== "object") return base;
+    const textOf = (i: unknown) => {
+      if (!i || typeof i !== "object") return "";
+      const item = i as { otherDescription?: unknown; description?: unknown; typeDescription?: unknown };
+      return clean(item.otherDescription || item.description || item.typeDescription);
+    };
+    const images = asArray<RawImage>(d.images);
+    const gallery = images
+      .slice(0, 8)
+      .map((img) => pickImage([img], base.title, 1024))
+      .filter((i): i is ListingImage => !!i);
+    const fullDescription = clean(d.description);
+    const logistics = d.logistics && typeof d.logistics === "object" ? d.logistics : undefined;
+    const start = asArray<{ description?: unknown }>(logistics?.start);
+    return {
+      ...base,
+      description: fullDescription || base.description,
+      image: pickImage(images, base.title, 1024) || base.image,
+      gallery,
+      inclusions: asArray(d.inclusions).map(textOf).filter(Boolean).slice(0, 15),
+      exclusions: asArray(d.exclusions).map(textOf).filter(Boolean).slice(0, 15),
+      additionalInfo: asArray<{ description?: unknown }>(d.additionalInfo)
+        .map((i) => clean(i?.description))
+        .filter(Boolean)
+        .slice(0, 12),
+      cancellationPolicy: clean(d.cancellationPolicy?.description) || undefined,
+      meetingPoint: clean(start[0]?.description) || clean(logistics?.travelerPickup?.additionalInfo) || undefined,
+      bookingUrl: isSafeBookingUrl(d.productUrl) ? d.productUrl : base.bookingUrl,
+    };
+  } catch (err) {
+    console.error(`[viator] detail ${base.productCode} failed:`, (err as Error).message);
+    return base;
+  }
 }
 
 /** Viator search URL used for curated guides (affiliate params appended when configured). */
